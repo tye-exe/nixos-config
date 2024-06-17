@@ -121,6 +121,7 @@
     git
     nil # nixos language server.
     home-manager
+    nixpkgs-fmt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
