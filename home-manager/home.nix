@@ -9,8 +9,8 @@ in {
       vesktop
     ];
 
-    username = "tye";
-    homeDirectory = "/home/tye";
+    inherit username;
+    homeDirectory = "/home/${username}";
 
     stateVersion = "24.05";
 
@@ -21,7 +21,7 @@ in {
         text = ''
           #!/usr/bin/env bash
 
-          echo "Hello again world!"
+          echo "Hello, me (${username})!"
           echo "SO many lines of text here XDDDDDDDDDDDDDDDD"
         '';
       };
