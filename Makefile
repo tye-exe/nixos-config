@@ -8,7 +8,7 @@ test:
 
 .PHONY: update
 update:
-	home-manager switch --flake .#tye
+	home-manager switch --flake /home/tye/nixos/home-manager/#tye
 
 .PHONY: clean
 clean:
