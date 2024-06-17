@@ -15,12 +15,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   
-#  nix.settings.experimental-features = ["nix-command" "flakes"];
-#
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
 #  home-manager = {
-#    specialArgs = { inherit inputs; };
+#  specialArgs = { inherit inputs; };
 #    users = {
-#      "tye" = import ./home-manager/home.nix;
+#      "tye" = import home-manager/home.nix;
 #    };
 #  };
 
