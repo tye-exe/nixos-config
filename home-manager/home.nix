@@ -3,7 +3,11 @@ let username = "tye";
 in {
   home = {
     # Add user packages here
-    packages = with pkgs; [ vesktop ];
+    packages = with pkgs; [
+      # Signing in could be nice, ya know?
+      gh
+      vesktop
+    ];
 
     username = "tye";
     homeDirectory = "/home/tye";
@@ -31,9 +35,14 @@ in {
       userName = "tye-exe";
       userEmail = "tye@mailbox.org";
 
-      extraConfig = { advice.addIgnoredFile = false; };
+      extraConfig = {
+        # Removes annoying message about git ignore files.
+        advice.addIgnoredFile = false;
+        push.autoSetupRemote = true;
+      };
     };
 
+    # Gives me the power to have pretty nix files. ^-^
     helix = {
       enable = true;
       languages.language = [{

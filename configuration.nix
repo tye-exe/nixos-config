@@ -5,26 +5,15 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-#      inputs.home-manager.nixosModules.default
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
-#  home-manager = {
-#  specialArgs = { inherit inputs; };
-#    users = {
-#      "tye" = import home-manager/home.nix;
-#    };
-#  };
-
-
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -62,7 +51,7 @@
   services.displayManager.sddm.wayland.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;  
+  services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -101,23 +90,11 @@
     isNormalUser = true;
     description = "tye";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      thunderbird
-    ];
+    packages = with pkgs; [ kdePackages.kate thunderbird ];
   };
 
   # Install firefox.
-  programs = {
-    firefox.enable = true;
-
-    # Should enable helix to format nix files?
-  #   helix.languages.language = [{
-  #   name = "nix";
-  #   auto-format = true;
-  #   formatter.command = "${pkgs.nixfmt}/bin/nixpkgs-fmt";
-  # }];
-  };
+  programs = { firefox.enable = true; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
