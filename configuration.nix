@@ -108,7 +108,16 @@
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
+  programs = {
+    firefox.enable = true;
+
+    # Should enable helix to format nix files?
+  #   helix.languages.language = [{
+  #   name = "nix";
+  #   auto-format = true;
+  #   formatter.command = "${pkgs.nixfmt}/bin/nixpkgs-fmt";
+  # }];
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -121,7 +130,7 @@
     git
     nil # nixos language server.
     home-manager
-    nixpkgs-fmt
+    nixfmt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
