@@ -30,6 +30,8 @@ in {
       enable = true;
       userName = "tye-exe";
       userEmail = "tye@mailbox.org";
+
+      extraConfig = { advice.addIgnoredFile = false; };
     };
 
     helix = {
