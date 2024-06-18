@@ -93,8 +93,11 @@
     packages = with pkgs; [ kdePackages.kate thunderbird ];
   };
 
-  # Install firefox.
-  programs = { firefox.enable = true; };
+  # Enable programs.
+  programs = {
+    firefox.enable = true;
+    fish.enable = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -107,7 +110,8 @@
     git
     nil # nixos language server.
     home-manager
-    nixfmt
+    nixfmt # Nix formatter
+    fish
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
