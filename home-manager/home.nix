@@ -14,19 +14,6 @@ in {
 
     stateVersion = "24.05";
 
-    # File funkies
-    file = {
-      "hello.txt" = {
-        executable = true;
-        text = ''
-          #!/usr/bin/env bash
-
-          echo "Hello, me (${username})!"
-          echo "SO many lines of text here XDDDDDDDDDDDDDDDD"
-        '';
-      };
-    };
-
   };
 
   programs = {
