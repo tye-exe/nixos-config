@@ -122,8 +122,11 @@
     nil # Nixos language server.
     home-manager
     nixfmt # Nix formatter
-    fish
-    zellij # Funky terminal stuffs
+
+    # Terminal stuffs
+    rio # Terminal emulator
+    fish # Bash 2.0
+    zellij # Funky terminal multiplexer
 
     # Rust
     rustc

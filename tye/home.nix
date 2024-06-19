@@ -7,6 +7,9 @@ in {
       # Signing in could be nice, ya know?
       gh
       vesktop
+
+      # Nerd fonts time
+      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
     ];
 
     inherit username;
@@ -16,6 +19,8 @@ in {
     # & yes to future me, i did write this. :p
     stateVersion = "24.05";
   };
+
+  fonts = { fontconfig.enable = true; };
 
   programs = {
     git = {
