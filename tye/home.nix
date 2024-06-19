@@ -1,10 +1,8 @@
 { lib, pkgs, ... }:
 let username = "tye";
 in {
-  # imports = [ ./code/rust.nix ];
 
   home = {
-    # Add user packages here
     packages = with pkgs; [
       # Signing in could be nice, ya know?
       gh
@@ -14,8 +12,9 @@ in {
     inherit username;
     homeDirectory = "/home/${username}";
 
+    # Don't change this without reading the wiki!
+    # & yes to future me, i did write this. :p
     stateVersion = "24.05";
-
   };
 
   programs = {
@@ -41,7 +40,14 @@ in {
       }];
     };
 
+    eza.enable = true;
+
     # Shell config.
-    fish.enable = true;
+    fish = {
+      enable = true;
+      shellAbbrs = { ls = "eza"; };
+    };
+
+    zellij = { enable = true; };
   };
 }

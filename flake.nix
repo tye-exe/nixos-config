@@ -29,7 +29,7 @@
       homeConfigurations = {
         tye = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [ ./tye/home.nix ];
         };
       };
     };

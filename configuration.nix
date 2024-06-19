@@ -123,6 +123,7 @@
     home-manager
     nixfmt # Nix formatter
     fish
+    zellij # Funky terminal stuffs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
