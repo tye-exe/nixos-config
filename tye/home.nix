@@ -33,11 +33,20 @@ in {
     # Gives me the power to have pretty nix files. ^-^
     helix = {
       enable = true;
-      languages.language = [{
-        name = "nix";
-        auto-format = true;
-        formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-      }];
+      languages.language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command =
+            "${pkgs.nixfmt}/bin/nixfmt"; # Path to installed nix formatter
+        }
+        {
+          name = "rust";
+          auto-format = true;
+          formatter.command =
+            "${pkgs.rustfmt}/bin/rustfmt"; # Path to installed rust formatter
+        }
+      ];
     };
 
     eza.enable = true;

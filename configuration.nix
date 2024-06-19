@@ -124,6 +124,12 @@
     nixfmt # Nix formatter
     fish
     zellij # Funky terminal stuffs
+
+    # Rust
+    rustc
+    cargo
+    rust-analyzer
+    rustfmt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
