@@ -2,12 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports =
+    [ ./hardware-confs/laptop.nix inputs.home-manager.nixosModules.default ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

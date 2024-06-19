@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 let username = "tye";
 in {
+  # imports = [ ./code/rust.nix ];
+
   home = {
     # Add user packages here
     packages = with pkgs; [

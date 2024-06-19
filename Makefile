@@ -1,6 +1,6 @@
 .PHONY: switch
 switch:
-	nixos-rebuild switch -I nixos-config=/home/tye/nixos/configuration.nix
+	nixos-rebuild switch -I nixos-config=/home/tye/nixos/configuration.nix --flake /home/tye/nixos/#tye
 
 .PHONY: test
 test:

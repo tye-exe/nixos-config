@@ -1,5 +1,2 @@
-# Unique to each system.
-hardware-configuration.nix
-
-# Not too sure what this is.
+# Home-manager "tmp" files.
 result
