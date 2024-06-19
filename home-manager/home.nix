@@ -43,6 +43,5 @@ in {
 
     # Shell config.
     fish.enable = true;
-
   };
 }

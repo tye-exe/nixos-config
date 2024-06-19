@@ -116,10 +116,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    helix
-    gnumake
+    helix # Vim-like editor
+    gnumake # Make but with a different name bc who knows
     git
-    nil # nixos language server.
+    nil # Nixos language server.
     home-manager
     nixfmt # Nix formatter
     fish
