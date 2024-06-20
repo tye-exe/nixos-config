@@ -10,6 +10,10 @@ in {
 
       # Nerd fonts time
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+
+      # File sync
+      syncthing
+      syncthingtray # Gui for syncthing
     ];
 
     inherit username;
