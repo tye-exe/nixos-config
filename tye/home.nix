@@ -64,6 +64,12 @@ in {
     fish = {
       enable = true;
       shellAbbrs = { ls = "eza"; };
+      interactiveShellInit = ''
+        if set -q ZELLIJ
+        else
+          zellij
+        end
+      '';
     };
 
     zellij = { enable = true; };
