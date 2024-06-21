@@ -1,7 +1,9 @@
-{ lib, pkgs, ... }:
-let username = "tye";
+{ pkgs, config, std, ... }:
+let
+  username = "tye";
+  home = "/home/${username}";
+  confDir = "${home}/.config/";
 in {
-
   home = {
     packages = with pkgs; [
       # Signing in could be nice, ya know?
@@ -17,11 +19,13 @@ in {
     ];
 
     inherit username;
-    homeDirectory = "/home/${username}";
+    homeDirectory = home;
 
-    # Don't change this without reading the wiki!
-    # & yes to future me, i did write this. :p
-    stateVersion = "24.05";
+    file."config.kdl" = {
+      enable = true;
+      target = "${confDir}zellij/";
+      text = ''on_force_close "quit"'';
+    };
   };
 
   fonts = { fontconfig.enable = true; };
@@ -63,7 +67,11 @@ in {
     # Shell config.
     fish = {
       enable = true;
-      shellAbbrs = { ls = "eza"; };
+      shellAbbrs = {
+        ls = "eza";
+        gs = "git status";
+      };
+      # Only starts zellij if it's not already open.
       interactiveShellInit = ''
         if set -q ZELLIJ
         else
@@ -72,6 +80,18 @@ in {
       '';
     };
 
-    zellij = { enable = true; };
+    zellij = {
+      enable = true;
+      settings = { on_force_close = "quit"; };
+    };
+
+    rio = {
+      enable = true;
+      # settings = std.serde.toTOML { on_force_close = "quit"; };
+    };
   };
+
+  # Don't change this without reading the wiki!
+  # & yes to future me, i did write this. :p
+  home.stateVersion = "24.05";
 }
