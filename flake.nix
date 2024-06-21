@@ -45,6 +45,8 @@
           modules = [
             # Base home-manager conf
             ./tye/home.nix
+            # Rust lang config
+            ./tye/rust.nix
             # Desktop Enviroment conf
             inputs.plasma-manager.homeManagerModules.plasma-manager
           ];
