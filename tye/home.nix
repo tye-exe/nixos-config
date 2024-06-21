@@ -71,6 +71,7 @@ in {
       shellAbbrs = {
         ls = "eza";
         gs = "git status";
+        cat = "bat";
       };
       # Only starts zellij if it's not already open.
       interactiveShellInit = ''
