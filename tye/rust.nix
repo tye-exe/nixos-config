@@ -1,9 +1,9 @@
 { pkgs, std, ... }: {
   home = {
 
-    aoc = pkgs.rustPlatform.buildRustPackage rec {
+    # aoc = pkgs.rustPlatform.buildRustPackage rec {
 
-    };
+    # };
 
     packages = with pkgs; [
       # Installs the rust toolchain
@@ -16,12 +16,12 @@
 
     ];
 
-    file."test" = {
-      text = std.serde.toTOML {
-        test.one = "E!";
-        test.two = "Two";
-        eh = "nah";
-      };
-    };
+    # file."test" = {
+    #   text = std.serde.toTOML {
+    #     test.one = "E!";
+    #     test.two = "Two";
+    #     eh = "nah";
+    #   };
+    # };
   };
 }
