@@ -7,6 +7,8 @@
 
     packages = with pkgs; [
       # Installs the rust toolchain
+      rustc
+      # Install well, useful stuff.
       rustup
       # Rust debugger
       lldb
@@ -16,12 +18,13 @@
 
     ];
 
-    # file."test" = {
-    #   text = std.serde.toTOML {
-    #     test.one = "E!";
-    #     test.two = "Two";
-    #     eh = "nah";
-    #   };
-    # };
+    file."settings.toml" = {
+      target = ".rustup/settings.toml";
+      text = std.serde.toTOML {
+        default_toolchain = "stable-x86_64-unknown-linux-gnu";
+        profile = "default";
+        version = "12";
+      };
+    };
   };
 }
