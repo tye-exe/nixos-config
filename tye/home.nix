@@ -1,4 +1,4 @@
-{ pkgs, config, std, ... }:
+{ pkgs, ... }:
 let
   username = "tye";
   home = "/home/${username}";
@@ -16,13 +16,14 @@ in {
       # File sync
       syncthing
       syncthingtray # Gui for syncthing
+
+      bat # Cat replacment
     ];
 
     inherit username;
     homeDirectory = home;
 
     file."config.kdl" = {
-      enable = true;
       target = "${confDir}zellij/";
       text = ''on_force_close "quit"'';
     };
@@ -89,8 +90,8 @@ in {
       enable = true;
       # settings = std.serde.toTOML { on_force_close = "quit"; };
     };
-  };
 
+  };
   # Don't change this without reading the wiki!
   # & yes to future me, i did write this. :p
   home.stateVersion = "24.05";

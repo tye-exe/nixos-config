@@ -127,12 +127,6 @@
     rio # Terminal emulator
     fish # Bash 2.0
     zellij # Funky terminal multiplexer
-
-    # Rust
-    rustc
-    cargo
-    rust-analyzer
-    rustfmt
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
