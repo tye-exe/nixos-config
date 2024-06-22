@@ -29,7 +29,7 @@
     in {
       # System confs
       nixosConfigurations = {
-        tye = lib.nixosSystem {
+        tye-laptop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./configuration.nix ];
@@ -38,8 +38,7 @@
 
       # Home manager confs
       homeConfigurations = {
-        # home-manager.users.tye = import ./tye/home.nix { inherit pkgs std; };
-        tye = home-manager.lib.homeManagerConfiguration {
+        tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std; };
           modules = [

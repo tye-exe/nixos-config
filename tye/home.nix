@@ -70,9 +70,17 @@ in {
     fish = {
       enable = true;
       shellAbbrs = {
+        # Util abbrs.
         ls = "eza";
-        gs = "git status";
         cat = "bat";
+
+        # Git abbrs
+        gs = "git status";
+        gd = "git diff";
+        gc = ''git commit -m ""'';
+        gca = "git commit --amend --no-edit";
+        ga = "git add ";
+        gp = "git push";
       };
       # Only starts zellij if it's not already open.
       interactiveShellInit = ''

@@ -1,14 +1,10 @@
 .PHONY: sys-switch
 sys-switch:
-	nixos-rebuild switch -I nixos-config=/home/tye/nixos/configuration.nix --flake /home/tye/nixos/#tye
-
-.PHONY: sys-test
-sys-test:
-	nixos-rebuild test -I nixos-config=/home/tye/nixos/configuration.nix
+	nixos-rebuild switch -I nixos-config=/home/tye/nixos/configuration.nix --flake /home/tye/nixos/#tye-laptop
 
 .PHONY: hm-switch
 hm-switch:
-	home-manager switch --flake /home/tye/nixos/#tye
+	home-manager switch --flake /home/tye/nixos/#tye-laptop
 
 .PHONY: clean
 clean:
