@@ -18,6 +18,7 @@ in {
       syncthingtray # Gui for syncthing
 
       bat # Cat replacment
+      eza # Ls replacment
     ];
 
     inherit username;
