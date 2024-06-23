@@ -5,8 +5,7 @@
 { pkgs, inputs, ... }:
 
 {
-  imports =
-    [ ./hardware-confs/laptop.nix inputs.home-manager.nixosModules.default ];
+  imports = [ inputs.home-manager.nixosModules.default ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -122,6 +121,8 @@
     nil # Nixos language server.
     home-manager
     nixfmt # Nix formatter
+
+    python3
 
     # Terminal stuffs
     rio # Terminal emulator

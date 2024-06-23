@@ -32,7 +32,7 @@
         tye-laptop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ];
+          modules = [ ./configuration.nix ./hardware-confs/laptop.nix ];
         };
       };
 
