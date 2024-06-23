@@ -1,2 +1,6 @@
 # Home-manager "tmp" files.
 result
+
+# Ignore custom device identifier
+.identity
+Makefile

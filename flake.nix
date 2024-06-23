@@ -43,7 +43,7 @@
           extraSpecialArgs = { inherit std; };
           modules = [
             # Base home-manager conf
-            ./tye/home.nix
+            ./tye/core.nix
             # Rust lang config
             ./tye/rust.nix
             # Desktop Enviroment conf
