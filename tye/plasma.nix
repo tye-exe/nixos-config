@@ -1,6 +1,12 @@
-{ lib, ... }: {
+{ pkgs, ... }: {
+
   programs.plasma = {
     enable = true;
-    panels = [{ location = "top"; }];
+
+    hotkeys.commands."launch-konsole" = {
+      name = "Launch Rio";
+      key = "Meta+Alt+K";
+      command = "rio";
+    };
   };
 }

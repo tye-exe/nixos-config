@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
   username = "tye";
-  home = "/home/${username}";
-  confDir = "${home}/.config/";
+  homeDirectory = "/home/${username}";
+  confDir = "${homeDirectory}/.config/";
 in {
   home = {
     packages = with pkgs; [
@@ -21,8 +21,7 @@ in {
       eza # Ls replacment
     ];
 
-    inherit username;
-    homeDirectory = home;
+    inherit username homeDirectory;
 
     file."config.kdl" = {
       target = "${confDir}zellij/";
