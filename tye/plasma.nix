@@ -1,11 +1,26 @@
 { pkgs, ... }: {
 
+  home.packages = with pkgs;
+    [
+      # I love my dot
+      cinnamon.mint-cursor-themes
+    ];
+
   programs.plasma = {
     enable = true;
 
-    hotkeys.commands."launch-konsole" = {
+    workspace = {
+      lookAndFeel = "org.kde.breezedark.desktop";
+
+      cursor = {
+        theme = "GoogleDot-Black";
+        size = 24;
+      };
+    };
+
+    hotkeys.commands."launch-rio" = {
       name = "Launch Rio";
-      key = "Meta+Alt+K";
+      key = "Ctrl+Alt+K";
       command = "rio";
     };
   };

@@ -8,6 +8,7 @@ in {
     packages = with pkgs; [
       # Signing in could be nice, ya know?
       gh
+
       vesktop
 
       # Nerd fonts time
@@ -37,10 +38,16 @@ in {
       userName = "tye-exe";
       userEmail = "tye@mailbox.org";
 
+      # Gives more git stuff?
+      package = pkgs.gitFull;
+
       extraConfig = {
         # Removes annoying message about git ignore files.
         advice.addIgnoredFile = false;
         push.autoSetupRemote = true;
+
+        # Idk how this exactly works but it allows me to login so i'm happy
+        credential.helper = "libsecret";
       };
     };
 
@@ -63,7 +70,11 @@ in {
       ];
     };
 
-    eza.enable = true;
+    eza = {
+      enable = true;
+      git = true; # Displays files git status when using -l
+      icons = true; # Shows cute icons next to file name.
+    };
 
     # Shell config.
     fish = {
