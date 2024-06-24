@@ -38,10 +38,14 @@ clean:
 	nix-collect-garbage -d
 """
 
-with open(identity+"temp", "w") as temp:
+# Writes content to temp file.
+with open("Makefile-temp", "w") as temp:
     temp.write(makeFileContent)
 
-os.remove(identity)
-os.rename(identity+"temp", identity)
+# Deletes old make file if it exists.
+if os.path.exists("Makefile"):
+    os.remove("Makefile")
+
+os.replace("Makefile-temp", "Makefile")
 print("Makefile writen")
 
