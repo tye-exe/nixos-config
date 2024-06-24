@@ -20,7 +20,7 @@
 
     hotkeys.commands."launch-rio" = {
       name = "Launch Rio";
-      key = "Ctrl+Alt+K";
+      key = "Ctrl+Alt+T";
       command = "rio";
     };
   };
