@@ -21,6 +21,7 @@ in {
 
       bat # Cat replacment
       eza # Ls replacment
+      trashy # Allows easy trashing & restoration of files
     ];
 
     inherit username homeDirectory;
@@ -83,7 +84,11 @@ in {
       shellAbbrs = {
         # Util abbrs.
         ls = "eza";
+        la = "eza -a";
+        ll = "eza -lh";
+        lla = "eza -lha";
         cat = "bat";
+        ts = "trash";
 
         # Git abbrs
         gs = "git status";
