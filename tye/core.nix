@@ -10,6 +10,7 @@ in {
       # Signing in could be nice, ya know?
       gh
 
+      # Alternate discord client.
       vesktop
 
       # Nerd fonts time
@@ -25,11 +26,6 @@ in {
     ];
 
     inherit username homeDirectory;
-
-    # file."config.kdl" = {
-    #   target = "${confDir}zellij/";
-    #   text = ''on_force_close "quit"'';
-    # };
   };
 
   fonts = { fontconfig.enable = true; };
