@@ -25,6 +25,10 @@
       command = "rio";
     };
 
+    startup.startupScript."start_syncthing" = {
+      text = "syncthing; syncthingtray";
+    };
+
     panels = [{
       location = "top";
       height = 48;
