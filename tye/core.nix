@@ -95,6 +95,9 @@ in {
         gca = "git commit --amend --no-edit";
         ga = "git add";
         gp = "git push";
+
+        # I got tired of having to type it in :P
+        cdn = "cd ${nixDir}";
       };
 
       # Runs either make command & then returns back to previous dir.
