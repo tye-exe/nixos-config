@@ -2,7 +2,8 @@
 let
   username = "tye";
   homeDirectory = "/home/${username}";
-  confDir = "${homeDirectory}/.config/";
+  confDir = "${homeDirectory}/.config";
+  nixDir = "${homeDirectory}/nixos";
 in {
   home = {
     packages = with pkgs; [
@@ -79,10 +80,6 @@ in {
     # Shell config.
     fish = {
       enable = true;
-      shellAliases = {
-        hm-switch = "cd /home/tye/nixos; make hm-switch; cd -";
-        sys-switch = "cd /home/tye/nixos; sudo make sys-switch; cd -";
-      };
       shellAbbrs = {
         # Util abbrs.
         ls = "eza";
@@ -99,6 +96,21 @@ in {
         ga = "git add";
         gp = "git push";
       };
+
+      # Runs either make command & then returns back to previous dir.
+      functions = {
+        hm-switch = ''
+          set -f PAST_DIR (pwd)
+          cd ${nixDir}
+          make hm-switch
+          cd $PAST_DIR'';
+        sys-switch = ''
+          set -f PAST_DIR (pwd)
+          cd ${nixDir}
+          sudo make sys-switch
+          cd $PAST_DIR'';
+      };
+
       # Only starts zellij if it's not already open.
       interactiveShellInit = ''
         if set -q ZELLIJ
@@ -117,8 +129,10 @@ in {
 
   };
 
+  # I couldn't figure out how to get the "TOML" value rio needs for config
+  # So i just did it myself \o/
   home.file."rio-conf" = {
-    target = "${confDir}rio/config.toml";
+    target = "${confDir}/rio/config.toml";
     text = std.serde.toTOML {
       cursor = "▇";
       blinking-cursor = true;
@@ -129,6 +143,7 @@ in {
       fonts.size = 18;
     };
   };
+
   # Don't change this without reading the wiki!
   # & yes to future me, i did write this. :p
   home.stateVersion = "24.05";
