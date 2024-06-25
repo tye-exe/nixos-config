@@ -60,7 +60,8 @@
             # Rust lang config
             ./tye/rust.nix
             # Desktop Enviroment conf
-            # ./tye/plasma.nix
+            inputs.plasma-manager.homeManagerModules.plasma-manager
+            ./tye/plasma.nix
           ];
         };
 
