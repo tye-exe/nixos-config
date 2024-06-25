@@ -5,7 +5,8 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [ inputs.home-manager.nixosModules.default ];
+  imports =
+    [ inputs.home-manager.nixosModules.default ./utils.nix ./exec_deps.nix ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

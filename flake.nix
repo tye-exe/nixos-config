@@ -39,13 +39,13 @@
         tye-laptop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./hardware-confs/laptop.nix ];
+          modules = [ ./system/configuration.nix ./hardware-confs/laptop.nix ];
         };
 
         tye-desktop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./hardware-confs/desktop.nix ];
+          modules = [ ./system/configuration.nix ./hardware-confs/desktop.nix ];
         };
       };
 
