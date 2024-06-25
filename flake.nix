@@ -26,7 +26,10 @@
       # Default nix stuff.
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config = { allowUnfree = true; };
+      };
 
       # External lib that's useful
       std = nix-std.lib;
@@ -72,6 +75,8 @@
             # Desktop Enviroment conf
             inputs.plasma-manager.homeManagerModules.plasma-manager
             ./tye/plasma.nix
+            # GAMES
+            ./tye/steam.nix
           ];
         };
       };
