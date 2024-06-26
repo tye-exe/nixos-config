@@ -49,18 +49,13 @@
         "org.kde.plasma.marginsseparator"
         {
           systemTray.items = {
-            # We explicitly show bluetooth and battery
+            extra = [ "syncthingtray" ];
             shown = [
               "org.kde.plasma.clipboard"
-              # "org.kde.plasma.volume"
               "org.kde.plasma.volume"
               "org.kde.plasma.bluetooth"
             ];
-            # And explicitly hide networkmanagement and volume
-            hidden = [
-              "org.kde.plasma.networkmanagement"
-              # "org.kde.plasma.volume"
-            ];
+            hidden = [ "org.kde.plasma.networkmanagement" ];
           };
         }
         { digitalClock = { }; }
