@@ -111,7 +111,10 @@ in {
 
     zellij = {
       enable = true;
-      settings = { on_force_close = "quit"; };
+      settings = {
+        on_force_close = "quit";
+        keybinds = { unbind = [ "Alt Left" "Alt Right" "Alt Up" "Alt Down" ]; };
+      };
     };
 
     rio = { enable = true; };
