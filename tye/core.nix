@@ -5,6 +5,9 @@ let
   confDir = "${homeDirectory}/.config";
   nixDir = "${homeDirectory}/nixos";
 in {
+
+  imports = [ ./helix.nix ];
+
   home = {
     packages = with pkgs; [
       # Signing in could be nice, ya know?
@@ -48,25 +51,6 @@ in {
         # Idk how this exactly works but it allows me to login so i'm happy
         credential.helper = "libsecret";
       };
-    };
-
-    # Gives me the power to have pretty nix files. ^-^
-    helix = {
-      enable = true;
-      languages.language = [
-        {
-          name = "nix";
-          auto-format = true;
-          formatter.command =
-            "${pkgs.nixfmt}/bin/nixfmt"; # Path to installed nix formatter
-        }
-        {
-          name = "rust";
-          auto-format = true;
-          formatter.command =
-            "${pkgs.rustfmt}/bin/rustfmt"; # Path to installed rust formatter
-        }
-      ];
     };
 
     eza = {
