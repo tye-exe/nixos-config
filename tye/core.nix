@@ -43,6 +43,7 @@ in {
         # Removes annoying message about git ignore files.
         advice.addIgnoredFile = false;
         push.autoSetupRemote = true;
+        pull.rebase = "false";
 
         # Idk how this exactly works but it allows me to login so i'm happy
         credential.helper = "libsecret";
