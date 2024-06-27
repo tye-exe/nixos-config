@@ -6,23 +6,20 @@
     # };
 
     packages = with pkgs; [
-      # Installs the rust toolchain
       rustc
-      # Install well, useful stuff.
-      #      rustup
-      # Rust LSP
       rust-analyzer
       cargo
+      clang
+
+      # Rust linter
       clippy
       # Rust debugger
       lldb
       # Live debugger
       bacon
-      # Creates cache
+      # Crate cache
       sccache
-
-      # Mold as rust linker
-      clang
+      # Rust linker
       mold
     ];
 
@@ -39,9 +36,8 @@
       target = ".cargo/config.toml";
       text = std.serde.toTOML {
         # Build with mold to reduce link time.
-        target.stable-x86_64-unknown-linux-gnu = {
-          linker = "${pkgs.clang}/bin/clang";
-          rustflags = ''["-C", "link-arg=--ld-path=${pkgs.mold}/bin/mold"]'';
+        target.x86_64-unknown-linux-gnu = {
+          rustflags = [ "-C" "link-arg=--ld-path=${pkgs.mold}/bin/mold" ];
         };
         # Cache of built crates to reduce compile time.
         build = { rustc-wrapper = "${pkgs.sccache}/bin/sccache"; };
