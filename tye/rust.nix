@@ -40,7 +40,10 @@
           rustflags = [ "-C" "link-arg=--ld-path=${pkgs.mold}/bin/mold" ];
         };
         # Cache of built crates to reduce compile time.
-        build = { rustc-wrapper = "${pkgs.sccache}/bin/sccache"; };
+        build = {
+          rustc-wrapper = "${pkgs.sccache}/bin/sccache";
+          incremental = false;
+        };
       };
     };
   };
