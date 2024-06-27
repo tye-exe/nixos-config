@@ -6,7 +6,7 @@ let
   nixDir = "${homeDirectory}/nixos";
 in {
 
-  imports = [ ./helix.nix ];
+  imports = [ ./helix.nix ./python.nix ];
 
   home = {
     packages = with pkgs; [
