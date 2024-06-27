@@ -1,8 +1,8 @@
 { pkgs, std, ... }: {
   home.packages = with pkgs; [
     python3
+    black # formatter
     python312Packages.python-lsp-server
-    python312Packages.python-lsp-black
     python312Packages.pylsp-rope
   ];
 
@@ -10,6 +10,7 @@
     name = "python";
     language-servers = [ "pylsp" ];
     auto-format = true;
+    formatter.command = "${pkgs.black}/bin/black";
   }];
 
   programs.helix.languages.language-server.pylsp.config.pylsp = {
