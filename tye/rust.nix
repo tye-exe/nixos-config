@@ -19,6 +19,7 @@
       # Live debugger
       bacon
       # Creates cache
+      sccache
 
       # Mold as rust linker
       clang
@@ -37,10 +38,13 @@
     file."cargo_config" = {
       target = ".cargo/config.toml";
       text = std.serde.toTOML {
+        # Build with mold to reduce link time.
         target.stable-x86_64-unknown-linux-gnu = {
           linker = "${pkgs.clang}/bin/clang";
           rustflags = ''["-C", "link-arg=--ld-path=${pkgs.mold}/bin/mold"]'';
         };
+        # Cache of built crates to reduce compile time.
+        build = { rustc-wrapper = "${pkgs.sccache}/bin/sccache"; };
       };
     };
   };
