@@ -132,7 +132,6 @@
     git
     nil # Nixos language server.
     home-manager
-    nixfmt # Nix formatter
 
     python3
 

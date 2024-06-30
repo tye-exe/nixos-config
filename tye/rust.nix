@@ -7,7 +7,6 @@
 
     packages = with pkgs; [
       rustc
-      rust-analyzer
       cargo
       clang
 

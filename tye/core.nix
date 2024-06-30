@@ -6,7 +6,7 @@ let
   nixDir = "${homeDirectory}/nixos";
 in {
 
-  imports = [ ./helix.nix ./python.nix ];
+  imports = [ ./helix.nix ];
 
   home = {
     packages = with pkgs; [
@@ -23,8 +23,8 @@ in {
       syncthing
       syncthingtray # Gui for syncthing
 
-      bat # Cat replacment
-      eza # Ls replacment
+      bat # Cat replacement
+      eza # Ls replacement
       trashy # Allows easy trashing & restoration of files
     ];
 
