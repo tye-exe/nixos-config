@@ -27,7 +27,7 @@ in {
       mouse = false;
       auto-save = true;
       completion-timeout = 100;
-      completion-trigger-len = 0;
+      completion-trigger-len = 1;
       lsp = {
         display-messages = true;
         display-inlay-hints = true;
