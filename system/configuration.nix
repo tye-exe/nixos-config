@@ -119,6 +119,11 @@
       # Open ports in the firewall for Steam Local Network Game Transfers
       localNetworkGameTransfers.openFirewall = true;
     };
+
+    nix-ld = {
+      enable = true;
+      libraries = (with pkgs; [ jdk21_headless stdenv.cc.cc openssl ]);
+    };
   };
 
   # Allow unfree packages

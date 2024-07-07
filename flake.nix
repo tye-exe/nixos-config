@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Desktop Enviroment config
+    # Desktop Environment config
     plasma-manager = {
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +18,9 @@
     };
 
     nix-std.url = "github:chessai/nix-std";
+
+    # nix-ld.url = "github:Mic92/nix-ld";
+    # nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -33,19 +36,31 @@
 
       # External lib that's useful
       std = nix-std.lib;
+
+      # nix-ld = inputs.nix-ld;
     in {
       # System confs
       nixosConfigurations = {
         tye-laptop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./system/configuration.nix ./hardware-confs/laptop.nix ];
+          modules = [
+            ./system/configuration.nix
+            ./hardware-confs/laptop.nix
+            # nix-ld.nixosModules.nix-ld
+            # { programs.nix-ld.dev.enable = true; }
+          ];
         };
 
         tye-desktop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./system/configuration.nix ./hardware-confs/desktop.nix ];
+          modules = [
+            ./system/configuration.nix
+            ./hardware-confs/desktop.nix
+            # nix-ld.nixosModules.nix-ld
+            # { programs.nix-ld.dev.enable = true; }
+          ];
         };
       };
 
@@ -53,32 +68,14 @@
       homeConfigurations = {
         tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit std; };
-          modules = [
-            # Base home-manager conf
-            ./tye/core.nix
-            # Rust lang config
-            ./tye/rust.nix
-            # Desktop Enviroment conf
-            inputs.plasma-manager.homeManagerModules.plasma-manager
-            ./tye/plasma.nix
-          ];
+          extraSpecialArgs = { inherit std inputs; };
+          modules = [ ./home/core.nix ];
         };
 
         tye-desktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit std; };
-          modules = [
-            # Base home-manager conf
-            ./tye/core.nix
-            # Rust lang config
-            ./tye/rust.nix
-            # Desktop Enviroment conf
-            inputs.plasma-manager.homeManagerModules.plasma-manager
-            ./tye/plasma.nix
-            # GAMES
-            ./tye/steam.nix
-          ];
+          extraSpecialArgs = { inherit std inputs; };
+          modules = [ ./home/desktop.nix ];
         };
       };
     };

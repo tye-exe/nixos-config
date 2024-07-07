@@ -1,12 +1,12 @@
-{ pkgs, std, ... }:
+{ pkgs, ... }:
 let
   username = "tye";
   homeDirectory = "/home/${username}";
-  confDir = "${homeDirectory}/.config";
+  configDir = "${homeDirectory}/.config";
   nixDir = "${homeDirectory}/nixos";
 in {
 
-  imports = [ ./helix.nix ];
+  imports = [ ./preset/helix.nix ./module/rio.nix ];
 
   home = {
     packages = with pkgs; [
@@ -26,6 +26,13 @@ in {
       bat # Cat replacement
       eza # Ls replacement
       trashy # Allows easy trashing & restoration of files
+
+      libreoffice-qt6-still # Office but without the Microsoft
+      hunspell # Spellchecker for libre office
+      hunspellDicts.en_GB-ise # Use the GB lib for the spell checker
+
+      # Allows screensharing
+      xwaylandvideobridge
     ];
 
     inherit username homeDirectory;
@@ -45,8 +52,10 @@ in {
       extraConfig = {
         # Removes annoying message about git ignore files.
         advice.addIgnoredFile = false;
+
         push.autoSetupRemote = true;
-        pull.rebase = "false";
+        pull.rebase = false;
+        init.defaultBranch = "master";
 
         # Idk how this exactly works but it allows me to login so i'm happy
         credential.helper = "libsecret";
@@ -107,6 +116,9 @@ in {
           zellij
         end
       '';
+
+      # Sets the default pager to bat
+      shellInit = "set PAGER bat";
     };
 
     zellij = {
@@ -117,23 +129,16 @@ in {
       };
     };
 
-    rio = { enable = true; };
+    rio.enable = true;
 
   };
 
-  # I couldn't figure out how to get the "TOML" value rio needs for config
-  # So i just did it myself \o/
-  home.file."rio-conf" = {
-    target = "${confDir}/rio/config.toml";
-    text = std.serde.toTOML {
-      cursor = "▇";
-      blinking-cursor = true;
-      hide-cursor-when-typing = true;
-      # line-height = 1.6;
-      editor = "hx";
-
-      fonts.size = 18;
-    };
+  rio = {
+    enable = true;
+    inherit configDir;
+    editor = "hx";
+    blinking-cursor = true;
+    hide-cursor-when-typing = true;
   };
 
   # Don't change this without reading the wiki!
