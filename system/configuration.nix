@@ -120,10 +120,12 @@
       localNetworkGameTransfers.openFirewall = true;
     };
 
-    nix-ld = {
-      enable = true;
-      libraries = (with pkgs; [ jdk21_headless stdenv.cc.cc openssl ]);
-    };
+    # nix-ld = {
+    #   enable = true;
+    #   libraries = (with pkgs; [ jdk21_headless stdenv.cc.cc openssl ]);
+    # };
+
+    noisetorch.enable = true;
   };
 
   # Allow unfree packages
