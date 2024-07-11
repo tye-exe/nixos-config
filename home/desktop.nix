@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, pkgs, ... }: {
 
   imports = [
     ./core.nix
@@ -12,4 +12,10 @@
     inputs.plasma-manager.homeManagerModules.plasma-manager
     ./preset/plasma.nix
   ];
+
+  home.packages = with pkgs;
+    [
+      # Minceraft
+      modrinth-app
+    ];
 }
