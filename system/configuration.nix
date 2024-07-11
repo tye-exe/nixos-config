@@ -148,6 +148,12 @@
     zellij # Funky terminal multiplexer
   ];
 
+  environment.sessionVariables = {
+    # There's a bug in nix with wayland lib, this is apparently a work-around
+    # Nvm, there's *also* a bug with session Variables
+    # LD_LIBRARY_PATH = "${pkgs.wayland}/lib";
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

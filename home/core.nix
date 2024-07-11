@@ -118,7 +118,9 @@ in {
       '';
 
       # Sets the default pager to bat
-      shellInit = "set PAGER bat";
+      shellInit = ''
+        set PAGER bat
+      '';
     };
 
     zellij = {
@@ -130,8 +132,10 @@ in {
     };
 
     rio.enable = true;
-
   };
+
+  # There's a bug in nix with wayland lib, this is apparently a work-around
+  home.sessionVariables = { LD_LIBRARY_PATH = "${pkgs.wayland}/lib"; };
 
   rio = {
     enable = true;
