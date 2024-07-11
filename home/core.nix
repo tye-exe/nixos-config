@@ -134,8 +134,19 @@ in {
     rio.enable = true;
   };
 
-  # There's a bug in nix with wayland lib, this is apparently a work-around
-  home.sessionVariables = { LD_LIBRARY_PATH = "${pkgs.wayland}/lib"; };
+  # IT WORKS. I LOVE YOU https://scvalex.net/posts/63/ <3
+  home.sessionVariables = let
+    libPath = with pkgs;
+      lib.makeLibraryPath [
+        libGL
+        libxkbcommon
+        wayland
+        xorg.libX11
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXrandr
+      ];
+  in { LD_LIBRARY_PATH = libPath; };
 
   rio = {
     enable = true;

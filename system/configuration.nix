@@ -139,6 +139,7 @@
     git
     nil # Nixos language server.
     home-manager
+    libxkbcommon # Keyboard library - required by some programs
 
     python3
 
