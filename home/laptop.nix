@@ -7,8 +7,12 @@
     ./preset/java.nix
     ./preset/rust.nix
 
+    ./module/rio.nix
+
     # Desktop Environment conf
     inputs.plasma-manager.homeManagerModules.plasma-manager
     ./preset/plasma.nix
   ];
+
+  rio = { fonts.size = 16; };
 }
