@@ -69,7 +69,7 @@
         tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs; };
-          modules = [ ./home/core.nix ];
+          modules = [ ./home/laptop.nix ];
         };
 
         tye-desktop = home-manager.lib.homeManagerConfiguration {
