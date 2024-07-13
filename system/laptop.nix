@@ -14,7 +14,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "tye_laptop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -44,7 +44,7 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Wayland?
   services.displayManager.sddm.wayland.enable = true;
@@ -54,10 +54,10 @@
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
-  #services.xserver = {
-  #  layout = "gb";
-  #  xkbVariant = "";
-  #};
+  # services.xserver = {
+  #   layout = "gb";
+  #   xkbVariant = "";
+  # };
 
   # Configure console keymap
   console.keyMap = "uk";
@@ -89,7 +89,6 @@
     isNormalUser = true;
     description = "tye";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ kdePackages.kate thunderbird ];
   };
 
   # Program configs
@@ -108,24 +107,6 @@
         fi
       '';
     };
-
-    # Steam has to be managed in config.nix due to some system-wide settings being modified
-    steam = {
-      enable = true;
-      # Open ports in the firewall for Steam Remote Play
-      remotePlay.openFirewall = true;
-      # Open ports in the firewall for Source Dedicated Server
-      dedicatedServer.openFirewall = true;
-      # Open ports in the firewall for Steam Local Network Game Transfers
-      localNetworkGameTransfers.openFirewall = true;
-    };
-
-    # nix-ld = {
-    #   enable = true;
-    #   libraries = (with pkgs; [ jdk21_headless stdenv.cc.cc openssl ]);
-    # };
-
-    noisetorch.enable = true;
   };
 
   # Allow unfree packages
@@ -137,16 +118,9 @@
     helix # Vim-like editor
     gnumake # Make but with a different name bc who knows
     git
-    nil # Nixos language server.
-    home-manager
+    home-manager # Manages user-configurations
     libxkbcommon # Keyboard library - required by some programs
-
-    python3
-
-    # Terminal stuffs
-    rio # Terminal emulator
-    fish # Bash 2.0
-    zellij # Funky terminal multiplexer
+    python3 # For making the makefile
   ];
 
   environment.sessionVariables = {

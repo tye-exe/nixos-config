@@ -10,17 +10,15 @@ in {
 
   home = {
     packages = with pkgs; [
-      # Signing in could be nice, ya know?
-      gh
-
-      # Alternate discord client.
-      vesktop
+      # Terminal stuffs
+      rio # Terminal emulator
+      fish # Bash 2.0
+      zellij # Funky terminal multiplexer
 
       # Nerd fonts time
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
 
-      # File sync
-      syncthing
+      syncthing # File sync
       syncthingtray # Gui for syncthing
 
       bat # Cat replacement
@@ -31,8 +29,11 @@ in {
       hunspell # Spellchecker for libre office
       hunspellDicts.en_GB-ise # Use the GB lib for the spell checker
 
-      # Allows screensharing
-      xwaylandvideobridge
+      # Misc
+      xwaylandvideobridge # Allows screensharing
+      thunderbird # Email
+      gh # Signing in could be nice, ya know?
+      vesktop # Alternate discord client.
     ];
 
     inherit username homeDirectory;

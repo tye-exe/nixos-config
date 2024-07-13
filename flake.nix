@@ -18,9 +18,6 @@
     };
 
     nix-std.url = "github:chessai/nix-std";
-
-    # nix-ld.url = "github:Mic92/nix-ld";
-    # nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -44,23 +41,13 @@
         tye-laptop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [
-            ./system/configuration.nix
-            ./hardware-confs/laptop.nix
-            # nix-ld.nixosModules.nix-ld
-            # { programs.nix-ld.dev.enable = true; }
-          ];
+          modules = [ ./system/laptop.nix ./hardware-confs/laptop.nix ];
         };
 
         tye-desktop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [
-            ./system/configuration.nix
-            ./hardware-confs/desktop.nix
-            # nix-ld.nixosModules.nix-ld
-            # { programs.nix-ld.dev.enable = true; }
-          ];
+          modules = [ ./system/desktop.nix ./hardware-confs/desktop.nix ];
         };
       };
 

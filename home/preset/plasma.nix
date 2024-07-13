@@ -1,10 +1,11 @@
 { pkgs, ... }: {
 
-  home.packages = with pkgs;
-    [
-      # I love my dot
-      cinnamon.mint-cursor-themes
-    ];
+  home.packages = with pkgs; [
+    # I love my dot
+    cinnamon.mint-cursor-themes
+    # Default editor for kde
+    kdePackages.kate
+  ];
 
   programs.plasma = {
     enable = true;
