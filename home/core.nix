@@ -34,6 +34,7 @@ in {
       thunderbird # Email
       gh # Signing in could be nice, ya know?
       vesktop # Alternate discord client.
+      mermaid-cli # Graph generation
     ];
 
     inherit username homeDirectory;
@@ -133,6 +134,11 @@ in {
     };
 
     rio.enable = true;
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 
   # IT WORKS. I LOVE YOU https://scvalex.net/posts/63/ <3

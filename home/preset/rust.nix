@@ -6,12 +6,13 @@
     # };
 
     packages = with pkgs; [
-      rustc
-      cargo
+      rustup
+      # rustc
+      # cargo
       clang
 
       # Rust linter
-      clippy
+      # clippy
       # Rust debugger
       lldb
       # Live debugger
@@ -20,6 +21,10 @@
       sccache
       # Rust linker
       mold
+
+      ## For electronics programming
+      # flip-link
+      # elf2uf2-rs
     ];
 
     file."rustup_config" = {
