@@ -8,8 +8,8 @@ in {
 
     nil # Nix
     nixfmt-rfc-style # Nix fmt
-    # rust-analyzer # Rust
-    # rustfmt # Rust fmt
+    rust-analyzer # Rust
+    rustfmt # Rust fmt
     taplo # Toml
 
     # Python decides to be complicated but oh well

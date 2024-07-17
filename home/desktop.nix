@@ -5,7 +5,6 @@
 
     ./preset/helix.nix
     ./preset/java.nix
-    ./preset/rust.nix
     ./preset/steam.nix
 
     # Desktop Environment conf

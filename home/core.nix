@@ -97,8 +97,8 @@ in {
         cdn = "cd ${nixDir}";
       };
 
-      # Runs either make command & then returns back to previous dir.
       functions = {
+        # Runs either make command & then returns back to previous dir.
         hm-switch = ''
           set -f PAST_DIR (pwd)
           cd ${nixDir}
@@ -109,6 +109,11 @@ in {
           cd ${nixDir}
           sudo make sys-switch
           cd $PAST_DIR'';
+
+        # Sets up template shell environment, alongside nix-direnv
+        mk-env = ''
+          [ ! -e .envrc ] && echo "use flake" >> .envrc && direnv allow .
+        '';
       };
 
       # Only starts zellij if it's not already open.
@@ -140,20 +145,6 @@ in {
       nix-direnv.enable = true;
     };
   };
-
-  # IT WORKS. I LOVE YOU https://scvalex.net/posts/63/ <3
-  home.sessionVariables = let
-    libPath = with pkgs;
-      lib.makeLibraryPath [
-        libGL
-        libxkbcommon
-        wayland
-        xorg.libX11
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXrandr
-      ];
-  in { LD_LIBRARY_PATH = libPath; };
 
   rio = {
     enable = true;
