@@ -34,7 +34,7 @@ in {
       thunderbird # Email
       gh # Signing in could be nice, ya know?
       vesktop # Alternate discord client.
-      mermaid-cli # Graph generation
+      vlc # Plays videos :P
     ];
 
     inherit username homeDirectory;
