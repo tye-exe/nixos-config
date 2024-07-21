@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # ~/ files config
     home-manager = {
@@ -20,13 +21,18 @@
     nix-std.url = "github:chessai/nix-std";
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, home-manager, nix-std, plasma-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-std
+    , plasma-manager, ... }:
     let
       # Default nix stuff.
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
+        inherit system;
+        config = { allowUnfree = true; };
+      };
+
+      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config = { allowUnfree = true; };
       };
@@ -55,7 +61,7 @@
       homeConfigurations = {
         tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit std inputs; };
+          extraSpecialArgs = { inherit std inputs pkgs-unstable; };
           modules = [
             ./home/laptop.nix
             inputs.plasma-manager.homeManagerModules.plasma-manager
@@ -64,7 +70,7 @@
 
         tye-desktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit std inputs; };
+          extraSpecialArgs = { inherit std inputs pkgs-unstable; };
           modules = [
             ./home/desktop.nix
             inputs.plasma-manager.homeManagerModules.plasma-manager

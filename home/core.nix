@@ -81,6 +81,7 @@ in {
         lla = "eza -lha";
         cat = "bat";
         ts = "trash";
+        "7z" = "7zz"; # Seven zip uses "7zz", not "7z"
 
         # Git abbrs
         gs = "git status";

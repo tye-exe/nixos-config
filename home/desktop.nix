@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, pkgs-unstable, ... }: {
 
   imports = [
     ./core.nix
@@ -11,9 +11,9 @@
     ./preset/plasma.nix
   ];
 
-  home.packages = with pkgs;
-    [
-      # Minceraft
-      modrinth-app
-    ];
+  home.packages = [
+    # Minceraft
+    pkgs.modrinth-app
+    pkgs-unstable.ytmdesktop
+  ];
 }
