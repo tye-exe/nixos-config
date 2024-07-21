@@ -56,13 +56,19 @@
         tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs; };
-          modules = [ ./home/laptop.nix ];
+          modules = [
+            ./home/laptop.nix
+            inputs.plasma-manager.homeManagerModules.plasma-manager
+          ];
         };
 
         tye-desktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs; };
-          modules = [ ./home/desktop.nix ];
+          modules = [
+            ./home/desktop.nix
+            inputs.plasma-manager.homeManagerModules.plasma-manager
+          ];
         };
       };
     };

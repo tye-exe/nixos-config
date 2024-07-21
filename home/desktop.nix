@@ -8,7 +8,6 @@
     ./preset/steam.nix
 
     # Desktop Environment conf
-    inputs.plasma-manager.homeManagerModules.plasma-manager
     ./preset/plasma.nix
   ];
 

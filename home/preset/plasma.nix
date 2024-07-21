@@ -1,5 +1,7 @@
 { pkgs, ... }: {
 
+  # imports = [ <plasma-manager/modules> ];
+
   home.packages = with pkgs; [
     # I love my dot
     cinnamon.mint-cursor-themes
