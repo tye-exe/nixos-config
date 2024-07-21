@@ -21,8 +21,10 @@ in {
       syncthing # File sync
       syncthingtray # Gui for syncthing
 
-      bat # Cat replacement
-      eza # Ls replacement
+      bat # cat replacement
+      eza # ls replacement
+      zoxide # cd replacement
+      fzf # Fuzzy searching
       trashy # Allows easy trashing & restoration of files
 
       libreoffice-qt6-still # Office but without the Microsoft
@@ -68,6 +70,8 @@ in {
       enable = true;
       git = true; # Displays files git status when using -l
       icons = true; # Shows cute icons next to file name.
+      enableFishIntegration =
+        false; # This stops alaises being added; I prefer abbrs.
     };
 
     # Shell config.
@@ -140,6 +144,11 @@ in {
     };
 
     rio.enable = true;
+
+    zoxide = {
+      enable = true;
+      options = [ "--cmd cd" ];
+    };
 
     direnv = {
       enable = true;
