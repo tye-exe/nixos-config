@@ -36,6 +36,7 @@ in {
       thunderbird # Email
       gh # Signing in could be nice, ya know?
       vesktop # Alternate discord client.
+      telegram-desktop # Do i need to explain?
       vlc # Plays videos :P
     ];
 
