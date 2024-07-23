@@ -17,6 +17,13 @@ in {
     python312Packages.python-lsp-server
     yapf # Fmt
     python312Packages.pyflakes
+
+    # markdown
+    # html
+    # json
+    # eslint
+    # css
+    vscode-langservers-extracted
   ];
 
   programs.helix = {
