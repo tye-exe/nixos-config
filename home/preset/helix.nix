@@ -58,7 +58,7 @@ in {
         name = "rust";
         auto-format = true;
         formatter.command =
-          "${pkgs.rustfmt}/bin/rustfmt"; # Path to installed rust formatter
+          "${pkgs.rustfmt}/bin/rustfmt --edition 2021"; # Path to installed rust formatter
         language-servers = [ "rust-analyzer" spell ];
       }
       {
