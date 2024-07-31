@@ -30,15 +30,42 @@ in {
     enable = true;
 
     # Generic configs
-    settings.editor = {
-      mouse = false;
-      auto-save = true;
-      completion-timeout = 100;
-      completion-trigger-len = 1;
-      lsp = {
-        display-messages = true;
-        display-inlay-hints = true;
+    settings = {
+      # Generic settings
+      editor = {
+        mouse = false;
+        auto-save = true;
+        completion-timeout = 100;
+        completion-trigger-len = 1;
+        lsp = {
+          display-messages = true;
+          display-inlay-hints = true;
+        };
+
+        # Custom keybinds
+        keys = {
+          normal = let
+            down = "move_visual_line_down";
+            up = "move_visual_line_up";
+          in {
+            # Lets me save files normally (insert cool face).
+            C-s = ":w";
+            # I can move up or down faster now.
+            A-j = "[${down}, ${down}, ${down}]";
+            A-k = "[${up}, ${up}, ${up}]";
+          };
+
+          view = let
+            down = "scroll_down";
+            up = "scroll_up";
+          in {
+            # I can move up or down faster now.
+            A-j = "[${down}, ${down}, ${down}]";
+            A-k = "[${up}, ${up}, ${up}]";
+          };
+        };
       };
+
     };
 
     # Spell checker
