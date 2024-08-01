@@ -38,6 +38,7 @@ in {
       vesktop # Alternate discord client.
       telegram-desktop # Do i need to explain?
       vlc # Plays videos :P
+      dotool # Can simulate various user inputs.
     ];
 
     inherit username homeDirectory;
@@ -125,6 +126,11 @@ in {
           cd ${nixDir}
           sudo make sys-switch
           cd $PAST_DIR'';
+
+        # Emulates the pressing of the given keys.
+        key = ''
+          command -q dotool && echo type $argv | dotool
+        '';
 
         # Sets up template shell environment, alongside nix-direnv
         mk-env = ''
