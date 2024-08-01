@@ -101,6 +101,16 @@ in {
 
         # I got tired of having to type it in :P
         cdn = "cd ${nixDir}";
+
+        # Shortcuts to void command output
+        void = {
+          expansion = ">> /dev/null";
+          position = "anywhere";
+        };
+        evoid = {
+          expansion = "&>> /dev/null";
+          position = "anywhere";
+        };
       };
 
       functions = {
@@ -118,7 +128,8 @@ in {
 
         # Sets up template shell environment, alongside nix-direnv
         mk-env = ''
-          [ ! -e .envrc ] && echo "use flake" >> .envrc && direnv allow .
+          [ ! -e .envrc ] && echo "use flake" >> .envrc
+          direnv allow
         '';
       };
 
@@ -136,6 +147,7 @@ in {
       '';
     };
 
+    # Terminal multiplexer
     zellij = {
       enable = true;
       settings = {
@@ -146,15 +158,19 @@ in {
 
     rio.enable = true;
 
+    # "cd" replacement
     zoxide = {
       enable = true;
       options = [ "--cmd cd" ];
     };
 
+    # Allows for seamless integration with nix flake environments.
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
+
+    nix-index.enable = true;
   };
 
   rio = {
