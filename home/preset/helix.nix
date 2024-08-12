@@ -41,27 +41,34 @@ in {
           display-messages = true;
           display-inlay-hints = true;
         };
+      };
 
-        # Custom keybinds
-        keys = {
-          normal = let
+      # Custom keybinds
+      keys = {
+        normal = let
+          down = "move_visual_line_down";
+          up = "move_visual_line_up";
+        in {
+          # Lets me save files normally (insert cool face).
+          C-s = ":w";
+
+          "\\" = let
             down = "move_visual_line_down";
             up = "move_visual_line_up";
           in {
-            # Lets me save files normally (insert cool face).
-            C-s = ":w";
             # I can move up or down faster now.
-            A-j = "[${down}, ${down}, ${down}]";
-            A-k = "[${up}, ${up}, ${up}]";
+            j = [ down down down ":sh key \\" ];
+            k = [ up up up ":sh key \\" ];
           };
 
-          view = let
-            down = "scroll_down";
-            up = "scroll_up";
+          # View mode
+          z = let
+            down = "move_visual_line_down";
+            up = "move_visual_line_up";
           in {
             # I can move up or down faster now.
-            A-j = "[${down}, ${down}, ${down}]";
-            A-k = "[${up}, ${up}, ${up}]";
+            C-j = [ down down down ];
+            C-k = [ up up up ];
           };
         };
       };
