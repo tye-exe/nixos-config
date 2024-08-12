@@ -6,7 +6,7 @@ let
   nixDir = "${homeDirectory}/nixos";
 in {
 
-  imports = [ ./preset/helix.nix ./module/rio.nix ];
+  imports = [ ./preset/helix.nix ./module/rio.nix ./module/file-output.nix ];
 
   home = {
     packages = with pkgs; [
