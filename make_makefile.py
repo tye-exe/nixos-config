@@ -5,7 +5,10 @@ chose_ident = None
 
 # Creates the identity file if it doesn't exist.
 if not os.path.isfile(identity):
-    chosen_ident = int(input("Identity not configured. Please select what machine to use.\n1 - tye-laptop\n2 - tye-desktop\n:"))
+    chosen_ident = int(
+        input(
+            "Identity not configured. Please select what machine to use.\n1 - tye-laptop\n2 - tye-desktop\n:"
+        ))
 
     # Selects identity
     if chosen_ident == 1:
@@ -14,10 +17,9 @@ if not os.path.isfile(identity):
         chosen_ident = "tye-desktop"
     else:
         exit("invalid option.")
-           
+
     with open(identity, "x") as ident:
         ident.write(chosen_ident)
-
 
 # Reads the selected identity content from the file
 with open(identity, "r") as ident:
@@ -27,7 +29,7 @@ with open(identity, "r") as ident:
 makeFileContent = f"""
 .PHONY: sys-switch
 sys-switch:
-	nixos-rebuild switch -I nixos-config=/home/tye/nixos/configuration.nix --flake /home/tye/nixos/#{chosen_ident}
+	nixos-rebuild switch -I nixos-config=/home/tye/nixos/configuration.nix --flake /home/tye/nixos/#{chosen_ident} --impure
 
 .PHONY: hm-switch
 hm-switch:
@@ -48,4 +50,3 @@ if os.path.exists("Makefile"):
 
 os.replace("Makefile-temp", "Makefile")
 print("Makefile writen")
-
