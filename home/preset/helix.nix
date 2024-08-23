@@ -11,6 +11,8 @@ in {
     rust-analyzer # Rust
     rustfmt # Rust fmt
     taplo # Toml
+    lua-language-server # Lua
+    markdown-oxide # Markdown
 
     # Python decides to be complicated but oh well
     python312Packages.jedi # LSP dependency
@@ -33,6 +35,7 @@ in {
     settings = {
       # Generic settings
       editor = {
+        line-number = "relative";
         mouse = false;
         auto-save = true;
         completion-timeout = 100;
@@ -106,6 +109,16 @@ in {
         auto-format = true;
         formatter.command = "${pkgs.yapf}/bin/yapf";
         language-servers = [ "pylsp" spell ];
+      }
+      {
+        name = "lua";
+        auto-format = true;
+        language-servers = [ "lua-language-server" spell ];
+      }
+      {
+        name = "markdown";
+        auto-format = true;
+        language-servers = [ "markdown-oxide" spell ];
       }
     ];
   };
