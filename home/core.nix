@@ -39,6 +39,7 @@ in {
       telegram-desktop # Do i need to explain?
       vlc # Plays videos :P
       dotool # Can simulate various user inputs.
+      localsend # Share files over local wifi network.
     ];
 
     inherit username homeDirectory;
