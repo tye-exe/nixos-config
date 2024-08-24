@@ -4,6 +4,7 @@ let
   homeDirectory = "/home/${username}";
   configDir = "${homeDirectory}/.config";
   nixDir = "${homeDirectory}/nixos";
+  luaScript = "${nixDir}/core.lua";
 in {
 
   imports = [ ./preset/helix.nix ./module/rio.nix ./module/file-output.nix ];
@@ -113,21 +114,14 @@ in {
           expansion = "&>> /dev/null";
           position = "anywhere";
         };
+
+        # Switches home-manager to new config
+        hm-switch = "eval (${luaScript} hm-switch)";
+        # Switches system to new config
+        sys-switch = "eval (${luaScript} sys-switch)";
       };
 
       functions = {
-        # Runs either make command & then returns back to previous dir.
-        hm-switch = ''
-          set -f PAST_DIR (pwd)
-          cd ${nixDir}
-          make hm-switch
-          cd $PAST_DIR'';
-        sys-switch = ''
-          set -f PAST_DIR (pwd)
-          cd ${nixDir}
-          sudo make sys-switch
-          cd $PAST_DIR'';
-
         # Emulates the pressing of the given keys.
         key = ''
           command -q dotool && echo type $argv | dotool
