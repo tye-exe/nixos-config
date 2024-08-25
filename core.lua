@@ -2,10 +2,17 @@
 
 -- Gets the path to the dir for the lua script
 local exec_path = arg[0]
-local path_len = string.len(exec_path) - string.len("core.lua")
-local path = string.sub(exec_path, 0, path_len)
+-- Removes the filename from the path
+local path = exec_path:match(".*/")
 
--- The first arg passed (excluding the exe path)
+-- If the path isn't absolute, find absolute path
+if path:sub(1, 1) ~= "/" then
+  -- Gets the cwd to find the full path
+  local working_dir = io.popen("pwd"):read() .. "/"
+  path = working_dir .. path
+end
+
+-- The first arg passed.
 local base_arg = arg[1]
 
 -- Path to the file storing identity.
@@ -33,6 +40,8 @@ end
 
 -- Gets the identity stored in the ident file.
 local function get_ident()
+  local file;
+
   if not file_exists(IDENTITY_FILE) then
     return nil
   else
@@ -136,12 +145,12 @@ elseif base_arg == "sys-switch" then
     os.exit(1)
   end
 
-  -- Removes the "tye-" from the start of the ident
-  local raw_ident = string.sub(ident, 5, string.len(ident))
+  -- Removes any characters proceeding the final non letter char.
+  local raw_ident = string.match(ident, "%a*$")
 
   local command = string.format(
-    "nixos-rebuild switch -I nixos-config=/home/tye/nixos/system/%s.nix --flake /home/tye/nixos/#%s --impure",
-    raw_ident, ident)
+    "nixos-rebuild switch -I nixos-config=%ssystem/%s.nix --flake %s#%s --impure",
+    path, raw_ident, path, ident)
   io.write(command)
 
   -- home manager switch
@@ -151,18 +160,22 @@ elseif base_arg == "hm-switch" then
     os.exit(1)
   end
 
-  local command = string.format("home-manager switch --flake /home/tye/nixos/#%s", ident)
+  local command = string.format("home-manager switch --flake %s#%s", path, ident)
   io.write(command)
 
   -- undefined system switch
 elseif base_arg == "undefined-sys-switch" then
-  io.write(
-    "nixos-rebuild switch -I nixos-config=/home/tye/nixos/system/undefined.nix --flake /home/tye/nixos/#undefined --impure")
+  local command = string.format(
+    "nixos-rebuild switch -I nixos-config=%ssystem/undefined.nix --flake %s#undefined --impure",
+    path, path)
+
+  io.write(command)
 
   -- undefined home manager switch
 elseif base_arg == "undefined-hm-switch" then
-  io.write(
-    "home-manager switch --flake /home/tye/nixos/#undefined")
+  local command = string.format("home-manager switch --flake %s#undefined", path)
+
+  io.write(command)
 
   -- Prints the logo to sout
 elseif base_arg == "logo" then
