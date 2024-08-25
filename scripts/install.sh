@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+# Terminate script if any command fails.
+set -eo pipefail
+
 # Only continues execution if sudo permission is granted.
-sudo echo "Sudo permission granted." || exit 1;
+sudo echo "Sudo permission granted."
 
 # Download repo & move into it.
 git clone https://github.com/tye-exe/nixos-config.git
