@@ -114,14 +114,15 @@ in {
           expansion = "&>> /dev/null";
           position = "anywhere";
         };
-
-        # Switches home-manager to new config
-        hm-switch = "eval (${luaScript} hm-switch)";
-        # Switches system to new config
-        sys-switch = "eval (${luaScript} sys-switch)";
       };
 
       functions = {
+        ## Following two are functions as i got error when using Aliases ##
+        # Switches home-manager to new config.
+        hm-switch = "eval (${luaScript} hm-switch)";
+        # Switches system to new config.
+        sys-switch = "sudo eval (${luaScript} sys-switch)";
+
         # Emulates the pressing of the given keys.
         key = ''
           command -q dotool && echo type $argv | dotool
