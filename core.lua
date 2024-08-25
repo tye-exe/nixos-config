@@ -5,6 +5,8 @@ local exec_path = arg[0]
 local path_len = string.len(exec_path) - string.len("core.lua")
 local path = string.sub(exec_path, 0, path_len)
 
+-- The first arg passed (excluding the exe path)
+local base_arg = arg[1]
 
 -- Path to the file storing identity.
 local IDENTITY_FILE = path .. ".identity"
@@ -78,8 +80,6 @@ end
 
 -- Select operation:
 
--- The first arg passed (excluding the exe path)
-local base_arg = arg[1]
 -- It looks cool, okay?
 --
 -- From: https://ascii-generator.site/t/
@@ -112,14 +112,20 @@ local HELP_TEXT = [[
   \/_/\/_/   \/_____/   \/_____/   \/_/
 
 ------------------------------------------
-"identity" - Set the identity of the system.
+# Nix switch commands
 "sys-switch" - Outputs the command to perform a nixos system switch.
 "hm-switch" - Outputs the command to perform a home-manager switch.
-_ - Shows this menu.
-]]
+"undefined-sys-switch" - Outputs the command to perform a nixos system switch for an undefined identity.
+"undefined-hm-switch" - Outputs the command to perform a home-manager switch for an undefined identity.
+
+# Misc
+"identity" - Set the identity of the system.
+<anything else> - Shows this menu.
+
+# Vanity
+"logo" - Outputs the logo]]
 
 if base_arg == "identity" then
-  print(LOGO)
   os.remove(IDENTITY_FILE)
   generate_identity()
 
@@ -147,6 +153,20 @@ elseif base_arg == "hm-switch" then
 
   local command = string.format("home-manager switch --flake /home/tye/nixos/#%s", ident)
   io.write(command)
+
+  -- undefined system switch
+elseif base_arg == "undefined-sys-switch" then
+  io.write(
+    "nixos-rebuild switch -I nixos-config=/home/tye/nixos/system/undefined.nix --flake /home/tye/nixos/#undefined --impure")
+
+  -- undefined home manager switch
+elseif base_arg == "undefined-hm-switch" then
+  io.write(
+    "home-manager switch --flake /home/tye/nixos/#undefined")
+
+  -- Prints the logo to sout
+elseif base_arg == "logo" then
+  print(LOGO)
 else
   print(HELP_TEXT)
 end

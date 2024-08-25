@@ -44,6 +44,12 @@
     in {
       # System confs
       nixosConfigurations = {
+        undefined = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./system/core.nix ./hardware-confs/undefined.nix ];
+        };
+
         tye-laptop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -59,6 +65,15 @@
 
       # Home manager confs
       homeConfigurations = {
+        undefined = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit std inputs pkgs-unstable; };
+          modules = [
+            ./home/core.nix
+            inputs.plasma-manager.homeManagerModules.plasma-manager
+          ];
+        };
+
         tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs pkgs-unstable; };

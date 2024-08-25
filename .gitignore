@@ -1,6 +1,8 @@
-# Home-manager "tmp" files.
+# Home-manager build files.
 result
 
-# Ignore custom device identifier
+# Device identifier
 .identity
-Makefile
+
+# Hardware config for undefined identifiers
+hardware-confs/undefined.nix
