@@ -42,5 +42,5 @@ echo "Finished configuration system & dot files; Reboot to allow for configurati
 
 ### Change configuration location
 If you wish to change the repo location, then move `nixos-config` to the desired folder/path of your
-choosing & execute `bash; eval ./core.lua hm-switch` within the new directory & nix will update the
+choosing & execute `bash; eval ./core.lua undefined-hm-switch` within the new directory & nix will update the
 required paths.
