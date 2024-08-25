@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Only continues execution if sudo permission is granted.
+sudo echo "Sudo permission granted." || exit 1;
+
 # Download repo & move into it.
 git clone https://github.com/tye-exe/nixos-config.git
 cd nixos-config
@@ -15,7 +18,7 @@ echo "Generating hardware configuration for this machine."
 nixos-generate-config --show-hardware-config >> ./hardware-confs/undefined.nix
 
 echo "Switching system configuration."
-eval sudo ./core.lua sys-switch | bash
+eval ./core.lua sys-switch | sudo bash
 
 echo "Switching home-manager configuration."
 eval ./core.lua undefined-hm-switch | bash
