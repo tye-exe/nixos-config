@@ -157,7 +157,7 @@ elseif base_arg == "hm-switch" then
   -- undefined system switch
 elseif base_arg == "undefined-sys-switch" then
   io.write(
-    "nixos-rebuild --extra-experimental-features \"nix-command flakes\" switch -I nixos-config=/home/tye/nixos/system/undefined.nix --flake /home/tye/nixos/#undefined --impure")
+    "nixos-rebuild switch -I nixos-config=/home/tye/nixos/system/undefined.nix --flake /home/tye/nixos/#undefined --impure")
 
   -- undefined home manager switch
 elseif base_arg == "undefined-hm-switch" then
