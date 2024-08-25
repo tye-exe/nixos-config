@@ -18,7 +18,7 @@ bash
 # Prerequisites to initialise configuration.
 nix-shell -p git lua
 
-# Download repo & move into it
+# Download repo & move into it.
 git clone https://github.com/tye-exe/nixos-config.git
 cd nixos-config
 
