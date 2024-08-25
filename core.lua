@@ -1,8 +1,13 @@
 #!/usr/bin/env lua
 
+-- Gets the path to the dir for the lua script
+local exec_path = arg[0]
+local path_len = string.len(exec_path) - string.len("core.lua")
+local path = string.sub(exec_path, 0, path_len)
+
 
 -- Path to the file storing identity.
-local IDENTITY_FILE = ".identity"
+local IDENTITY_FILE = path .. ".identity"
 -- The possible valid identifiers.
 local IDENTITIES = { "tye-laptop", "tye-desktop" }
 
