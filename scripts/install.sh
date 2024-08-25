@@ -26,7 +26,7 @@ chmod +x core.lua
 
 # Generate hardware conf for this machine.
 echo "Generating hardware configuration for this machine."
-nixos-generate-config --show-hardware-config >> ./hardware-confs/undefined.nix
+nixos-generate-config --show-hardware-config > ./hardware-confs/undefined.nix
 # A file needs to be added to git for nix flakes to access it.
 git add ./hardware-confs/undefined.nix
 
