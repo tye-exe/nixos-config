@@ -3,6 +3,3 @@ result
 
 # Device identifier
 .identity
-
-# Hardware config for undefined identifiers
-hardware-confs/undefined.nix
