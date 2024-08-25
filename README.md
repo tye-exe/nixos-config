@@ -12,7 +12,7 @@
 
 ### Install instructions
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/tye-exe/nixos-config/main/scripts/init.sh)
+curl -s https://raw.githubusercontent.com/tye-exe/nixos-config/main/scripts/init.sh | bash
 ```
 
 ### Change configuration location
