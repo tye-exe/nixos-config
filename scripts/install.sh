@@ -21,7 +21,7 @@ echo "Generating hardware configuration for this machine."
 nixos-generate-config --show-hardware-config >> ./hardware-confs/undefined.nix
 
 echo "Switching system configuration."
-eval ./core.lua sys-switch | sudo bash
+eval ./core.lua undefined-sys-switch | sudo bash
 
 echo "Switching home-manager configuration."
 eval ./core.lua undefined-hm-switch | bash
