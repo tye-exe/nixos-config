@@ -18,7 +18,7 @@ local base_arg = arg[1]
 -- Path to the file storing identity.
 local IDENTITY_FILE = path .. ".identity"
 -- The possible valid identifiers.
-local IDENTITIES = { "tye-laptop", "tye-desktop" }
+local IDENTITIES = { "undefined", "tye-laptop", "tye-desktop" }
 
 
 -- Matches the chosen identity against the existing ones
@@ -63,12 +63,13 @@ local function generate_identity()
     io.write(
       [[Select your identity:
 q - quit
+0 - undefined
 1 - tye-laptop
 2 - tye-desktop
 :]])
-    local chosen_ident = IDENTITIES[io.read("*n")]
+    local num_input = io.read("*n")
 
-    if chosen_ident == nil then
+    if num_input == nil then
       -- If invalid input was entered consume it.
       local text = io.read("*l")
       if text == "q" then
@@ -79,6 +80,7 @@ q - quit
       goto continue;
     end
 
+    local chosen_ident = IDENTITIES[num_input + 1]
     print("Selected: " .. chosen_ident)
     set_ident(chosen_ident)
     break
@@ -127,8 +129,12 @@ local HELP_TEXT = [[
 "undefined-sys-switch" - Outputs the command to perform a nixos system switch for an undefined identity.
 "undefined-hm-switch" - Outputs the command to perform a home-manager switch for an undefined identity.
 
-# Misc
+# Identity
 "identity" - Set the identity of the system.
+"identity-undefined" - Sets the identity to "undefined".
+"identity-clear" - Clears the previously set identity.
+
+# Misc
 <anything else> - Shows this menu.
 
 # Vanity
@@ -174,8 +180,25 @@ elseif base_arg == "undefined-sys-switch" then
   -- undefined home manager switch
 elseif base_arg == "undefined-hm-switch" then
   local command = string.format("home-manager switch --flake %s#undefined", path)
-
   io.write(command)
+
+  -- Sets identity to undefined
+elseif base_arg == "identity-undefined" then
+  print("Setting identity to undefined.")
+
+  local previous = get_ident() or "none"
+  print("Previous identity: \"" .. previous .. "\".")
+
+  set_ident(IDENTITIES[1])
+
+  -- Clears the current identity
+elseif base_arg == "identity-clear" then
+  print("Removing identity file.")
+
+  local previous = get_ident() or "none"
+  print("Previous identity: \"" .. previous .. "\".")
+
+  os.remove(IDENTITY_FILE)
 
   -- Prints the logo to sout
 elseif base_arg == "logo" then
