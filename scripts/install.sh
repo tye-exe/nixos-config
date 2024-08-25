@@ -7,7 +7,7 @@ set -eo pipefail
 sudo echo "Sudo permission granted."
 
 # Check if repo has already been cloned.
-if [ -d "nixos-config" ] then
+if [ -d "nixos-config" ]; then
   echo "Repo found; updating"
   cd nixos-config
   git pull
