@@ -90,19 +90,23 @@ q - quit
 end
 
 
--- Ensures that the path in the tmp folder exists
+-- Creates the tmp dir & puts the path to this scripts folder in it.
 local function make_path()
-  os.execute(("test -d %s || mkdir %s"):format(TEMP_PATH, TEMP_PATH))
+  -- Path without trailing "/" char
+  local path_no_trailing = path:sub(1, -2)
+  os.execute(("test -d %s || mkdir %s; echo -n \"%s\" > %spath"):format(TEMP_PATH, TEMP_PATH, path_no_trailing, TEMP_PATH))
+end
+
+-- Removes the tmp dir & path file from the /tmp folder.
+local function clean_path()
+  os.execute(("rm %spath; rm -d %s"):format(TEMP_PATH, TEMP_PATH))
 end
 
 -- Writes the path to TEMP_PATH folder before executing given command
 local function execute(command)
   make_path()
-
-  -- Path without trailing "/" char
-  local path = path:sub(1, -2)
-  local full_command = ("echo -n \"%s\" > %spath; %s"):format(path, TEMP_PATH, command)
-  os.execute(full_command)
+  os.execute(command)
+  clean_path()
 end
 
 -- Select operation:
