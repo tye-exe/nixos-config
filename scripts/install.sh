@@ -24,6 +24,10 @@ chmod +x core.lua
 # Prints my logo; This can be removed if desired.
 ./core.lua logo
 
+# Sets the identity to undefined
+# This is required for some parts of the nix scripts
+./core.lua identity-undefined
+
 # Generate hardware conf for this machine.
 echo "Generating hardware configuration for this machine."
 nixos-generate-config --show-hardware-config > ./hardware-confs/undefined.nix
