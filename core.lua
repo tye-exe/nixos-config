@@ -12,8 +12,8 @@ if path:sub(1, 1) ~= "/" then
   path = working_dir .. path
 end
 
--- The first arg passed.
-local base_arg = arg[1]
+-- The path within the /tmp folder to my stored values.
+local TEMP_PATH = "/tmp/tye_nix_config/"
 
 -- Path to the file storing identity.
 local IDENTITY_FILE = path .. ".identity"
@@ -89,6 +89,22 @@ q - quit
   end
 end
 
+
+-- Ensures that the path in the tmp folder exists
+local function make_path()
+  os.execute(("test -d %s || mkdir %s"):format(TEMP_PATH, TEMP_PATH))
+end
+
+-- Writes the path to TEMP_PATH folder before executing given command
+local function execute(command)
+  make_path()
+
+  -- Path without trailing "/" char
+  local path = path:sub(1, -2)
+  local full_command = ("echo -n \"%s\" > %spath; %s"):format(path, TEMP_PATH, command)
+  os.execute(full_command)
+end
+
 -- Select operation:
 
 -- It looks cool, okay?
@@ -140,6 +156,9 @@ local HELP_TEXT = [[
 # Vanity
 "logo" - Outputs the logo]]
 
+-- The first arg passed.
+local base_arg = arg[1]
+
 if base_arg == "identity" then
   os.remove(IDENTITY_FILE)
   generate_identity()
@@ -155,9 +174,9 @@ elseif base_arg == "sys-switch" then
   local raw_ident = string.match(ident, "%a*$")
 
   local command = string.format(
-    "nixos-rebuild switch -I nixos-config=%ssystem/%s.nix --flake %s#%s --impure",
+    "sudo nixos-rebuild switch -I nixos-config=%ssystem/%s.nix --flake %s#%s --impure",
     path, raw_ident, path, ident)
-  io.write(command)
+  execute(command)
 
   -- home manager switch
 elseif base_arg == "hm-switch" then
@@ -166,21 +185,20 @@ elseif base_arg == "hm-switch" then
     os.exit(1)
   end
 
-  local command = string.format("home-manager switch --flake %s#%s", path, ident)
-  io.write(command)
+  local command = string.format("home-manager switch --flake %s#%s --impure", path, ident)
+  execute(command)
 
   -- undefined system switch
 elseif base_arg == "undefined-sys-switch" then
   local command = string.format(
-    "nixos-rebuild switch -I nixos-config=%ssystem/undefined.nix --flake %s#undefined --impure",
+    "sudo nixos-rebuild switch -I nixos-config=%ssystem/undefined.nix --flake %s#undefined --impure",
     path, path)
-
-  io.write(command)
+  execute(command)
 
   -- undefined home manager switch
 elseif base_arg == "undefined-hm-switch" then
-  local command = string.format("home-manager switch --flake %s#undefined", path)
-  io.write(command)
+  local command = string.format("home-manager switch --flake %s#undefined --impure", path)
+  execute(command)
 
   -- Sets identity to undefined
 elseif base_arg == "identity-undefined" then

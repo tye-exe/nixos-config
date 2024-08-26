@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   username = "tye";
   homeDirectory = "/home/${username}";
   configDir = "${homeDirectory}/.config";
-  nixDir = "${homeDirectory}/nixos";
+  nixDir = config.nixDir;
   luaScript = "${nixDir}/core.lua";
 in {
 
@@ -117,11 +117,13 @@ in {
       };
 
       functions = {
-        ## Following two are functions as i got error when using Aliases ##
+        ## Following three are functions as i got error when using Aliases ##
+        # Sets the identity of this machine
+        set-identity = "${luaScript} identity";
         # Switches home-manager to new config.
-        hm-switch = "eval (${luaScript} hm-switch)";
+        hm-switch = "${luaScript} hm-switch";
         # Switches system to new config.
-        sys-switch = "sudo eval (${luaScript} sys-switch)";
+        sys-switch = "${luaScript} sys-switch";
 
         # Emulates the pressing of the given keys.
         key = ''

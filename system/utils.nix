@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   environment.systemPackages = with pkgs; [
     # These are like useful utils, yk?
     _7zz # Seven zip
@@ -9,9 +9,9 @@
   ];
 
   system.autoUpgrade = let
-    nixDir = "/home/tye/nixos";
+    nixDir = config.nixDir;
     # Reads in the which flake direvation to use.
-    variant = builtins.readFile /home/tye/nixos/.identity;
+    variant = builtins.readFile (/. + "${nixDir}/.identity");
     # Gets the root config for the direvation.
     # As the root file is the same name with the prefix removed.
     conf-file = builtins.replaceStrings [ "tye-" ] [ "" ] variant;
@@ -28,7 +28,7 @@
       "-L" # print build logs
     ];
     # Timing doesn't matter due to persistence
-    dates = "00:00";
+    dates = "16:22";
     persistent = true;
   };
 

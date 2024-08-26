@@ -40,26 +40,35 @@
       # External lib that's useful
       std = nix-std.lib;
 
-      # nix-ld = inputs.nix-ld;
+      # Allows me to pass the nixDir arg into every module recersively.
+      custom_option = ({ lib, ... }: {
+        options.nixDir = lib.mkOption {
+          type = lib.types.str;
+          default = builtins.readFile "/tmp/tye_nix_config/path";
+        };
+      });
     in {
       # System confs
       nixosConfigurations = {
         undefined = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./system/core.nix ./hardware-confs/undefined.nix ];
+          modules =
+            [ ./system/core.nix ./hardware-confs/undefined.nix custom_option ];
         };
 
         tye-laptop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./system/laptop.nix ./hardware-confs/laptop.nix ];
+          modules =
+            [ ./system/laptop.nix ./hardware-confs/laptop.nix custom_option ];
         };
 
         tye-desktop = lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
-          modules = [ ./system/desktop.nix ./hardware-confs/desktop.nix ];
+          modules =
+            [ ./system/desktop.nix ./hardware-confs/desktop.nix custom_option ];
         };
       };
 
@@ -71,6 +80,7 @@
           modules = [
             ./home/core.nix
             inputs.plasma-manager.homeManagerModules.plasma-manager
+            custom_option
           ];
         };
 
@@ -80,6 +90,7 @@
           modules = [
             ./home/laptop.nix
             inputs.plasma-manager.homeManagerModules.plasma-manager
+            custom_option
           ];
         };
 
@@ -89,6 +100,7 @@
           modules = [
             ./home/desktop.nix
             inputs.plasma-manager.homeManagerModules.plasma-manager
+            custom_option
           ];
         };
       };
