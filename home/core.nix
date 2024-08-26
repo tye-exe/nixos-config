@@ -100,10 +100,15 @@ in {
         };
         gca = "git commit --amend --no-edit";
         ga = "git add";
+        gaa = "git add .";
         gp = "git push";
+        gu = "git pull";
 
-        # I got tired of having to type it in :P
-        cdn = "cd ${nixDir}";
+        # Opens the given path/file with the default application.
+        open = {
+          expansion = "xdg-open % &>> /dev/null";
+          setCursor = true;
+        };
 
         # Shortcuts to void command output
         void = {
