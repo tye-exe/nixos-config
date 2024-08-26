@@ -4,7 +4,6 @@
     ./core.nix
 
     ./preset/helix.nix
-    ./preset/java.nix
 
     ./module/rio.nix
 
