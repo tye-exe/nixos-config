@@ -142,8 +142,6 @@ local HELP_TEXT = [[
 # Nix switch commands
 "sys-switch" - Outputs the command to perform a nixos system switch.
 "hm-switch" - Outputs the command to perform a home-manager switch.
-"undefined-sys-switch" - Outputs the command to perform a nixos system switch for an undefined identity.
-"undefined-hm-switch" - Outputs the command to perform a home-manager switch for an undefined identity.
 
 # Identity
 "identity" - Set the identity of the system.
@@ -186,18 +184,6 @@ elseif base_arg == "hm-switch" then
   end
 
   local command = string.format("home-manager switch --flake %s#%s --impure", path, ident)
-  execute(command)
-
-  -- undefined system switch
-elseif base_arg == "undefined-sys-switch" then
-  local command = string.format(
-    "sudo nixos-rebuild switch -I nixos-config=%ssystem/undefined.nix --flake %s#undefined --impure",
-    path, path)
-  execute(command)
-
-  -- undefined home manager switch
-elseif base_arg == "undefined-hm-switch" then
-  local command = string.format("home-manager switch --flake %s#undefined --impure", path)
   execute(command)
 
   -- Sets identity to undefined

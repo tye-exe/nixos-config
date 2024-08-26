@@ -25,7 +25,6 @@ chmod +x core.lua
 ./core.lua logo
 
 # Sets the identity to undefined
-# This is required for some parts of the nix scripts
 ./core.lua identity-undefined
 
 # Generate hardware conf for this machine.
@@ -35,9 +34,9 @@ nixos-generate-config --show-hardware-config > ./hardware-confs/undefined.nix
 git add ./hardware-confs/undefined.nix
 
 echo "Switching system configuration."
-./core.lua undefined-sys-switch
+./core.lua sys-switch
 
 echo "Switching home-manager configuration."
-./core.lua undefined-hm-switch
+./core.lua hm-switch
 
 echo "Finished configuring system & dot files; Reboot to allow for the configuration to take full effect."
