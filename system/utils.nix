@@ -8,6 +8,7 @@
     ntfs3g # Ntfs support
   ];
 
+  # Updates the system daily.
   system.autoUpgrade = let
     nixDir = config.nixDir;
     # Reads in the which flake direvation to use.
@@ -28,8 +29,15 @@
       "-L" # print build logs
     ];
     # Timing doesn't matter due to persistence
-    dates = "16:22";
+    dates = "00:00";
     persistent = true;
   };
 
+  # Runs nix gc on entries older than 30 days.
+  nix.gc = {
+    automatic = true;
+    dates = "00:00";
+    persistent = true;
+    options = "--delete-older-than 30d";
+  };
 }
