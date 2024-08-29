@@ -40,4 +40,7 @@
     persistent = true;
     options = "--delete-older-than 30d";
   };
+
+  # Optimizes the nix store on write operations.
+  nix.settings.auto-optimise-store = true;
 }
