@@ -21,4 +21,11 @@
     noisetorch.enable = true;
   };
 
+  # Fixes F (function) keys not working for my keyboard.
+  boot = {
+    kernelModules = [ "hid-apple" ];
+    extraModprobeConfig = ''
+      options hid_apple fnmode=2
+    '';
+  };
 }
