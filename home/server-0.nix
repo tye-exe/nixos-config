@@ -3,11 +3,10 @@
 
   programs = {
     plasma.enable = false;
-    #  Imma just settle for the cache as anything is a nightmare or doesn't work.
     git.extraConfig = {
       credential = {
-        credentialStore = "cache";
-        helper = "";
+        credentialStore = "gpg";
+        helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
       };
     };
   };
