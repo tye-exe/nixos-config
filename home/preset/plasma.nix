@@ -15,11 +15,28 @@
     workspace = {
       # I like my eyes, thank you very much
       lookAndFeel = "org.kde.breezedark.desktop";
+      colorScheme = "BreezeDark";
+      theme = "breeze-dark";
 
+      # Dot! :)
       cursor = {
         theme = "GoogleDot-Black";
         size = 24;
       };
+
+      wallpaper =
+        "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Honeywave/contents/images/5120x2880.jpg";
+
+      clickItemTo = null;
+      iconTheme = null;
+      soundTheme = null;
+      splashScreen = {
+        engine = null;
+        theme = null;
+      };
+      tooltipDelay = null;
+      wallpaperFillMode = null;
+      wallpaperPictureOfTheDay = null;
     };
 
     hotkeys.commands."launch-rio" = {
