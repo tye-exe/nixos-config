@@ -70,6 +70,16 @@
           modules =
             [ ./system/desktop.nix ./hardware-confs/desktop.nix custom_option ];
         };
+
+        tye-server-0 = lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./system/server-0.nix
+            ./hardware-confs/server-0.nix
+            custom_option
+          ];
+        };
       };
 
       # Home manager confs
@@ -90,6 +100,12 @@
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs pkgs-unstable; };
           modules = [ ./home/desktop.nix custom_option ];
+        };
+
+        tye-server-0 = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit std inputs pkgs-unstable; };
+          modules = [ ./home/server-0.nix custom_option ];
         };
       };
     };

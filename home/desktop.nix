@@ -1,8 +1,10 @@
 { inputs, pkgs, pkgs-unstable, ... }: {
 
-  imports = [ ./core.nix ];
+  imports = [ ./core.nix ./preset/de.nix ];
 
   home.packages = [
+    pkgs.syncthing # File sync
+
     # Minceraft
     pkgs.modrinth-app
     # Java for Mc

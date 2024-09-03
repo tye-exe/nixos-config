@@ -1,4 +1,4 @@
-{ pkgs, inputs, pkgs-unstable, ... }: {
+{ pkgs, inputs, pkgs-unstable, lib, ... }: {
 
   imports = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
 
@@ -10,7 +10,7 @@
   ];
 
   programs.plasma = {
-    enable = true;
+    enable = lib.mkDefault true;
 
     workspace = {
       # I like my eyes, thank you very much

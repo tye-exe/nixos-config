@@ -18,7 +18,7 @@ local TEMP_PATH = "/tmp/tye_nix_config/"
 -- Path to the file storing identity.
 local IDENTITY_FILE = path .. ".identity"
 -- The possible valid identifiers.
-local IDENTITIES = { "undefined", "tye-laptop", "tye-desktop" }
+local IDENTITIES = { "undefined", "tye-laptop", "tye-desktop", "tye-server-0" }
 
 
 -- Matches the chosen identity against the existing ones
@@ -60,13 +60,13 @@ end
 
 local function generate_identity()
   while get_ident() == nil do
-    io.write(
-      [[Select your identity:
-q - quit
-0 - undefined
-1 - tye-laptop
-2 - tye-desktop
-:]])
+    io.write("Select your identity:\nq - quit\n")
+    for key, value in pairs(IDENTITIES) do
+      -- The index of each key is offset by one.
+      io.write(("%d - %s\n"):format(key - 1, value))
+    end
+    io.write(":")
+
     local num_input = io.read("*n")
 
     if num_input == nil then

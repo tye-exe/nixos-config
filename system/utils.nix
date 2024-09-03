@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     # These are like useful utils, yk?
     _7zz # Seven zip
+    sshfs # Mount file system from ssh connection.
 
     # Disk management
     gparted
