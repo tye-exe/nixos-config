@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, pkgs-unstable, ... }: {
 
   imports = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
 
@@ -25,7 +25,7 @@
       };
 
       wallpaper =
-        "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Honeywave/contents/images/5120x2880.jpg";
+        "${pkgs-unstable.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Honeywave/contents/images/5120x2880.jpg";
 
       clickItemTo = null;
       iconTheme = null;
