@@ -10,9 +10,6 @@
       userName = "tye-exe";
       userEmail = "tye@mailbox.org";
 
-      # Gives more git stuff?
-      # package = pkgs.gitFull;
-
       extraConfig = {
         # Removes annoying message about git ignore files.
         advice.addIgnoredFile = false;
@@ -21,10 +18,12 @@
         pull.rebase = false;
         init.defaultBranch = "master";
 
-        credential.helper = lib.mkDefault "${
-            pkgs.git.override { withLibsecret = true; }
-          }/bin/git-credential-libsecret";
-        # credential.helper = "${pkgs.gnupg}/bin/gpg-agent";
+        credential = {
+          helper = lib.mkDefault
+            "${pkgs.git-credential-manager}/bin/git-credential-manager";
+          # Only works if a DE available
+          credentialStore = lib.mkDefault "secretservice";
+        };
       };
     };
   };
