@@ -41,6 +41,7 @@ in {
       vlc # Plays videos :P
       dotool # Can simulate various user inputs.
       localsend # Share files over local wifi network.
+      sshfs # Mount file system from ssh connection.
     ];
 
     inherit username homeDirectory;
@@ -148,11 +149,6 @@ in {
         else
           zellij
         end
-      '';
-
-      # Sets the default pager to bat
-      shellInit = ''
-        set PAGER bat
       '';
     };
 
