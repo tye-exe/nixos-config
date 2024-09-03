@@ -37,6 +37,11 @@
       tooltipDelay = null;
       wallpaperFillMode = null;
       wallpaperPictureOfTheDay = null;
+      wallpaperSlideShow = null;
+      windowDecorations = {
+        library = null;
+        theme = null;
+      };
     };
 
     hotkeys.commands."launch-rio" = {
