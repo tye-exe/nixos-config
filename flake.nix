@@ -77,31 +77,19 @@
         undefined = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs pkgs-unstable; };
-          modules = [
-            ./home/core.nix
-            inputs.plasma-manager.homeManagerModules.plasma-manager
-            custom_option
-          ];
+          modules = [ ./home/core.nix custom_option ];
         };
 
         tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs pkgs-unstable; };
-          modules = [
-            ./home/laptop.nix
-            inputs.plasma-manager.homeManagerModules.plasma-manager
-            custom_option
-          ];
+          modules = [ ./home/laptop.nix custom_option ];
         };
 
         tye-desktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs pkgs-unstable; };
-          modules = [
-            ./home/desktop.nix
-            inputs.plasma-manager.homeManagerModules.plasma-manager
-            custom_option
-          ];
+          modules = [ ./home/desktop.nix custom_option ];
         };
       };
     };

@@ -1,14 +1,6 @@
 { inputs, pkgs, pkgs-unstable, ... }: {
 
-  imports = [
-    ./core.nix
-
-    ./preset/helix.nix
-    ./preset/steam.nix
-
-    # Desktop Environment conf
-    ./preset/plasma.nix
-  ];
+  imports = [ ./core.nix ];
 
   home.packages = [
     # Minceraft

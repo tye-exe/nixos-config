@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 let
   username = "tye";
   homeDirectory = "/home/${username}";
@@ -7,7 +7,13 @@ let
   luaScript = "${nixDir}/core.lua";
 in {
 
-  imports = [ ./preset/helix.nix ./module/rio.nix ./module/file-output.nix ];
+  imports = [
+    ./preset/helix.nix
+    ./preset/plasma.nix
+
+    ./module/rio.nix
+    ./module/file-output.nix
+  ];
 
   home = {
     packages = with pkgs; [
