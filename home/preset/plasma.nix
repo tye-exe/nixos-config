@@ -37,19 +37,22 @@
       height = 48;
       widgets = [
         # Launcher menu
-        "org.kde.plasma.kickoff"
+        {
+          name = "org.kde.plasma.kickoff";
+        }
         # Has the open apps on it
         {
-          name = "org.kde.plasma.icontasks";
-          config = {
-            General.launchers = [
+          iconTasks = {
+            launchers = [
               "applications:org.kde.dolphin.desktop"
               "applications:firefox.desktop"
               "applications:rio.desktop"
             ];
           };
         }
-        "org.kde.plasma.marginsseparator"
+
+        { name = "org.kde.plasma.marginsseparator"; }
+
         {
           systemTray.items = {
             extra = [ "syncthingtray" ];
