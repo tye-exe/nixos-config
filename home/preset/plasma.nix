@@ -51,7 +51,8 @@
     };
 
     startup.startupScript."start_syncthing" = {
-      text = "syncthing; syncthingtray";
+      # Startup scripts MUST terminate.
+      text = "syncthing &>> /dev/null; syncthingtray &>> /dev/null;";
     };
 
     panels = [{
