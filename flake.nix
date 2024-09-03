@@ -77,7 +77,7 @@
         undefined = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit std inputs pkgs-unstable; };
-          modules = [ ./home/core.nix custom_option ];
+          modules = [ ./home/undefined.nix custom_option ];
         };
 
         tye-laptop = home-manager.lib.homeManagerConfiguration {
