@@ -7,5 +7,5 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  programs.firefox.enable = false;
+  programs = { firefox.enable = false; };
 }

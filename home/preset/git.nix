@@ -1,8 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   home.packages = with pkgs; [
     git
     gh # Used for authentication
-    libsecret # Stores auth details
   ];
 
   programs = {
@@ -22,10 +21,11 @@
         pull.rebase = false;
         init.defaultBranch = "master";
 
-        # Idk how this exactly works but it allows me to login so i'm happy
-        credential.helper = "libsecret";
+        credential.helper = lib.mkDefault "${
+            pkgs.git.override { withLibsecret = true; }
+          }/bin/git-credential-libsecret";
+        # credential.helper = "${pkgs.gnupg}/bin/gpg-agent";
       };
     };
   };
-
 }
