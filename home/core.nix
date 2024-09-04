@@ -18,6 +18,7 @@ in {
     packages = with pkgs;
       [
         # dotool # Can simulate various user inputs.
+        ncdu # Disk usage analyzer
       ];
 
     inherit username homeDirectory;
