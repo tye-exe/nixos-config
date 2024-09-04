@@ -28,19 +28,4 @@
       options hid_apple fnmode=2
     '';
   };
-
-  # systemd.services."start_syncthing" = {
-  #   wantedBy = [ "default.target" ];
-  #   name = "syncthing_start";
-  #   description = "starts syncthing";
-  #   script = "syncthing";
-  # };
-
-  # systemd.user.services."start_syncthingtray" = {
-  #   # path = [ "/run/current-system/sw" ];
-  #   wantedBy = [ "multi-user.target" ];
-  #   # name = "start_syncthingtray";
-  #   description = "starts syncthingtray";
-  #   script = "syncthingtray";
-  # };
 }
