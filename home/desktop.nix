@@ -16,8 +16,12 @@
   ];
 
   # Start noisetorch on DE startup with my main mic as the input.
-  programs.plasma.startup.startupScript."start_noisetorch".text = ''
-    noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback"
-  '';
+  # programs.plasma.startup.startupScript."start_noisetorch" = {
+  #   text = ''
+  #     firefox &>> /dev/null;
+  #     noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback" &>> /home/tye/logs.txt;
+  #   '';
+  #   priority = 8;
+  # };
 
 }

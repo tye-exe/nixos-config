@@ -50,10 +50,13 @@
       command = "rio";
     };
 
-    startup.startupScript."start_syncthing" = {
-      # Startup scripts MUST terminate.
-      text = "syncthing &>> /dev/null; syncthingtray &>> /dev/null;";
-    };
+    # startup.startupScript."start_noisetorch" = {
+    #   # Start noisetorch on DE startup with my main mic as the input.
+    #   text = ''
+    #     firefox &>> /dev/null &;
+    #     noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback" &>> /dev/null &;
+    #   '';
+    # };
 
     panels = [{
       location = "top";
