@@ -7,5 +7,9 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Docker
+  virtualisation.docker.enable = true;
+  users.users."tye".extraGroups = [ "docker" ];
+
   programs = { firefox.enable = false; };
 }
