@@ -12,7 +12,14 @@ in {
     ./preset/cli.nix
 
     ./module/file-output.nix
+    ./module/systemd.nix
   ];
+
+  # Needed for ./module/systemd.nix
+  systemd.user = {
+    enable = true;
+    startServices = "sd-switch";
+  };
 
   home = {
     packages = with pkgs; [
@@ -27,7 +34,6 @@ in {
   fonts = { fontconfig.enable = true; };
 
   programs = {
-    # Allows for seamless integration with nix flake environments.
     direnv = {
       enable = true;
       nix-direnv.enable = true;

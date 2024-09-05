@@ -50,6 +50,12 @@
       command = "rio";
     };
 
+    startup.startupScript = {
+      syncthingtray.text = "syncthingtray &>> /dev/null &";
+      # syncthing.text = "syncthing &>> /dev/null &";
+      # script.text = "syncthing &>> /dev/null &; syncthingtray &>> /dev/null &;";
+    };
+
     # startup.startupScript."start_noisetorch" = {
     #   # Start noisetorch on DE startup with my main mic as the input.
     #   text = ''

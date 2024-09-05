@@ -1,10 +1,8 @@
-{ inputs, pkgs, pkgs-unstable, ... }: {
+{ inputs, pkgs, pkgs-unstable, config, ... }: {
 
   imports = [ ./core.nix ./preset/de.nix ];
 
   home.packages = [
-    pkgs.syncthing # File sync
-
     # Minceraft
     pkgs.modrinth-app
     # Java for Mc
@@ -15,13 +13,10 @@
     pkgs-unstable.ytmdesktop
   ];
 
-  # Start noisetorch on DE startup with my main mic as the input.
-  # programs.plasma.startup.startupScript."start_noisetorch" = {
-  #   text = ''
-  #     firefox &>> /dev/null;
-  #     noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback" &>> /home/tye/logs.txt;
-  #   '';
-  #   priority = 8;
-  # };
+  services.syncthing.enable = true;
 
+  tye-services.enabled = {
+    syncthingtray = true;
+    noisetorch = true;
+  };
 }
