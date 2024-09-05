@@ -22,11 +22,11 @@ in {
   };
 
   home = {
-    packages = with pkgs;
-      [
-        # dotool # Can simulate various user inputs.
-        ncdu # Disk usage analyzer
-      ];
+    packages = with pkgs; [
+      # dotool # Can simulate various user inputs.
+      ncdu # Disk usage analyzer
+      viu # Terminal image viewer
+    ];
 
     inherit username homeDirectory;
   };
