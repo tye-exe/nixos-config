@@ -23,7 +23,9 @@
       enable = true;
       settings = {
         on_force_close = "quit";
-        keybinds = { unbind = [ "Alt Left" "Alt Right" "Alt Up" "Alt Down" ]; };
+        keybinds = {
+          unbind = [ "Alt Left" "Alt Right" "Alt Up" "Alt Down" "Ctrl q" ];
+        };
       };
     };
 
