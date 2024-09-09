@@ -24,6 +24,7 @@ in {
     xwaylandvideobridge # Allows screensharing
     vlc # Plays videos :P
     localsend # Share files over local wifi network.
+    kdePackages.merkuro # Calander.
   ];
 
   programs = { rio.enable = true; };
