@@ -26,6 +26,10 @@ in {
     # eslint
     # css
     vscode-langservers-extracted
+
+    # javascript
+    # typescript
+    nodePackages.typescript-language-server
   ];
 
   programs.helix = {
