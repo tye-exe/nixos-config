@@ -13,12 +13,15 @@ in {
     hunspell # Spellchecker for libre office
     hunspellDicts.en_GB-ise # Use the GB lib for the spell checker
 
+    # Communication
+    whatsapp-for-linux
+    vesktop # Alternate discord client.
+    telegram-desktop # Do i need to explain?
+    thunderbird # Email
+
     rio # Terminal emulator
     syncthingtray # Gui for syncthing
     xwaylandvideobridge # Allows screensharing
-    thunderbird # Email
-    vesktop # Alternate discord client.
-    telegram-desktop # Do i need to explain?
     vlc # Plays videos :P
     localsend # Share files over local wifi network.
   ];
