@@ -87,7 +87,6 @@
 
         {
           systemTray.items = {
-            extra = [ "syncthingtray" ];
             shown = [
               "org.kde.plasma.clipboard"
               "org.kde.plasma.volume"
