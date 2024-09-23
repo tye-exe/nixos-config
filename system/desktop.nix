@@ -1,6 +1,15 @@
-{ pkgs, inputs, lib, ... }: {
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
   # Shared configs are in this file.
-  imports = [ ./core.nix ./de.nix ];
+  imports = [
+    ./core.nix
+    ./de.nix
+  ];
 
   networking.hostName = "tye"; # Define your hostname.
 

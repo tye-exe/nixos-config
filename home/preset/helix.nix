@@ -1,6 +1,8 @@
 { pkgs, ... }:
-let spell = "typos";
-in {
+let
+  spell = "typos";
+in
+{
   home.packages = with pkgs; [
     # Spellchecker
     typos-lsp
@@ -52,38 +54,64 @@ in {
 
       # Custom keybinds
       keys = {
-        normal = let
-          down = "move_visual_line_down";
-          up = "move_visual_line_up";
-        in {
-          # Lets me save files normally (insert cool face).
-          C-s = ":w";
-
-          "\\" = let
+        normal =
+          let
             down = "move_visual_line_down";
             up = "move_visual_line_up";
-          in {
-            # I can move up or down faster now.
-            j = [ down down down ":sh key \\" ];
-            k = [ up up up ":sh key \\" ];
-          };
+          in
+          {
+            # Lets me save files normally (insert cool face).
+            C-s = ":w";
 
-          # View mode
-          z = let
-            down = "move_visual_line_down";
-            up = "move_visual_line_up";
-          in {
-            # I can move up or down faster now.
-            C-j = [ down down down ];
-            C-k = [ up up up ];
+            "\\" =
+              let
+                down = "move_visual_line_down";
+                up = "move_visual_line_up";
+              in
+              {
+                # I can move up or down faster now.
+                j = [
+                  down
+                  down
+                  down
+                  ":sh key \\"
+                ];
+                k = [
+                  up
+                  up
+                  up
+                  ":sh key \\"
+                ];
+              };
+
+            # View mode
+            z =
+              let
+                down = "move_visual_line_down";
+                up = "move_visual_line_up";
+              in
+              {
+                # I can move up or down faster now.
+                C-j = [
+                  down
+                  down
+                  down
+                ];
+                C-k = [
+                  up
+                  up
+                  up
+                ];
+              };
           };
-        };
       };
 
     };
 
     # Spell checker
-    languages.language-server = { typos.command = "typos-lsp"; };
+    languages.language-server = {
+      typos.command = "typos-lsp";
+    };
 
     # language configs
     languages.language = [
@@ -91,38 +119,54 @@ in {
         # Gives me the power to have pretty nix files. ^-^
         name = "nix";
         auto-format = true;
-        formatter.command =
-          "${pkgs.nixfmt}/bin/nixfmt"; # Path to installed nix formatter
-        language-servers = [ "nil" spell ];
+        formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt"; # Path to installed nix formatter
+        language-servers = [
+          "nil"
+          spell
+        ];
       }
       {
         name = "rust";
         auto-format = true;
-        formatter.command =
-          "${pkgs.rustfmt}/bin/rustfmt --edition 2021"; # Path to installed rust formatter
-        language-servers = [ "rust-analyzer" spell ];
+        formatter.command = "${pkgs.rustfmt}/bin/rustfmt --edition 2021"; # Path to installed rust formatter
+        language-servers = [
+          "rust-analyzer"
+          spell
+        ];
       }
       {
         name = "toml";
         auto-format = true;
         # formatter.command = "${pkgs.taplo}/bin/taplo fmt";
-        language-servers = [ "taplo" spell ];
+        language-servers = [
+          "taplo"
+          spell
+        ];
       }
       {
         name = "python";
         auto-format = true;
         formatter.command = "${pkgs.yapf}/bin/yapf";
-        language-servers = [ "pylsp" spell ];
+        language-servers = [
+          "pylsp"
+          spell
+        ];
       }
       {
         name = "lua";
         auto-format = true;
-        language-servers = [ "lua-language-server" spell ];
+        language-servers = [
+          "lua-language-server"
+          spell
+        ];
       }
       {
         name = "markdown";
         auto-format = true;
-        language-servers = [ "markdown-oxide" spell ];
+        language-servers = [
+          "markdown-oxide"
+          spell
+        ];
       }
     ];
   };

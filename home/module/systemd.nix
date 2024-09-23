@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   tye-services = config.tye-services;
-  # cursorType = types.enum [ "Block" "_" "|" ];
-in {
+in
+# cursorType = types.enum [ "Block" "_" "|" ];
+{
   options.tye-services = {
     enabled = {
       syncthingtray = mkEnableOption "Syncthing tray on login.";

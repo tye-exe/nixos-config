@@ -1,6 +1,10 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }:
+{
 
-  imports = [ ./core.nix ./preset/de.nix ];
+  imports = [
+    ./core.nix
+    ./preset/de.nix
+  ];
 
   rio.fonts.size = 16;
 

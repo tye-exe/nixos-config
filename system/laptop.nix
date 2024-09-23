@@ -1,7 +1,10 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [ ./core.nix ./de.nix ];
+  imports = [
+    ./core.nix
+    ./de.nix
+  ];
 
   networking.hostName = "tye_laptop"; # Define your hostname.
 

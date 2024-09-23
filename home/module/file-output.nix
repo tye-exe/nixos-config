@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let fout = config.fout;
-in {
+let
+  fout = config.fout;
+in
+{
   options.fout = {
     # Util
     enable = mkEnableOption "Write a string to a file!";
@@ -24,4 +26,3 @@ in {
     text = fout.content;
   };
 }
-

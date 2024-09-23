@@ -1,14 +1,25 @@
-{ pkgs, inputs, lib, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
-  imports = [ inputs.home-manager.nixosModules.default ./utils.nix ];
+  imports = [
+    inputs.home-manager.nixosModules.default
+    ./utils.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Enables flakes & the new style nix commands.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -58,7 +69,10 @@
   users.users.tye = {
     isNormalUser = true;
     description = "tye";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   # Program configs.

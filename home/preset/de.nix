@@ -3,7 +3,8 @@ let
   username = "tye";
   homeDirectory = "/home/${username}";
   configDir = "${homeDirectory}/.config";
-in {
+in
+{
 
   imports = [ ./../module/rio.nix ];
 
@@ -25,9 +26,12 @@ in {
     vlc # Plays videos :P
     localsend # Share files over local wifi network.
     kdePackages.merkuro # Calander.
+    bitwarden-desktop # Password manager.
   ];
 
-  programs = { rio.enable = true; };
+  programs = {
+    rio.enable = true;
+  };
 
   rio = {
     enable = true;

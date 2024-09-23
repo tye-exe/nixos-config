@@ -2,11 +2,11 @@
 let
   nixDir = config.nixDir;
   luaScript = "${nixDir}/core.lua";
-in {
-  home.packages = with pkgs;
-    [
-      fish # Bash 2.0
-    ];
+in
+{
+  home.packages = with pkgs; [
+    fish # Bash 2.0
+  ];
 
   programs = {
     # Shell config.

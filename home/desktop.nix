@@ -1,6 +1,16 @@
-{ inputs, pkgs, pkgs-unstable, config, ... }: {
+{
+  inputs,
+  pkgs,
+  pkgs-unstable,
+  config,
+  ...
+}:
+{
 
-  imports = [ ./core.nix ./preset/de.nix ];
+  imports = [
+    ./core.nix
+    ./preset/de.nix
+  ];
 
   home.packages = [
     # Minceraft

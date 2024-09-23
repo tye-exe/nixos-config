@@ -1,17 +1,26 @@
-{ std, config, lib, ... }:
+{
+  std,
+  config,
+  lib,
+  ...
+}:
 with lib;
 let
   rio = config.rio;
-  cursorType = types.enum [ "Block" "_" "|" ];
-in {
+  cursorType = types.enum [
+    "Block"
+    "_"
+    "|"
+  ];
+in
+{
   options.rio = {
     # Util
     enable = mkEnableOption "Rio - A terminal emulator";
     configDir = mkOption {
       type = types.str;
       example = "/home/<user>/.config";
-      description =
-        "The path to your user '.config' location. You must exclude the ending '/' character!";
+      description = "The path to your user '.config' location. You must exclude the ending '/' character!";
     };
     # Options
     cursor = mkOption {
@@ -32,8 +41,7 @@ in {
       type = types.str;
       example = "code";
       default = "vi";
-      description =
-        "Whenever the key binding OpenConfigEditor is triggered it will use the value of the editor along with the rio configuration path.";
+      description = "Whenever the key binding OpenConfigEditor is triggered it will use the value of the editor along with the rio configuration path.";
     };
 
     blinking-cursor = mkOption {
@@ -61,22 +69,24 @@ in {
     };
   };
 
-  config.home.file."rio" = let
-    # The word block is easier to type than the symbol.
-    cursor = if rio.cursor == "Block" then "▇" else rio.cursor;
+  config.home.file."rio" =
+    let
+      # The word block is easier to type than the symbol.
+      cursor = if rio.cursor == "Block" then "▇" else rio.cursor;
 
-    content = std.serde.toTOML {
-      cursor = cursor;
-      line-height = rio.line-height;
-      editor = rio.editor;
-      blinking-cursor = rio.blinking-cursor;
-      hide-cursor-when-typing = rio.hide-cursor-when-typing;
+      content = std.serde.toTOML {
+        cursor = cursor;
+        line-height = rio.line-height;
+        editor = rio.editor;
+        blinking-cursor = rio.blinking-cursor;
+        hide-cursor-when-typing = rio.hide-cursor-when-typing;
 
-      fonts.size = rio.fonts.size;
+        fonts.size = rio.fonts.size;
+      };
+    in
+    mkIf rio.enable {
+      target = "${rio.configDir}/rio/config.toml";
+      text = content;
     };
-  in mkIf rio.enable {
-    target = "${rio.configDir}/rio/config.toml";
-    text = content;
-  };
 
 }

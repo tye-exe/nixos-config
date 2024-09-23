@@ -1,4 +1,11 @@
-{ pkgs, inputs, pkgs-unstable, lib, ... }: {
+{
+  pkgs,
+  inputs,
+  pkgs-unstable,
+  lib,
+  ...
+}:
+{
 
   imports = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
 
@@ -24,8 +31,7 @@
         size = 24;
       };
 
-      wallpaper =
-        "${pkgs-unstable.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Honeywave/contents/images/5120x2880.jpg";
+      wallpaper = "${pkgs-unstable.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Honeywave/contents/images/5120x2880.jpg";
 
       clickItemTo = null;
       iconTheme = null;
@@ -64,39 +70,39 @@
     #   '';
     # };
 
-    panels = [{
-      location = "top";
-      height = 48;
-      widgets = [
-        # Launcher menu
-        {
-          name = "org.kde.plasma.kickoff";
-        }
-        # Has the open apps on it
-        {
-          iconTasks = {
-            launchers = [
-              "applications:org.kde.dolphin.desktop"
-              "applications:firefox.desktop"
-              "applications:rio.desktop"
-            ];
-          };
-        }
+    panels = [
+      {
+        location = "top";
+        height = 48;
+        widgets = [
+          # Launcher menu
+          { name = "org.kde.plasma.kickoff"; }
+          # Has the open apps on it
+          {
+            iconTasks = {
+              launchers = [
+                "applications:org.kde.dolphin.desktop"
+                "applications:firefox.desktop"
+                "applications:rio.desktop"
+              ];
+            };
+          }
 
-        { name = "org.kde.plasma.marginsseparator"; }
+          { name = "org.kde.plasma.marginsseparator"; }
 
-        {
-          systemTray.items = {
-            shown = [
-              "org.kde.plasma.clipboard"
-              "org.kde.plasma.volume"
-              "org.kde.plasma.bluetooth"
-            ];
-            hidden = [ "org.kde.plasma.networkmanagement" ];
-          };
-        }
-        { digitalClock = { }; }
-      ];
-    }];
+          {
+            systemTray.items = {
+              shown = [
+                "org.kde.plasma.clipboard"
+                "org.kde.plasma.volume"
+                "org.kde.plasma.bluetooth"
+              ];
+              hidden = [ "org.kde.plasma.networkmanagement" ];
+            };
+          }
+          { digitalClock = { }; }
+        ];
+      }
+    ];
   };
 }

@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   home.packages = with pkgs; [
     git
     gh # Used for authentication
@@ -19,8 +20,7 @@
         init.defaultBranch = "master";
 
         credential = {
-          helper = lib.mkDefault
-            "${pkgs.git-credential-manager}/bin/git-credential-manager";
+          helper = lib.mkDefault "${pkgs.git-credential-manager}/bin/git-credential-manager";
           # Only works if a DE available
           credentialStore = lib.mkDefault "secretservice";
         };

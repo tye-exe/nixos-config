@@ -1,8 +1,14 @@
-{ pkgs, config, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 let
   username = "tye";
   homeDirectory = "/home/${username}";
-in {
+in
+{
 
   imports = [
     ./preset/helix.nix
@@ -31,7 +37,9 @@ in {
     inherit username homeDirectory;
   };
 
-  fonts = { fontconfig.enable = true; };
+  fonts = {
+    fontconfig.enable = true;
+  };
 
   programs = {
     direnv = {

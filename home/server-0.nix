@@ -1,4 +1,10 @@
-{ inputs, pkgs, pkgs-unstable, ... }: {
+{
+  inputs,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+{
   imports = [ ./core.nix ];
 
   programs = {
