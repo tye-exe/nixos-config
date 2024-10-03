@@ -37,4 +37,7 @@
       options hid_apple fnmode=2
     '';
   };
+
+  # It's undergoing mitosis!
+  virtualisation.vmware.host.enable = true;
 }
