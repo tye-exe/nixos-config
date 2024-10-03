@@ -20,6 +20,7 @@
     pkgs.jdk17_headless
     # pkgs.openjdk21_headless
 
+    pkgs.obs-studio
     pkgs-unstable.ytmdesktop
   ];
 
