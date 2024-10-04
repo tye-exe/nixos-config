@@ -18,7 +18,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    # Expands upon the nix std lib.
     nix-std.url = "github:chessai/nix-std";
+
+    # Plugin overlay for nvim
+    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
   };
 
   outputs =
@@ -40,6 +44,7 @@
         config = {
           allowUnfree = true;
         };
+        overlays = [ inputs.nixneovimplugins.overlays.default ];
       };
 
       pkgs-unstable = import nixpkgs-unstable {

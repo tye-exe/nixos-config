@@ -27,6 +27,7 @@ in
     localsend # Share files over local wifi network.
     kdePackages.merkuro # Calander.
     bitwarden-desktop # Password manager.
+    opentabletdriver # Driver for drawing tablets.
   ];
 
   programs = {

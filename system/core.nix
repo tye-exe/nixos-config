@@ -75,6 +75,20 @@
     ];
   };
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    helix # Vim-like editor
+    gnumake # Make but with a different name bc who knows
+    git
+    home-manager # Manages user-configurations
+    libxkbcommon # Keyboard library - required by some programs
+    lua # Main scripting language.
+  ];
+
   # Program configs.
   programs = {
     firefox.enable = lib.mkDefault true;
@@ -91,28 +105,22 @@
         fi
       '';
     };
-  };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # programs.mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    helix # Vim-like editor
-    gnumake # Make but with a different name bc who knows
-    git
-    home-manager # Manages user-configurations
-    libxkbcommon # Keyboard library - required by some programs
-    lua # Main scripting language.
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+    # Terminal text editor.
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      viAlias = true;
+    };
   };
 
   # List services that you want to enable:
