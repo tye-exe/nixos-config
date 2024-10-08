@@ -1,38 +1,41 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 let
   spell = "typos";
 in
 {
-  home.packages = with pkgs; [
-    # Spellchecker
-    typos-lsp
-    typos
+  home.packages =
+    with pkgs;
+    [
+      # Spellchecker
+      typos-lsp
+      typos
 
-    nil # Nix
-    nixfmt-rfc-style # Nix fmt
-    rust-analyzer # Rust
-    rustfmt # Rust fmt
-    taplo # Toml
-    lua-language-server # Lua
-    markdown-oxide # Markdown
+      nil # Nix
+      nixfmt-rfc-style # Nix fmt
+      # rust-analyzer # Rust
+      rustfmt # Rust fmt
+      taplo # Toml
+      lua-language-server # Lua
+      markdown-oxide # Markdown
 
-    # Python decides to be complicated but oh well
-    python312Packages.jedi # LSP dependency
-    python312Packages.python-lsp-server
-    yapf # Fmt
-    python312Packages.pyflakes
+      # Python decides to be complicated but oh well
+      python312Packages.jedi # LSP dependency
+      python312Packages.python-lsp-server
+      yapf # Fmt
+      python312Packages.pyflakes
 
-    # markdown
-    # html
-    # json
-    # eslint
-    # css
-    vscode-langservers-extracted
+      # markdown
+      # html
+      # json
+      # eslint
+      # css
+      vscode-langservers-extracted
 
-    # javascript
-    # typescript
-    nodePackages.typescript-language-server
-  ];
+      # javascript
+      # typescript
+      nodePackages.typescript-language-server
+    ]
+    ++ (with pkgs-unstable; [ rust-analyzer ]);
 
   programs.helix = {
     enable = true;
