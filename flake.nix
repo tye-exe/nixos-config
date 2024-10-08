@@ -23,6 +23,12 @@
 
     # Plugin overlay for nvim
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
+
+    # Nvim config
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =

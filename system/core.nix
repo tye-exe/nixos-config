@@ -115,12 +115,12 @@
     };
 
     # Terminal text editor.
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-      viAlias = true;
-    };
+    # neovim = {
+    #   enable = true;
+    #   defaultEditor = true;
+    #   vimAlias = true;
+    #   viAlias = true;
+    # };
   };
 
   # List services that you want to enable:

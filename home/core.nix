@@ -2,6 +2,7 @@
   pkgs,
   config,
   inputs,
+  pkgs-unstable,
   ...
 }:
 let
@@ -16,10 +17,10 @@ in
     ./preset/git.nix
     ./preset/fish.nix
     ./preset/cli.nix
+    ./preset/nvim/core.nix
 
     ./module/file-output.nix
     ./module/systemd.nix
-    ./module/nvim.nix
   ];
 
   # Needed for ./module/systemd.nix
@@ -50,45 +51,46 @@ in
 
     nix-index.enable = true;
 
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      defaultEditor = true;
-      plugins = with pkgs.vimPlugins; [
-        rustaceanvim
+    # neovim = {
+    #   enable = true;
+    #   viAlias = true;
+    #   vimAlias = true;
+    #   defaultEditor = true;
+    #   plugins = with pkgs.vimPlugins; [
+    #     rustaceanvim
 
-        nvim-treesitter
+    #     nvim-treesitter
 
-        # Debugging
-        telescope-dap-nvim
-        nvim-dap-virtual-text
-        nvim-dap-ui
-      ];
-    };
+    #     # Debugging
+    #     telescope-dap-nvim
+    #     nvim-dap-virtual-text
+    #     nvim-dap-ui
+    #   ];
+    # };
+
   };
 
-  nvim = {
-    enable = true;
-    rust.enable = true;
-    rust.keybinds = [
-      {
-        mode = "n";
-        leader = " ";
-        follower = "a";
-        args = [ "codeAction" ];
-      }
-      {
-        mode = "n";
-        leader = " ";
-        follower = "k";
-        args = [
-          "hover"
-          "actions"
-        ];
-      }
-    ];
-  };
+  # nvim = {
+  #   enable = true;
+  #   rust.enable = true;
+  #   rust.keybinds = [
+  #     {
+  #       mode = "n";
+  #       leader = " ";
+  #       follower = "a";
+  #       args = [ "codeAction" ];
+  #     }
+  #     {
+  #       mode = "n";
+  #       leader = " ";
+  #       follower = "k";
+  #       args = [
+  #         "hover"
+  #         "actions"
+  #       ];
+  #     }
+  #   ];
+  # };
 
   # Don't change this without reading the wiki!
   # & yes to future me, i did write this. :p
