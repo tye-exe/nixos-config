@@ -34,6 +34,7 @@ in
         gaa = "git add .";
         gp = "git push";
         gu = "git pull";
+        gl = "git log";
 
         # Opens the given path/file with the default application.
         open = {
