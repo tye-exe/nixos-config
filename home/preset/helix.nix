@@ -56,58 +56,21 @@ in
       };
 
       # Custom keybinds
-      keys = {
-        normal =
-          let
-            down = "move_visual_line_down";
-            up = "move_visual_line_up";
-          in
-          {
-            # Lets me save files normally (insert cool face).
-            C-s = ":w";
-
-            "\\" =
-              let
-                down = "move_visual_line_down";
-                up = "move_visual_line_up";
-              in
-              {
-                # I can move up or down faster now.
-                j = [
-                  down
-                  down
-                  down
-                  ":sh key \\"
-                ];
-                k = [
-                  up
-                  up
-                  up
-                  ":sh key \\"
-                ];
-              };
-
-            # View mode
-            z =
-              let
-                down = "move_visual_line_down";
-                up = "move_visual_line_up";
-              in
-              {
-                # I can move up or down faster now.
-                C-j = [
-                  down
-                  down
-                  down
-                ];
-                C-k = [
-                  up
-                  up
-                  up
-                ];
-              };
+      keys =
+        let
+          X = [
+            "extend_line_up"
+            "extend_to_line_bounds"
+          ];
+        in
+        {
+          normal = {
+            inherit X;
           };
-      };
+          select = {
+            inherit X;
+          };
+        };
 
     };
 
