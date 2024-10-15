@@ -29,13 +29,24 @@ in
       # json
       # eslint
       # css
-      vscode-langservers-extracted
+      # vscode-langservers-extracted
 
       # javascript
       # typescript
       nodePackages.typescript-language-server
     ]
-    ++ (with pkgs-unstable; [ rust-analyzer ]);
+    ++ (with pkgs-unstable; [
+      # Rust.
+      # moved to unstable due to bugs within the stable version.
+      rust-analyzer
+      # markdown
+      # html
+      # json
+      # eslint
+      # css
+      # moved to unstable due to https://github.com/NixOS/nixpkgs/issues/348596 patch.
+      vscode-langservers-extracted
+    ]);
 
   programs.helix = {
     enable = true;
