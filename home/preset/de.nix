@@ -28,6 +28,7 @@ in
     kdePackages.merkuro # Calander.
     bitwarden-desktop # Password manager.
     opentabletdriver # Driver for drawing tablets.
+    obsidian # Note taking using markdown.
   ];
 
   programs = {
