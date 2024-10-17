@@ -13,4 +13,6 @@
   networking.firewall.allowedUDPPorts = [ 1900 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  hardware.bluetooth.enable = true;
 }
