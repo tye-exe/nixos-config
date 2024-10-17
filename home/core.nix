@@ -3,11 +3,16 @@
   config,
   inputs,
   pkgs-unstable,
+  system,
   ...
 }:
 let
   username = "tye";
   homeDirectory = "/home/${username}";
+
+  nix-alien-pkgs =
+    import (builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master")
+      { };
 in
 {
 
@@ -30,11 +35,15 @@ in
   };
 
   home = {
-    packages = with pkgs; [
-      # dotool # Can simulate various user inputs.
-      ncdu # Disk usage analyzer
-      viu # Terminal image viewer
-    ];
+    packages =
+      with pkgs;
+      [
+        # dotool # Can simulate various user inputs.
+        ncdu # Disk usage analyzer
+        viu # Terminal image viewer
+        ripgrep # Faster alternative to grep
+      ]
+      ++ (with nix-alien-pkgs; [ nix-alien ]);
 
     inherit username homeDirectory;
   };

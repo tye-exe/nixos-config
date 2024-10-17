@@ -29,6 +29,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    # Get deps for non-nix binaries.
+    nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
   outputs =
@@ -39,6 +42,7 @@
       home-manager,
       nix-std,
       plasma-manager,
+      nix-alien,
       ...
     }:
     let
@@ -131,7 +135,12 @@
         undefined = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
-            inherit std inputs pkgs-unstable;
+            inherit
+              std
+              inputs
+              pkgs-unstable
+              system
+              ;
           };
           modules = [
             ./home/undefined.nix
@@ -142,7 +151,12 @@
         tye-laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
-            inherit std inputs pkgs-unstable;
+            inherit
+              std
+              inputs
+              pkgs-unstable
+              system
+              ;
           };
           modules = [
             ./home/laptop.nix
@@ -153,7 +167,12 @@
         tye-desktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
-            inherit std inputs pkgs-unstable;
+            inherit
+              std
+              inputs
+              pkgs-unstable
+              system
+              ;
           };
           modules = [
             ./home/desktop.nix
@@ -164,7 +183,12 @@
         tye-server-0 = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
-            inherit std inputs pkgs-unstable;
+            inherit
+              std
+              inputs
+              pkgs-unstable
+              system
+              ;
           };
           modules = [
             ./home/server-0.nix
