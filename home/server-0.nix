@@ -7,6 +7,10 @@
 {
   imports = [ ./core.nix ];
 
+  home.packages = with pkgs; [
+    rio # Used for term compatibility
+  ];
+
   programs = {
     plasma.enable = false;
     git.extraConfig = {
