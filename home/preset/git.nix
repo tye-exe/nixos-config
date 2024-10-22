@@ -19,6 +19,10 @@
         pull.rebase = false;
         init.defaultBranch = "master";
 
+        core = {
+          editor = "${pkgs.helix}/bin/hx";
+        };
+
         credential = {
           helper = lib.mkDefault "${pkgs.git-credential-manager}/bin/git-credential-manager";
           # Only works if a DE available
