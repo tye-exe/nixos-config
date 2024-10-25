@@ -25,6 +25,10 @@ in
           expansion = "nix shell nixpkgs#%";
           setCursor = true;
         };
+        shell-unstable = {
+          expansion = "nix shell nixpkgs/nixos-unstable#%";
+          setCursor = true;
+        };
 
         # Git abbrs
         gs = "git status";
