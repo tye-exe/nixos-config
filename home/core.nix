@@ -22,6 +22,7 @@ in
     ./preset/git.nix
     ./preset/fish.nix
     ./preset/cli.nix
+    ./preset/rust.nix
     ./preset/nvim/core.nix
 
     ./module/file-output.nix
