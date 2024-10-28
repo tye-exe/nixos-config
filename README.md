@@ -12,10 +12,7 @@
 
 ### Install Command
 ```bash
-curl -s https://tye-home.xyz/nix-init | bash
-# The above URL is a redirect for:
-# https://raw.githubusercontent.com/tye-exe/nixos-config/main/scripts/init.sh 
-# This is just to reduce the effort when typing the install command into a terminal.
+curl -s https://raw.githubusercontent.com/tye-exe/nixos-config/main/scripts/init.sh | bash
 ```
 
 ### Change configuration location
