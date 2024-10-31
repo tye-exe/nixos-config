@@ -22,11 +22,11 @@ in
         ts = "trash";
         "7z" = "7zz"; # Seven zip uses "7zz", not "7z"
         shell = {
-          expansion = "nix shell nixpkgs#%";
+          expansion = "nix shell nixpkgs#% --command sh -c \"fish\"";
           setCursor = true;
         };
         shell-unstable = {
-          expansion = "nix shell nixpkgs/nixos-unstable#%";
+          expansion = "nix shell nixpkgs/nixos-unstable#% --command sh -c \"fish\"";
           setCursor = true;
         };
 
