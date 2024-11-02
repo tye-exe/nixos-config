@@ -18,7 +18,7 @@ local TEMP_PATH = "/tmp/tye_nix_config/"
 -- Path to the file storing identity.
 local IDENTITY_FILE = path .. ".identity"
 -- The possible valid identifiers.
-local IDENTITIES = { "undefined", "tye-laptop", "tye-desktop", "tye-server-0" }
+local IDENTITIES = { "undefined", "tye-laptop", "tye-desktop", "tye-server-0", "tye-nas" }
 
 
 -- Matches the chosen identity against the existing ones

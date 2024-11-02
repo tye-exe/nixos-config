@@ -128,6 +128,19 @@
             custom_option
           ];
         };
+
+        tye-nas = lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./system/nas.nix
+            ./hardware-confs/nas.nix
+            custom_option
+          ];
+        };
+
       };
 
       # Home manager confs
@@ -192,6 +205,22 @@
           };
           modules = [
             ./home/server-0.nix
+            custom_option
+          ];
+        };
+
+        tye-nas = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit
+              std
+              inputs
+              pkgs-unstable
+              system
+              ;
+          };
+          modules = [
+            ./home/nas.nix
             custom_option
           ];
         };
