@@ -36,6 +36,12 @@
             "Alt Down"
             "Ctrl q"
           ];
+          locked = {
+            unbind = [ "Ctrl g" ];
+            "bind \"Ctrl u\"" = {
+              SwitchToMode = "Normal";
+            };
+          };
         };
       };
     };
