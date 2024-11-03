@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   pkgs-unstable,
+  config,
   ...
 }:
 {
@@ -10,6 +11,9 @@
   home.packages = with pkgs; [
     rio # Used for term compatibility
   ];
+
+  # Link to zfs dataset
+  home.file.zfs.source = config.lib.file.mkOutOfStoreSymlink "/zfs/data";
 
   programs = {
     plasma.enable = false;

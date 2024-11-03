@@ -11,17 +11,18 @@
   networking = {
     hostName = "tye-nas";
     nameservers = [
-      "1.1.1.1"
-      "8.8.8.8"
-    ]; # Cloudflair, Google
+      "1.1.1.1" # Cloudflair
+      "8.8.8.8" # Google
+    ];
     defaultGateway = "192.168.0.1";
-    # interfaces.eno1.ipv4.addresses = [
-    #   {
-    #     address = "192.168.0.33";
-    #     prefixLength = 24;
-    #   }
-    # ];
-    firewall.enable = true;
+    # Static IP addr
+    interfaces.eno1.ipv4.addresses = [
+      {
+        address = "192.168.0.33";
+        prefixLength = 24;
+      }
+    ];
+    firewall.enable = false;
   };
 
   # Enable the OpenSSH daemon.
@@ -36,6 +37,7 @@
     firefox.enable = false;
   };
 
+  # Network routing for containers.
   environment.systemPackages = with pkgs; [ iptables ];
   systemd.services."reroute_ports" = {
     script = ''
@@ -91,6 +93,7 @@
     in
     {
       enable = true;
+      # Check zpool health every hour
       systemCronJobs = [ "0 * * * *  root ${zpoolCheck}" ];
     };
 
