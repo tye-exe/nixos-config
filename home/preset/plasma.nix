@@ -11,7 +11,7 @@
 
   home.packages = with pkgs; [
     # I love my dot
-    cinnamon.mint-cursor-themes
+    mint-cursor-themes
     # Default editor for kde
     kdePackages.kate
   ];

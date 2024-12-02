@@ -8,9 +8,9 @@ with lib;
 let
   rio = config.rio;
   cursorType = types.enum [
-    "Block"
-    "_"
-    "|"
+    "block"
+    "underline"
+    "beam"
   ];
 in
 {
@@ -23,11 +23,19 @@ in
       description = "The path to your user '.config' location. You must exclude the ending '/' character!";
     };
     # Options
-    cursor = mkOption {
-      type = cursorType;
-      example = "Block";
-      default = "Block";
-      description = "How your cursor will appear in rio.";
+    cursor = {
+      shape = mkOption {
+        type = cursorType;
+        example = "block";
+        default = "block";
+        description = "The shape of your cursor in rio.";
+      };
+      blinking = mkOption {
+        type = types.bool;
+        example = "true";
+        default = false;
+        description = "Whether the cursor should blink.";
+      };
     };
 
     line-height = mkOption {
@@ -37,18 +45,19 @@ in
       description = "This option will apply an modifier to line-height.";
     };
 
-    editor = mkOption {
-      type = types.str;
-      example = "code";
-      default = "vi";
-      description = "Whenever the key binding OpenConfigEditor is triggered it will use the value of the editor along with the rio configuration path.";
-    };
-
-    blinking-cursor = mkOption {
-      type = types.bool;
-      example = "true";
-      default = false;
-      description = "Whether the cursor should blink";
+    editor = {
+      program = mkOption {
+        type = types.str;
+        example = "code";
+        default = "vi";
+        description = "Whenever the key binding OpenConfigEditor is triggered it will use the value of the editor along with the rio configuration path.";
+      };
+      args = mkOption {
+        type = types.listOf types.str;
+        example = "[]";
+        default = [ ];
+        description = "The configuration args for the default editor.";
+      };
     };
 
     hide-cursor-when-typing = mkOption {
@@ -72,14 +81,13 @@ in
   config.home.file."rio" =
     let
       # The word block is easier to type than the symbol.
-      cursor = if rio.cursor == "Block" then "▇" else rio.cursor;
-
       content = std.serde.toTOML {
-        cursor = cursor;
         line-height = rio.line-height;
-        editor = rio.editor;
-        blinking-cursor = rio.blinking-cursor;
         hide-cursor-when-typing = rio.hide-cursor-when-typing;
+
+        editor = rio.editor;
+
+        cursor = rio.cursor;
 
         fonts.size = rio.fonts.size;
       };

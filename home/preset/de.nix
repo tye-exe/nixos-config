@@ -27,7 +27,7 @@ in
     localsend # Share files over local wifi network.
     kdePackages.merkuro # Calander.
     bitwarden-desktop # Password manager.
-    opentabletdriver # Driver for drawing tablets.
+    # opentabletdriver # Driver for drawing tablets.
     obsidian # Note taking using markdown.
   ];
 
@@ -38,8 +38,11 @@ in
   rio = {
     enable = true;
     inherit configDir;
-    editor = "hx";
-    blinking-cursor = true;
+    editor.program = "hx";
     hide-cursor-when-typing = true;
+
+    cursor = {
+      blinking = true;
+    };
   };
 }

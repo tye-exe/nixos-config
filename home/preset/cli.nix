@@ -20,7 +20,7 @@
     eza = {
       enable = true;
       git = true; # Displays files git status when using -l
-      icons = true; # Shows cute icons next to file name.
+      icons = "auto"; # Shows cute icons next to file name.
       enableFishIntegration = false; # This stops alaises being added; I prefer abbrs.
     };
 
