@@ -34,4 +34,6 @@
     syncthingtray = true;
     noisetorch = true;
   };
+
+  rio.fonts.size = 14;
 }
