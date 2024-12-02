@@ -29,6 +29,7 @@ in
           expansion = "nix shell nixpkgs/nixos-unstable#% --command sh -c \"fish\"";
           setCursor = true;
         };
+        du = "ncdu"; # I always keep forgetting this
 
         # Git abbrs
         gs = "git status";
