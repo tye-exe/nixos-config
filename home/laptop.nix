@@ -12,6 +12,13 @@
     # Video editing
     shotcut
     gimp
+
+    # DAW
+    lmms
+
+    # Synths
+    vital
+    helm
   ];
 
   services.syncthing.enable = true;
