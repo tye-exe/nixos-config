@@ -16,7 +16,7 @@
     with pkgs;
     [
       # Minceraft
-      modrinth-app
+      hmcl
       # Java for Mc
       # pkgs.jdk8
       jdk17_headless
