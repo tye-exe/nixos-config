@@ -8,7 +8,6 @@ with lib;
 let
   tye-services = config.tye-services;
 in
-# cursorType = types.enum [ "Block" "_" "|" ];
 {
   options.tye-services = {
     enabled = {
@@ -42,6 +41,10 @@ in
         ''}";
         Restart = "on-failure";
       };
+
+      # The service fails to init the first few times,
+      # so dealy it to allow for it to start correctly.
+      serviceConfig.RestartSec = 5;
     };
   };
 
