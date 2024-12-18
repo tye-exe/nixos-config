@@ -19,6 +19,12 @@
   programs.plasma = {
     enable = lib.mkDefault true;
 
+    kwin = {
+      edgeBarrier = 0;
+      # BE GONE FOUL BEAST
+      effects.shakeCursor.enable = false;
+    };
+
     workspace = {
       # I like my eyes, thank you very much
       lookAndFeel = "org.kde.breezedark.desktop";
@@ -61,14 +67,6 @@
       # syncthing.text = "syncthing &>> /dev/null &";
       # script.text = "syncthing &>> /dev/null &; syncthingtray &>> /dev/null &;";
     };
-
-    # startup.startupScript."start_noisetorch" = {
-    #   # Start noisetorch on DE startup with my main mic as the input.
-    #   text = ''
-    #     firefox &>> /dev/null &;
-    #     noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback" &>> /dev/null &;
-    #   '';
-    # };
 
     panels = [
       {
