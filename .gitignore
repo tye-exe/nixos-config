@@ -3,3 +3,7 @@ result
 
 # Device identifier
 .identity
+
+# System-Manager
+system-manager/.*
+system-manager/target
