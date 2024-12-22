@@ -25,6 +25,8 @@
       effects.shakeCursor.enable = false;
     };
 
+    session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
+
     workspace = {
       # I like my eyes, thank you very much
       lookAndFeel = "org.kde.breezedark.desktop";
@@ -72,6 +74,7 @@
       {
         location = "top";
         height = 48;
+        screen = "all";
         widgets = [
           # Launcher menu
           { name = "org.kde.plasma.kickoff"; }
