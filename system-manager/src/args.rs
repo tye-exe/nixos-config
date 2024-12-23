@@ -11,7 +11,7 @@ pub(crate) struct Cli {
     pub(crate) operation: Operations,
 
     /// Whether to output debug information.
-    #[arg(short, long)]
+    #[arg(short, long, global = true)]
     pub(crate) debug: bool,
 }
 
