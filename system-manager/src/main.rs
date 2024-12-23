@@ -154,23 +154,28 @@ fn main() -> Result<(), Errors> {
                 println!("New identity: {:?}", config.identity)
             }
         },
-        Operations::Path { path } => {
-            if cli.debug {
-                println!("Raw Path: {path:?}")
+        Operations::Path { operation } => match operation {
+            args::PathOption::Set { path } => {
+                if cli.debug {
+                    println!("Raw Path: {path:?}")
+                }
+
+                let true_path = path
+                    .canonicalize()
+                    .map_err(|err| Errors::InvalidPath { error: err })?
+                    .into_boxed_path();
+
+                if cli.debug {
+                    println!("Canonicalized Path: {true_path:?}")
+                }
+
+                config.nix_path = Some(true_path);
+                write_config(&config, config_path, cli.debug)?;
             }
-
-            let true_path = path
-                .canonicalize()
-                .map_err(|err| Errors::InvalidPath { error: err })?
-                .into_boxed_path();
-
-            if cli.debug {
-                println!("Canonicalized Path: {true_path:?}")
+            args::PathOption::Get => {
+                println!("Nix Path: {:?}", config.nix_path)
             }
-
-            config.nix_path = Some(true_path);
-            write_config(&config, config_path, cli.debug)?;
-        }
+        },
         Operations::Logo => println!("{}", LOGO),
     }
 

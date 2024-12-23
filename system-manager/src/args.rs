@@ -32,7 +32,10 @@ pub(crate) enum Operations {
         operation: IdentityOptions,
     },
     /// The path to the nix configuration; Relative paths are converted into absolute paths.
-    Path { path: Box<Path> },
+    Path {
+        #[command(subcommand)]
+        operation: PathOption,
+    },
     /// Displays "tye-nix" in ASCII; Ignore the vanity.
     Logo,
 }
@@ -72,4 +75,12 @@ impl Default for Identities {
     fn default() -> Self {
         Self::Undefined
     }
+}
+
+#[derive(Clone, Debug, Subcommand)]
+pub(crate) enum PathOption {
+    /// Sets the path to the nix configuration.
+    Set { path: Box<Path> },
+    /// Gets the absolute path of the nix configuration.
+    Get,
 }
