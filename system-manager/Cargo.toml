@@ -1,6 +1,6 @@
 [package]
 name = "system-manager"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2021"
 description = "Manages the nixos configuration for the system & home-manager."
 
