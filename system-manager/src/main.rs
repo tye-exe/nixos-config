@@ -47,6 +47,9 @@ enum Errors {
         "The set path is not a valid UTF-8 string. Please set the path to a valid UTF-8 string."
     )]
     NotUTFPath,
+
+    #[error("Failed to execute command. Error: {error}")]
+    CommandExecutionFail { error: std::io::Error },
 }
 
 /// The persistent configuration data for this program.
@@ -117,29 +120,39 @@ fn main() -> Result<(), Errors> {
 
             let identity = format!("{:?}", config.identity).to_lowercase();
 
-            // Display/Execute command.
-            let mut command;
-            if display_command {
-                command = Command::new("echo");
-            } else {
-                command = Command::new("sh");
-                command.arg("-c");
-            }
-
-            match target {
-                SwitchTarget::Home => {
-                    command.arg(format!(
-                        "home-manager switch --flake {path}#{identity} --impure",
-                    ));
+            // Closure reduces code duplication
+            let base_command = || {
+                // Display/Execute command.
+                let mut command;
+                if display_command {
+                    command = Command::new("echo");
+                } else {
+                    command = Command::new("sh");
+                    command.arg("-c");
                 }
-                SwitchTarget::System => {
-                    command.arg(format!(
-                        "sudo nixos-rebuild switch --flake {path}#{identity} --impure"
-                    ));
-                }
-            }
+                command
+            };
 
-            let _ = command.status();
+            // Update flake lock file
+            println!("Updating flake lock file:\n");
+            base_command()
+                .arg(format!("nix flake update --flake {path}"))
+                .status()
+                .map_err(|err| Errors::CommandExecutionFail { error: err })?;
+
+            // Perform switch
+            println!("Performing switch:\n");
+            base_command()
+                .arg(match target {
+                    SwitchTarget::Home => {
+                        format!("home-manager switch --flake {path}#{identity} --impure")
+                    }
+                    SwitchTarget::System => {
+                        format!("sudo nixos-rebuild switch --flake {path}#{identity} --impure")
+                    }
+                })
+                .status()
+                .map_err(|err| Errors::CommandExecutionFail { error: err })?;
         }
         Operations::Identity { operation } => match operation {
             IdentityOptions::Get { raw } => {
