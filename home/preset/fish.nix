@@ -1,8 +1,4 @@
-{ config, pkgs, ... }:
-let
-  nixDir = config.nixDir;
-  luaScript = "${nixDir}/core.lua";
-in
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     fish # Bash 2.0
@@ -63,19 +59,6 @@ in
       };
 
       functions = {
-        ## Following three are functions as i got error when using Aliases ##
-        # Sets the identity of this machine
-        set-identity = "${luaScript} identity";
-        # Switches home-manager to new config.
-        hm-switch = "${luaScript} hm-switch";
-        # Switches system to new config.
-        sys-switch = "${luaScript} sys-switch";
-
-        # Emulates the pressing of the given keys.
-        key = ''
-          command -q dotool && echo type $argv | dotool
-        '';
-
         # Sets up template shell environment, alongside nix-direnv
         mk-env = ''
           [ ! -e .envrc ] && echo "use flake" >> .envrc
