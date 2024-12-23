@@ -54,7 +54,9 @@
         config = {
           allowUnfree = true;
         };
-        overlays = [ inputs.nixneovimplugins.overlays.default ];
+        overlays = [
+          inputs.nixneovimplugins.overlays.default
+        ];
       };
 
       pkgs-unstable = import nixpkgs-unstable {
@@ -73,7 +75,10 @@
         {
           options.nixDir = lib.mkOption {
             type = lib.types.str;
-            default = builtins.readFile "/tmp/tye_nix_config/path";
+            # default = lib.readFile "${pkgs.runCommand "timestamp" {
+            #   env.when = builtins.currentTime;
+            # } "echo -n `date -d @$when +%Y-%m-%d_%H-%M-%S` > $out"}";
+            default = lib.readFile "${pkgs.runCommand "placeholder"}";
           };
         }
       );
@@ -93,7 +98,7 @@
           ];
         };
 
-        tye-laptop = lib.nixosSystem {
+        laptop = lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs;
@@ -105,7 +110,7 @@
           ];
         };
 
-        tye-desktop = lib.nixosSystem {
+        desktop = lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs;
@@ -117,19 +122,7 @@
           ];
         };
 
-        tye-server-0 = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            ./system/server-0.nix
-            ./hardware-confs/server-0.nix
-            custom_option
-          ];
-        };
-
-        tye-nas = lib.nixosSystem {
+        nas = lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs;
@@ -161,7 +154,7 @@
           ];
         };
 
-        tye-laptop = home-manager.lib.homeManagerConfiguration {
+        laptop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
             inherit
@@ -177,7 +170,7 @@
           ];
         };
 
-        tye-desktop = home-manager.lib.homeManagerConfiguration {
+        desktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
             inherit
@@ -193,23 +186,7 @@
           ];
         };
 
-        tye-server-0 = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit
-              std
-              inputs
-              pkgs-unstable
-              system
-              ;
-          };
-          modules = [
-            ./home/server-0.nix
-            custom_option
-          ];
-        };
-
-        tye-nas = home-manager.lib.homeManagerConfiguration {
+        nas = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
             inherit

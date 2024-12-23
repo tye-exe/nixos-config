@@ -92,6 +92,9 @@
     home-manager # Manages user-configurations
     libxkbcommon # Keyboard library - required by some programs
     lua # Main scripting language.
+
+    # system-manager
+    (pkgs.callPackage ./system-manager.nix { })
   ];
 
   # Program configs.
