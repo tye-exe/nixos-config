@@ -1,9 +1,9 @@
 # System-Manager
 Manages the nixos configuration for the system & home-manager.
-I got tired of using complicated nix commands & cobbeled togeth scripts so i sat down on evening & made system-manager!
+I got tired of using complicated nix commands & cobbeled together scripts so i sat down one evening & made system-manager!
 
-In less words, it makes managin the nix configurations less tedious, with some quality of life options.
-A notable benetif is that it makes relocating the nix configuration directory easy, as the directory only needs setting
+In less words, it makes managing the nix configurations less tedious, with some quality of life options.
+A notable benefit is that it makes relocating the nix configuration directory easy, as the directory only needs setting
 once & all future invocations will point to the set configuration path.
 
 For a high-level usage overview see the [root README](../README.md). For other curiousites indulge in the help menu.
