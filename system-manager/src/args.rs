@@ -56,7 +56,11 @@ pub(crate) enum IdentityOptions {
         identity: Identities,
     },
     /// Get the identity of the configuration.
-    Get,
+    Get {
+        /// Display the raw config value.
+        #[arg(long)]
+        raw: bool,
+    },
 }
 
 #[derive(Serialize, Deserialize, Debug, Subcommand, Clone)]
@@ -82,5 +86,9 @@ pub(crate) enum PathOption {
     /// Sets the path to the nix configuration.
     Set { path: Box<Path> },
     /// Gets the absolute path of the nix configuration.
-    Get,
+    Get {
+        /// Display the raw config value.
+        #[arg(long)]
+        raw: bool,
+    },
 }

@@ -142,8 +142,13 @@ fn main() -> Result<(), Errors> {
             let _ = command.status();
         }
         Operations::Identity { operation } => match operation {
-            IdentityOptions::Get => {
-                println!("Identity: {:?}", config.identity)
+            IdentityOptions::Get { raw } => {
+                if raw {
+                    let identity = format!("{:?}", config.identity).to_lowercase();
+                    println!("{identity}")
+                } else {
+                    println!("Identity: {:?}", config.identity)
+                }
             }
             IdentityOptions::Set { identity } => {
                 println!("Old identity: {:?}", config.identity);
@@ -172,8 +177,16 @@ fn main() -> Result<(), Errors> {
                 config.nix_path = Some(true_path);
                 write_config(&config, config_path, cli.debug)?;
             }
-            args::PathOption::Get => {
-                println!("Nix Path: {:?}", config.nix_path)
+            args::PathOption::Get { raw } => {
+                if raw {
+                    let output = match config.nix_path {
+                        Some(path) => path.to_str().ok_or(Errors::NotUTFPath)?.to_owned(),
+                        None => "None".to_owned(),
+                    };
+                    println!("{output}")
+                } else {
+                    println!("Nix Path: {:?}", config.nix_path)
+                }
             }
         },
         Operations::Logo => println!("{}", LOGO),
