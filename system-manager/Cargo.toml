@@ -2,7 +2,7 @@
 name = "system-manager"
 version = "1.0.0"
 edition = "2021"
-description = "Manages the nixos configuation for the system & home-manager."
+description = "Manages the nixos configuration for the system & home-manager."
 
 [dependencies]
 app_dirs2 = "2.5.5"
