@@ -29,7 +29,7 @@ to the desired folder/path of your choosing & execute:
 ```bash
 system-manager path <New Config Path> # Can be relative, such as "." if it is the current working dir.
 ```
-It is also recommended to perform a system switch & a home-manager switch [see](<README#Basic Usage>)
+It is also recommended to perform a system switch & a home-manager switch [see Basic Usage](#Basic-Usage)
 
 ### Basic Usage
 ```bash
