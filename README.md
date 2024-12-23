@@ -27,7 +27,7 @@ curl -s https://raw.githubusercontent.com/tye-exe/nixos-config/main/scripts/init
 If you wish to change the repo location, then move **all** the files (including dot files) within `nixos-config`
 to the desired folder/path of your choosing & execute:
 ```bash
-system-manager path <New Config Path> # Can be relative, such as "." if it is the current working dir.
+system-manager path set <New Config Path> # Can be relative, such as "." if it is the current working dir.
 ```
 It is also recommended to perform a system switch & a home-manager switch [see Basic Usage](#Basic-Usage)
 
