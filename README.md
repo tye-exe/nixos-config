@@ -25,26 +25,28 @@ curl -s https://raw.githubusercontent.com/tye-exe/nixos-config/main/scripts/init
 
 ### Change Configuration Location
 If you wish to change the repo location, then move **all** the files (including dot files) within `nixos-config`
-to the desired folder/path of your choosing & execute `./core.lua hm-switch` within the new directory & nix will
-update the required paths.
+to the desired folder/path of your choosing & execute:
+```bash
+system-manager path <New Config Path> # Can be relative, such as "." if it is the current working dir.
+```
+It is also recommended to perform a system switch & a home-manager switch [see](<README#Basic Usage>)
 
 ### Basic Usage
 ```bash
 # Executes 'nixos-rebuild switch'.
-sys-switch
+system-manager switch system
 ```
 ```bash
 # Executes 'home-manager switch'.
-hm-switch
+system-manager switch home
+```
+For further help:
+```bash
+system-manager --help
 ```
 
 ### Advanced Usage
 ```bash
 # Prompts for changing the identity of the system.
-set-identity
-```
-```bash
-cd <nix-config>
-# Shows available commands to execute on the core.lua file directly.
-./core.lua help
+system-manager identity set <Identity>
 ```
