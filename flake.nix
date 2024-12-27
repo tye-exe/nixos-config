@@ -73,13 +73,6 @@
       custom_option = (
         { lib, ... }:
         {
-          options.nixDir = lib.mkOption {
-            type = lib.types.str;
-            # default = lib.readFile "${pkgs.runCommand "timestamp" {
-            #   env.when = builtins.currentTime;
-            # } "echo -n `date -d @$when +%Y-%m-%d_%H-%M-%S` > $out"}";
-            default = lib.readFile "${pkgs.runCommand "placeholder"}";
-          };
         }
       );
     in
