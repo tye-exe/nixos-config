@@ -9,6 +9,7 @@
   imports = [
     ./core.nix
     ./de.nix
+    ./virtualization.nix
   ];
 
   networking.hostName = "tye"; # Define your hostname.
