@@ -23,7 +23,7 @@ pub(crate) enum Operations {
         target: SwitchTarget,
 
         /// Display the switch commands instead of executing them.
-        #[arg(long = "display")]
+        #[arg(long = "display", global = true)]
         display_command: bool,
     },
     /// The identity of the nix configuration used. Different machines have different configuration.

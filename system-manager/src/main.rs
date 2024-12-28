@@ -50,12 +50,16 @@ enum Errors {
 
     #[error("Failed to execute command. Error: {error}")]
     CommandExecutionFail { error: std::io::Error },
+    #[error("Command failed")]
+    CommandFailed { command: String },
 }
 
 /// The persistent configuration data for this program.
 #[derive(Serialize, Deserialize, Debug, Default)]
 struct Config {
+    /// The identity of this system.
     identity: Identities,
+    /// The path to the nix configuration.
     nix_path: Option<Box<Path>>,
 }
 
@@ -115,44 +119,26 @@ fn main() -> Result<(), Errors> {
             display_command,
         } => {
             // Separated due to ownership limitations.
-            let path = config.nix_path.ok_or(Errors::PathNotSet)?;
+            let path = config.nix_path.clone().ok_or(Errors::PathNotSet)?;
             let path = path.to_str().ok_or(Errors::NotUTFPath)?;
 
             let identity = format!("{:?}", config.identity).to_lowercase();
 
-            // Closure reduces code duplication
-            let base_command = || {
-                // Display/Execute command.
-                let mut command;
-                if display_command {
-                    command = Command::new("echo");
-                } else {
-                    command = Command::new("sh");
-                    command.arg("-c");
-                }
-                command
-            };
-
             // Update flake lock file
-            println!("Updating flake lock file:\n");
-            base_command()
-                .arg(format!("nix flake update --flake {path}"))
-                .status()
-                .map_err(|err| Errors::CommandExecutionFail { error: err })?;
+            command_arg(display_command, format!("nix flake update --flake {path}"))?;
 
             // Perform switch
-            println!("Performing switch:\n");
-            base_command()
-                .arg(match target {
+            command_arg(
+                display_command,
+                match target {
                     SwitchTarget::Home => {
                         format!("home-manager switch --flake {path}#{identity} --impure")
                     }
                     SwitchTarget::System => {
                         format!("sudo nixos-rebuild switch --flake {path}#{identity} --impure")
                     }
-                })
-                .status()
-                .map_err(|err| Errors::CommandExecutionFail { error: err })?;
+                },
+            )?;
         }
         Operations::Identity { operation } => match operation {
             IdentityOptions::Get { raw } => {
@@ -221,5 +207,29 @@ fn write_config(config: &Config, config_path: Box<Path>, debug: bool) -> Result<
     std::fs::write(config_path.clone(), text).map_err(|_| Errors::ConfigWrite {
         path: config_path.clone(),
     })?;
+    Ok(())
+}
+
+fn command_arg(display_command: bool, arg: String) -> Result<(), Errors> {
+    // Display/Execute command.
+    let mut command;
+    if display_command {
+        command = Command::new("echo");
+    } else {
+        command = Command::new("sh");
+        command.arg("-c");
+    }
+    // Run command.
+    let success = command
+        .arg(arg.clone())
+        .status()
+        .map_err(|err| Errors::CommandExecutionFail { error: err })?
+        .success();
+
+    // If the run command failed that's an error.
+    if !success {
+        Err(Errors::CommandFailed { command: arg })?;
+    }
+
     Ok(())
 }
