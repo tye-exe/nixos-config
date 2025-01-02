@@ -19,8 +19,8 @@
     plasma.enable = false;
     git.extraConfig = {
       credential = {
-        credentialStore = "gpg";
-        helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
+        # credentialStore = "gpg";
+        helper = "${pkgs.gh}/bin/gh auth git-credential";
       };
     };
   };
