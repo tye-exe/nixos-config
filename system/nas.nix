@@ -14,15 +14,22 @@
       "1.1.1.1" # Cloudflair
       "8.8.8.8" # Google
     ];
-    defaultGateway = "192.168.0.1";
-    # Static IP addr
-    interfaces.eno1.ipv4.addresses = [
-      {
-        address = "192.168.0.33";
-        prefixLength = 24;
-      }
-    ];
-    firewall.enable = false;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        # SSH
+        22
+        # Tunnel
+        2332
+        # Syncthing
+        22000
+      ];
+      allowedUDPPorts = [
+        # Syncthing
+        22000
+        21027
+      ];
+    };
   };
 
   # Enable the OpenSSH daemon.
