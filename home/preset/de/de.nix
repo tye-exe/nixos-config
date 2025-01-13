@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   username = "tye";
   homeDirectory = "/home/${username}";
@@ -6,7 +6,10 @@ let
 in
 {
 
-  imports = [ ./../module/rio.nix ];
+  imports = [
+    ./../../module/rio.nix
+    ./avatar.nix
+  ];
 
   home.packages = with pkgs; [
     # Libre office

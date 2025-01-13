@@ -9,7 +9,7 @@
 
   imports = [
     ./core.nix
-    ./preset/de.nix
+    ./preset/de/de.nix
   ];
 
   home.packages =
