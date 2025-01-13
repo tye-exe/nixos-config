@@ -86,8 +86,9 @@ in
     };
 
     # Spell checker
-    languages.language-server = {
-      typos.command = "typos-lsp";
+    languages.language-server.typos = {
+      command = "typos-lsp";
+      config.diagnosticSeverity = "Warning";
     };
 
     # language configs
