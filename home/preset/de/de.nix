@@ -32,6 +32,7 @@ in
     bitwarden-desktop # Password manager.
     # opentabletdriver # Driver for drawing tablets.
     obsidian # Note taking using markdown.
+    pdfmixtool # Used to edit PDF's
   ];
 
   programs = {
