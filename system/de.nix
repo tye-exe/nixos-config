@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -24,4 +24,11 @@
     # no need to redefine it in your config for now)
     # media-session.enable = true;
   };
+
+  # Scanner
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.utsushi ];
+  };
+  services.udev.packages = [ pkgs.utsushi ];
 }
