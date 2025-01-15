@@ -117,6 +117,7 @@ fn main() -> Result<(), Errors> {
         Operations::Switch {
             target,
             display_command,
+            no_update,
         } => {
             // Separated due to ownership limitations.
             let path = config.nix_path.clone().ok_or(Errors::PathNotSet)?;
@@ -125,7 +126,9 @@ fn main() -> Result<(), Errors> {
             let identity = format!("{:?}", config.identity).to_lowercase();
 
             // Update flake lock file
-            command_arg(display_command, format!("nix flake update --flake {path}"))?;
+            if !no_update {
+                command_arg(display_command, format!("nix flake update --flake {path}"))?;
+            }
 
             // Perform switch
             command_arg(

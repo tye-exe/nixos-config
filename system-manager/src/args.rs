@@ -25,6 +25,10 @@ pub(crate) enum Operations {
         /// Display the switch commands instead of executing them.
         #[arg(long = "display", global = true)]
         display_command: bool,
+
+        /// Don't update the inputs (`flake.lock` file), only rebuild the system.
+        #[arg(long = "no_update", global = true)]
+        no_update: bool,
     },
     /// The identity of the nix configuration used. Different machines have different configuration.
     Identity {
