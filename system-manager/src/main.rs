@@ -125,6 +125,21 @@ fn main() -> Result<(), Errors> {
 
             let identity = format!("{:?}", config.identity).to_lowercase();
 
+            // Get sudo perms firms, as flake update can take a minuet or two.
+            match target {
+                SwitchTarget::System => {
+                    command_arg(
+                        display_command,
+                        "echo 'Sudo perms required for system rebuild.'".to_owned(),
+                    )?;
+                    command_arg(
+                        display_command,
+                        "sudo echo 'Sudo perms given for system rebuild.'".to_owned(),
+                    )?;
+                }
+                SwitchTarget::Home => todo!(),
+            }
+
             // Update flake lock file
             if !no_update {
                 command_arg(display_command, format!("nix flake update --flake {path}"))?;
