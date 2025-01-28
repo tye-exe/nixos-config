@@ -15,6 +15,7 @@
       "8.8.8.8" # Google
     ];
     firewall = {
+      # Note to self: "docker.internal.host" is blocked by firewall
       enable = true;
       allowedTCPPorts = [
         # SSH
@@ -23,6 +24,7 @@
         2332
         # Syncthing
         22000
+        8384
       ];
       allowedUDPPorts = [
         # Syncthing
