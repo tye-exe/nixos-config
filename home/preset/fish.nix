@@ -15,7 +15,7 @@
         ll = "eza -lh";
         lla = "eza -lha";
         cat = "bat";
-        ts = "trash";
+        ts = "gtrash put";
         "7z" = "7zz"; # Seven zip uses "7zz", not "7z"
         shell = {
           expansion = "nix shell nixpkgs#% --command sh -c \"fish\"";
