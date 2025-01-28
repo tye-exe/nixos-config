@@ -27,16 +27,21 @@
         };
         du = "ncdu"; # I always keep forgetting this
 
-        # Git abbrs
-        gs = "git status";
+        # Git abbrs #
         gd = "git diff";
+        gdc = "git diff --cached";
+
         gc = {
           expansion = ''git commit -m "%"'';
           setCursor = true;
         };
         gca = "git commit --amend --no-edit";
+
         ga = "git add";
         gaa = "git add .";
+        gai = "git add -i";
+
+        gs = "git status";
         gp = "git push";
         gu = "git pull";
         gl = "git log";
