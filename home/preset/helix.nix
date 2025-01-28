@@ -84,11 +84,17 @@ in
         };
 
     };
+    languages.language-server = {
+      # Spell checker
+      typos = {
+        command = "typos-lsp";
+        config.diagnosticSeverity = "Warning";
+      };
 
-    # Spell checker
-    languages.language-server.typos = {
-      command = "typos-lsp";
-      config.diagnosticSeverity = "Warning";
+      rust-analyzer = {
+        # Analyses inactive code
+        config.cargo.features = "all";
+      };
     };
 
     # language configs
