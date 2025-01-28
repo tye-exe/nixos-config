@@ -137,7 +137,7 @@ fn main() -> Result<(), Errors> {
                         "sudo echo 'Sudo perms given for system rebuild.'".to_owned(),
                     )?;
                 }
-                SwitchTarget::Home => todo!(),
+                SwitchTarget::Home => {}
             }
 
             // Update flake lock file
