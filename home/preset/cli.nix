@@ -14,6 +14,7 @@
     zoxide # cd replacement
     fzf # Fuzzy searching
     trashy # Allows easy trashing & restoration of files
+    btop # Like "top", but better :p
   ];
 
   programs = {
