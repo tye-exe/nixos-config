@@ -45,15 +45,15 @@
   };
 
   # Network routing for containers.
-  environment.systemPackages = with pkgs; [ iptables ];
-  systemd.services."reroute_ports" = {
-    script = ''
-      ${pkgs.iptables}/bin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3080;
-      ${pkgs.iptables}/bin/iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 3443;
-    '';
-    wantedBy = [ "multi-user.target" ];
-    description = "Rerouts traffic from port 80 to port 3080; Rerouts traffic from port 443 to port 3443.";
-  };
+  # environment.systemPackages = with pkgs; [ iptables ];
+  # systemd.services."reroute_ports" = {
+  #   script = ''
+  #     ${pkgs.iptables}/bin/iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3080;
+  #     ${pkgs.iptables}/bin/iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 3443;
+  #   '';
+  #   wantedBy = [ "multi-user.target" ];
+  #   description = "Rerouts traffic from port 80 to port 3080; Rerouts traffic from port 443 to port 3443.";
+  # };
 
   # Email monitoring
   programs.msmtp = {
