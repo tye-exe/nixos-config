@@ -7,8 +7,7 @@ in
 {
 
   imports = [
-    ./../../module/rio.nix
-    ./avatar.nix
+    ./../module/rio.nix
   ];
 
   home.packages = with pkgs; [

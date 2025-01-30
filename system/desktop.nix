@@ -8,7 +8,7 @@
   # Shared configs are in this file.
   imports = [
     ./core.nix
-    ./de.nix
+    ./de/de.nix
     ./virtualization.nix
   ];
 

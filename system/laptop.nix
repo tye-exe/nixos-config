@@ -3,7 +3,7 @@
 {
   imports = [
     ./core.nix
-    ./de.nix
+    ./de/de.nix
   ];
 
   networking.hostName = "tye_laptop"; # Define your hostname.
