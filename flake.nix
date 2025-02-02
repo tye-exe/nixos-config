@@ -21,15 +21,6 @@
     # Expands upon the nix std lib.
     nix-std.url = "github:chessai/nix-std";
 
-    # Plugin overlay for nvim
-    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
-
-    # Nvim config
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     # Get deps for non-nix binaries.
     nix-alien.url = "github:thiagokokada/nix-alien";
   };
@@ -54,9 +45,6 @@
         config = {
           allowUnfree = true;
         };
-        overlays = [
-          inputs.nixneovimplugins.overlays.default
-        ];
       };
 
       pkgs-unstable = import nixpkgs-unstable {
