@@ -1,5 +1,5 @@
 {
-  description = "My flake(?)";
+  description = "My NixOS configuration :P";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -40,6 +40,8 @@
       # Default nix stuff.
       lib = nixpkgs.lib;
       system = "x86_64-linux";
+
+      # Current pkgs
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -47,6 +49,7 @@
         };
       };
 
+      # Unstable pkgs
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config = {
@@ -57,7 +60,7 @@
       # External lib that's useful
       std = nix-std.lib;
 
-      # Allows me to pass the nixDir arg into every module recersively.
+      # Allows me to pass custom options into every module.
       custom_option = (
         { lib, ... }:
         {
