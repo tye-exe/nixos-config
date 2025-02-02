@@ -9,10 +9,6 @@
 let
   username = "tye";
   homeDirectory = "/home/${username}";
-
-  nix-alien-pkgs =
-    import (builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master")
-      { };
 in
 {
 
@@ -43,7 +39,9 @@ in
         viu # Terminal image viewer
         ripgrep # Faster alternative to grep
       ]
-      ++ (with nix-alien-pkgs; [ nix-alien ]);
+      ++ (with inputs.nix-alien.packages.${system}; [
+        nix-alien
+      ]);
 
     inherit username homeDirectory;
   };
