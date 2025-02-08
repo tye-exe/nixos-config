@@ -160,4 +160,48 @@
   #
   # Enabling auto snapshot
   # sudo zfs set com.sun:auto-snapshot=true zfs
+
+  ## Run obsidian scripts ##
+
+  # Diary card
+  systemd.user.timers."Update_Diary_Card" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "Fri *-*-* 00:00:00";
+      Unit = "Update_Diary_Card.service";
+      Persistent = true;
+    };
+  };
+
+  systemd.user.services."Update_Diary_Card" = {
+    script = ''
+      set -eu
+      cd /home/tye/zfs/docker/syncthing/data/Me
+      ${pkgs.bash}/bin/bash diary_card.sh
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
+
+  # Rambles
+  systemd.user.timers."Update_Rambles" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "Fri *-*-* 00:00:00";
+      Unit = "Update_Rambles.service";
+      Persistent = true;
+    };
+  };
+
+  systemd.user.services."Update_Rambles" = {
+    script = ''
+      set -eu
+      cd /home/tye/zfs/docker/syncthing/data/Me
+      ${pkgs.bash}/bin/bash rambles.sh
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
 }
