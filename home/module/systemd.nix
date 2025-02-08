@@ -31,7 +31,10 @@ in
 
     # Start noisetorch on DE startup with my main mic as the input.
     noisetorch-init = mkIf tye-services.enabled.noisetorch {
-      Unit.Description = "Start/Loads noisetorch with the desired microphone.";
+      Unit = {
+        Description = "Start/Loads noisetorch with the desired microphone.";
+        StartLimitBurst = 10;
+      };
       Install.WantedBy = [ "default.target" ];
 
       Service = {
@@ -40,11 +43,8 @@ in
           noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback"
         ''}";
         Restart = "on-failure";
+        RestartSec = "10s";
       };
-
-      # The service fails to init the first few times,
-      # so dealy it to allow for it to start correctly.
-      serviceConfig.RestartSec = 5;
     };
   };
 
