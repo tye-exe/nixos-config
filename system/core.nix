@@ -133,6 +133,9 @@
 
   # List services that you want to enable:
 
+  # Enables system-resolved : essential for wireguard.
+  services.resolved.enable = true;
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
