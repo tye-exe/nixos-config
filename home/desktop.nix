@@ -25,6 +25,7 @@
       obs-studio
       # Games
       heroic
+      mangohud
     ]
     ++ (with pkgs-unstable; [ ytmdesktop ]);
 
