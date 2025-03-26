@@ -32,6 +32,7 @@ in
     # opentabletdriver # Driver for drawing tablets.
     obsidian # Note taking using markdown.
     pdfmixtool # Used to edit PDF's
+    et # Simple terminal timer
   ];
 
   programs = {

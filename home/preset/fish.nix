@@ -61,6 +61,12 @@
           expansion = "&>> /dev/null";
           position = "anywhere";
         };
+
+        # Abbr for my shell timer.
+        timer = {
+          expansion = "et % &>> /dev/null &";
+          setCursor = true;
+        };
       };
 
       functions = {
