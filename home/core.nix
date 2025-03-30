@@ -58,46 +58,7 @@ in
 
     nix-index.enable = true;
 
-    # neovim = {
-    #   enable = true;
-    #   viAlias = true;
-    #   vimAlias = true;
-    #   defaultEditor = true;
-    #   plugins = with pkgs.vimPlugins; [
-    #     rustaceanvim
-
-    #     nvim-treesitter
-
-    #     # Debugging
-    #     telescope-dap-nvim
-    #     nvim-dap-virtual-text
-    #     nvim-dap-ui
-    #   ];
-    # };
-
   };
-
-  # nvim = {
-  #   enable = true;
-  #   rust.enable = true;
-  #   rust.keybinds = [
-  #     {
-  #       mode = "n";
-  #       leader = " ";
-  #       follower = "a";
-  #       args = [ "codeAction" ];
-  #     }
-  #     {
-  #       mode = "n";
-  #       leader = " ";
-  #       follower = "k";
-  #       args = [
-  #         "hover"
-  #         "actions"
-  #       ];
-  #     }
-  #   ];
-  # };
 
   # Don't change this without reading the wiki!
   # & yes to future me, i did write this. :p
