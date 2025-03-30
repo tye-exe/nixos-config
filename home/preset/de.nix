@@ -27,7 +27,6 @@ in
     xwaylandvideobridge # Allows screensharing
     vlc # Plays videos :P
     kdePackages.merkuro # Calander.
-    # opentabletdriver # Driver for drawing tablets.
     obsidian # Note taking using markdown.
     pdfmixtool # Used to edit PDF's
     et # Simple terminal timer
