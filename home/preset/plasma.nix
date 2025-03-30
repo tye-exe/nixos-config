@@ -101,7 +101,11 @@
               hidden = [ "org.kde.plasma.networkmanagement" ];
             };
           }
-          { digitalClock = { }; }
+          {
+            digitalClock = {
+              time.showSeconds = "always";
+            };
+          }
         ];
       }
     ];
