@@ -26,9 +26,7 @@ in
     syncthingtray # Gui for syncthing
     xwaylandvideobridge # Allows screensharing
     vlc # Plays videos :P
-    localsend # Share files over local wifi network.
     kdePackages.merkuro # Calander.
-    bitwarden-desktop # Password manager.
     # opentabletdriver # Driver for drawing tablets.
     obsidian # Note taking using markdown.
     pdfmixtool # Used to edit PDF's
