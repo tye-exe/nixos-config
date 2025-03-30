@@ -31,6 +31,7 @@ in
     obsidian # Note taking using markdown.
     pdfmixtool # Used to edit PDF's
     et # Simple terminal timer
+    rnote # Note taking application
   ];
 
   programs = {
