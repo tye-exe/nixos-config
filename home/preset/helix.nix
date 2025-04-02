@@ -55,7 +55,7 @@ in
     settings = {
       # Generic settings
       editor = {
-        line-number = "relative";
+        line-number = "absolute";
         mouse = false;
         auto-save = true;
         completion-timeout = 100;
