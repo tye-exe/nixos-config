@@ -64,6 +64,14 @@ in
           display-messages = true;
           display-inlay-hints = true;
         };
+        # Minimum severity to show a diagnostic after the end of a line:
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics = {
+          # Minimum severity to show a diagnostic on the primary cursor's line.
+          cursor-line = "error";
+          # Minimum severity to show a diagnostic on other lines:
+          other-lines = "error";
+        };
       };
 
       # Custom keybinds
