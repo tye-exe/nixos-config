@@ -23,6 +23,12 @@
 
     # Get deps for non-nix binaries.
     nix-alien.url = "github:thiagokokada/nix-alien";
+
+    # My system manager.
+    system-manager = {
+      url = "github:tye-exe/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,6 +40,7 @@
       nix-std,
       plasma-manager,
       nix-alien,
+      system-manager,
       ...
     }:
     let

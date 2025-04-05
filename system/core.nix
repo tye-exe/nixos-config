@@ -93,8 +93,7 @@
     libxkbcommon # Keyboard library - required by some programs
     lua # Main scripting language.
 
-    # system-manager
-    (pkgs.callPackage ../system-manager/default.nix { })
+    inputs.system-manager
   ];
 
   # Program configs.
