@@ -94,7 +94,7 @@
     lua # Main scripting language.
 
     # system-manager
-    (pkgs.callPackage ./system-manager.nix { })
+    (pkgs.callPackage ../system-manager/default.nix { })
   ];
 
   # Program configs.
