@@ -96,9 +96,6 @@
 
     inputs.system-manager.packages.${system}.system-manager
   ];
-  # ++ (with inputs.system-manager.packages.${system}; [
-  #   system-manager
-  # ]);
 
   # Program configs.
   programs = {

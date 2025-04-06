@@ -25,10 +25,8 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
 
     # My system manager.
-    system-manager = {
-      url = "github:tye-exe/system-manager";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    system-manager.url = "github:tye-exe/system-manager";
+
   };
 
   outputs =
@@ -73,125 +71,80 @@
         {
         }
       );
+
+      # Generates the nixos system configuration for each system
+      nix_conf =
+        {
+          name ? "undefined",
+        }:
+        {
+          inherit system;
+          specialArgs = {
+            inherit inputs system;
+          };
+          modules = [
+            ./system/${name}.nix
+            ./hardware-confs/${name}.nix
+            custom_option
+          ];
+
+        };
+
+      # Generates the home-manager configuration for each system
+      home_conf =
+        {
+          name ? "undefined",
+        }:
+        {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit
+              std
+              inputs
+              pkgs-unstable
+              system
+              ;
+          };
+          modules = [
+            ./home/${name}.nix
+            custom_option
+          ];
+        };
     in
     {
       # System confs
       nixosConfigurations = {
-        undefined = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs system;
-          };
-          modules = [
-            ./system/core.nix
-            ./hardware-confs/undefined.nix
-            custom_option
-          ];
-        };
+        undefined = lib.nixosSystem (nix_conf);
 
-        laptop = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs system;
-          };
-          modules = [
-            ./system/laptop.nix
-            ./hardware-confs/laptop.nix
-            custom_option
-          ];
-        };
+        laptop = lib.nixosSystem (nix_conf {
+          name = "laptop";
+        });
 
-        desktop = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs system;
-          };
-          modules = [
-            ./system/desktop.nix
-            ./hardware-confs/desktop.nix
-            custom_option
-          ];
-        };
+        desktop = lib.nixosSystem (nix_conf {
+          name = "desktop";
+        });
 
-        nas = lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs system;
-          };
-          modules = [
-            ./system/nas.nix
-            ./hardware-confs/nas.nix
-            custom_option
-          ];
-        };
+        nas = lib.nixosSystem (nix_conf {
+          name = "nas";
+        });
 
       };
 
       # Home manager confs
       homeConfigurations = {
-        undefined = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit
-              std
-              inputs
-              pkgs-unstable
-              system
-              ;
-          };
-          modules = [
-            ./home/undefined.nix
-            custom_option
-          ];
-        };
+        undefined = home-manager.lib.homeManagerConfiguration (home_conf);
 
-        laptop = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit
-              std
-              inputs
-              pkgs-unstable
-              system
-              ;
-          };
-          modules = [
-            ./home/laptop.nix
-            custom_option
-          ];
-        };
+        laptop = home-manager.lib.homeManagerConfiguration (home_conf {
+          name = "laptop";
+        });
 
-        desktop = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit
-              std
-              inputs
-              pkgs-unstable
-              system
-              ;
-          };
-          modules = [
-            ./home/desktop.nix
-            custom_option
-          ];
-        };
+        desktop = home-manager.lib.homeManagerConfiguration (home_conf {
+          name = "desktop";
+        });
 
-        nas = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit
-              std
-              inputs
-              pkgs-unstable
-              system
-              ;
-          };
-          modules = [
-            ./home/nas.nix
-            custom_option
-          ];
-        };
+        nas = home-manager.lib.homeManagerConfiguration (home_conf {
+          name = "nas";
+        });
       };
     };
 }

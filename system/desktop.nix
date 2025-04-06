@@ -40,5 +40,5 @@
   };
 
   # It's undergoing mitosis!
-  virtualisation.vmware.host.enable = true;
+  # virtualisation.vmware.host.enable = true;
 }
