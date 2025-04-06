@@ -27,7 +27,7 @@
     # My system manager.
     system-manager = {
       url = "github:tye-exe/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -80,7 +80,7 @@
         undefined = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs;
+            inherit inputs system;
           };
           modules = [
             ./system/core.nix
@@ -92,7 +92,7 @@
         laptop = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs;
+            inherit inputs system;
           };
           modules = [
             ./system/laptop.nix
@@ -104,7 +104,7 @@
         desktop = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs;
+            inherit inputs system;
           };
           modules = [
             ./system/desktop.nix
@@ -116,7 +116,7 @@
         nas = lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs;
+            inherit inputs system;
           };
           modules = [
             ./system/nas.nix

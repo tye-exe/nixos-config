@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  system,
   ...
 }:
 
@@ -93,8 +94,11 @@
     libxkbcommon # Keyboard library - required by some programs
     lua # Main scripting language.
 
-    inputs.system-manager
+    inputs.system-manager.packages.${system}.system-manager
   ];
+  # ++ (with inputs.system-manager.packages.${system}; [
+  #   system-manager
+  # ]);
 
   # Program configs.
   programs = {
