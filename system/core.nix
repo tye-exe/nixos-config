@@ -16,10 +16,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Enables flakes & the new style nix commands.
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
+    "pipe-operators"
   ];
 
   # Disables time-consuming generation of man cache.

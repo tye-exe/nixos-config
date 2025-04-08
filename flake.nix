@@ -31,14 +31,10 @@
 
   outputs =
     inputs@{
-      self,
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
       nix-std,
-      plasma-manager,
-      nix-alien,
-      system-manager,
       ...
     }:
     let
@@ -113,38 +109,32 @@
     in
     {
       # System confs
-      nixosConfigurations = {
-        undefined = lib.nixosSystem (nix_conf);
-
-        laptop = lib.nixosSystem (nix_conf {
-          name = "laptop";
-        });
-
-        desktop = lib.nixosSystem (nix_conf {
-          name = "desktop";
-        });
-
-        nas = lib.nixosSystem (nix_conf {
-          name = "nas";
-        });
-
-      };
+      nixosConfigurations = (
+        [
+          "undefined"
+          "laptop"
+          "desktop"
+          "nas"
+        ]
+        |> map (name: {
+          name = "${name}";
+          value = (nix_conf { "name" = name; } |> lib.nixosSystem);
+        })
+        |> builtins.listToAttrs
+      );
 
       # Home manager confs
-      homeConfigurations = {
-        undefined = home-manager.lib.homeManagerConfiguration (home_conf);
-
-        laptop = home-manager.lib.homeManagerConfiguration (home_conf {
-          name = "laptop";
-        });
-
-        desktop = home-manager.lib.homeManagerConfiguration (home_conf {
-          name = "desktop";
-        });
-
-        nas = home-manager.lib.homeManagerConfiguration (home_conf {
-          name = "nas";
-        });
-      };
+      homeConfigurations =
+        [
+          "undefined"
+          "laptop"
+          "desktop"
+          "nas"
+        ]
+        |> map (name: {
+          name = "${name}";
+          value = (home_conf { "name" = name; } |> home-manager.lib.homeManagerConfiguration);
+        })
+        |> builtins.listToAttrs;
     };
 }
