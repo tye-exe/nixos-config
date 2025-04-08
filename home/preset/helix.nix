@@ -1,4 +1,9 @@
-{ pkgs, pkgs-unstable, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  name,
+  ...
+}:
 let
   spell = "typos";
 in
@@ -10,7 +15,7 @@ in
       typos-lsp
       typos
 
-      nil # Nix
+      nixd # Nix
       nixfmt-rfc-style # Nix fmt
       # rust-analyzer # Rust
       rustfmt # Rust fmt
@@ -103,6 +108,14 @@ in
         # Analyses inactive code
         config.cargo.features = "all";
       };
+
+      nixd = {
+        nixpkgs.expr = "import <nixpkgs> {}";
+        options = {
+          nixos.expr = ''(builtins.getFlake "github:tye-exe/nixos-config").nixosConfigurations.${name}.options'';
+          home_manager.expr = ''(builtins.getFlake "github:tye-exe/nixos-config").homeConfigurations.${name}.options'';
+        };
+      };
     };
 
     # language configs
@@ -113,7 +126,7 @@ in
         auto-format = true;
         formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt"; # Path to installed nix formatter
         language-servers = [
-          "nil"
+          "nixd"
           spell
         ];
       }

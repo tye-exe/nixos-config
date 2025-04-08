@@ -99,6 +99,7 @@
               inputs
               pkgs-unstable
               system
+              name
               ;
           };
           modules = [
