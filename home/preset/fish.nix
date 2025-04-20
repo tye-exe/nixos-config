@@ -31,7 +31,8 @@
         gd = "git diff";
         gdc = "git diff --cached";
 
-        gc = {
+        gc = "git commit";
+        gcm = {
           expansion = ''git commit -m "%"'';
           setCursor = true;
         };
