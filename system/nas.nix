@@ -25,6 +25,9 @@
         # Syncthing
         22000
         8384
+
+        # Home assistant
+        8123
       ];
       allowedUDPPorts = [
         # Syncthing
@@ -40,6 +43,9 @@
   # Docker
   virtualisation.docker.enable = true;
   users.users."tye".extraGroups = [ "docker" ];
+
+  # Enable systemd user units at boot
+  users.users."tye".linger = true;
 
   # No gui
   programs = {
@@ -167,7 +173,7 @@
   systemd.user.timers."Update_Diary_Card" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "Fri *-*-* 00:00:00";
+      OnCalendar = "1..2:10:00";
       Unit = "Update_Diary_Card.service";
       Persistent = true;
     };
@@ -188,7 +194,7 @@
   systemd.user.timers."Update_Rambles" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "Fri *-*-* 00:00:00";
+      OnCalendar = "1..2:10:00";
       Unit = "Update_Rambles.service";
       Persistent = true;
     };
