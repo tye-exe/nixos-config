@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     git
     gh # Used for authentication
+    diff-so-fancy
   ];
 
   programs = {
@@ -17,11 +18,23 @@
 
         push.autoSetupRemote = true;
         pull.rebase = false;
-        init.defaultBranch = "master";
+        rebase.missingCommitCheck = "warn";
+
+        interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
+        diff = {
+          renames = "copies";
+          interHunkContext = 10;
+        };
+        init.defaultBranch = "main";
 
         core = {
           editor = "${pkgs.helix}/bin/hx";
+          compression = 9;
+          preloadIndex = true;
         };
+        pager.diff = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | $PAGER";
+
+        diff-so-fancy.markEmptyLines = false;
 
         credential = {
           helper = lib.mkDefault "${pkgs.git-credential-manager}/bin/git-credential-manager";

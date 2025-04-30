@@ -41,11 +41,15 @@
         ga = "git add";
         gaa = "git add .";
         gai = "git add -i";
+        gap = "git add --patch";
 
-        gs = "git status";
+        gs = "git status --short --b";
+        gss = "git status --show-stash -b";
+
         gp = "git push";
         gu = "git pull";
-        gl = "git log";
+        gl = ''git log --all --graph --pretty=format:"%C(magenta)%h:%n%C(brightcyan)%an  %ar%C(blue)  %D%n%C(cyan)%s%n"'';
+        gll = ''git log --all --graph --pretty=format:"%C(magenta)%h:%n%C(brightcyan)%an  %ar%C(blue)  %D%n%C(cyan)%s%n%+b"'';
 
         # Opens the given path/file with the default application.
         open = {
