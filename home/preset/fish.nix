@@ -27,6 +27,12 @@
         };
         du = "ncdu"; # I always keep forgetting this
 
+        # Pipes rg into delta (pager).
+        rgi = {
+          expansion = "rg --json -C 3 % | delta";
+          setCursor = true;
+        };
+
         # Git abbrs #
         gd = "git diff";
         gdc = "git diff --cached";

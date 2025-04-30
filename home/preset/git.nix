@@ -4,6 +4,7 @@
     git
     gh # Used for authentication
     diff-so-fancy
+    delta
   ];
 
   programs = {
@@ -18,9 +19,11 @@
 
         push.autoSetupRemote = true;
         pull.rebase = false;
-        rebase.missingCommitCheck = "warn";
 
-        interactive.diffFilter = "${pkgs.diff-so-fancy}/bin/diff-so-fancy --patch";
+        rebase.missingCommitCheck = "warn";
+        merge.conflicstyhle = "zdiff3";
+
+        interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
         diff = {
           renames = "copies";
           interHunkContext = 10;
@@ -31,15 +34,20 @@
           editor = "${pkgs.helix}/bin/hx";
           compression = 9;
           preloadIndex = true;
+          pager = "delta";
         };
-        pager.diff = "${pkgs.diff-so-fancy}/bin/diff-so-fancy | $PAGER";
-
-        diff-so-fancy.markEmptyLines = false;
 
         credential = {
           helper = lib.mkDefault "${pkgs.git-credential-manager}/bin/git-credential-manager";
           # Only works if a DE available
           credentialStore = lib.mkDefault "secretservice";
+        };
+
+        delta = {
+          navigate = true;
+          dark = true;
+          line-numbers = true;
+          hypderlinks = true;
         };
       };
     };
