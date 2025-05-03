@@ -25,8 +25,10 @@
     nix-alien.url = "github:thiagokokada/nix-alien";
 
     # My system manager.
-    system-manager.url = "github:tye-exe/system-manager";
-
+    system-manager = {
+      url = "github:tye-exe/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
