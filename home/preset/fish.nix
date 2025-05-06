@@ -27,6 +27,7 @@
         };
         du = "ncdu"; # I always keep forgetting this
         image = "qimgv";
+        sm = "system-manager";
 
         # Pipes rg into delta (pager).
         rgi = {
