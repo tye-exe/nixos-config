@@ -26,6 +26,7 @@
           setCursor = true;
         };
         du = "ncdu"; # I always keep forgetting this
+        image = "qimgv";
 
         # Pipes rg into delta (pager).
         rgi = {

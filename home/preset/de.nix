@@ -31,6 +31,7 @@ in
     pdfmixtool # Used to edit PDF's
     et # Simple terminal timer
     rnote # Note taking application
+    qimgv # Image viewer
   ];
 
   programs = {
