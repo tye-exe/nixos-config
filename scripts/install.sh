@@ -24,6 +24,9 @@ system-manager logo
 # Sets the identity to undefined
 system-manager identity set undefined
 
+# Sets the current path as the path to the configuration.
+system-manager path set .
+
 # Generate hardware conf for this machine.
 echo "Generating hardware configuration for this machine."
 nixos-generate-config --show-hardware-config > ./hardware-confs/undefined.nix
