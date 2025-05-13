@@ -15,13 +15,11 @@ in
 
   imports = [
     ./preset/helix.nix
-    ./preset/plasma.nix
     ./preset/git.nix
     ./preset/fish.nix
     ./preset/cli.nix
     ./preset/rust.nix
 
-    ./module/file-output.nix
     ./module/systemd.nix
   ];
 

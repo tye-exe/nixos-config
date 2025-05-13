@@ -8,6 +8,7 @@ in
 
   imports = [
     ./../module/rio.nix
+    ./../preset/plasma.nix
   ];
 
   home.packages = with pkgs; [
