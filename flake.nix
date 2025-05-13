@@ -40,27 +40,7 @@
       ...
     }:
     let
-      # Default nix stuff.
       lib = nixpkgs.lib;
-      system = "x86_64-linux";
-
-      # Current pkgs
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-
-      # Unstable pkgs
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-
-      # External lib that's useful
       std = nix-std.lib;
 
       # Allows me to pass custom options into every module.
@@ -74,6 +54,7 @@
       nix_conf =
         {
           name ? "undefined",
+          system ? "x86_64-linux",
         }:
         {
           inherit system;
@@ -92,18 +73,35 @@
       home_conf =
         {
           name ? "undefined",
+          system ? "x86_64-linux",
+
         }:
         {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit
-              std
-              inputs
-              pkgs-unstable
-              system
-              name
-              ;
+          pkgs = import nixpkgs {
+            inherit system;
+            config = {
+              allowUnfree = true;
+            };
           };
+          extraSpecialArgs =
+            let
+              # Unstable pkgs
+              pkgs-unstable = import nixpkgs-unstable {
+                inherit system;
+                config = {
+                  allowUnfree = true;
+                };
+              };
+            in
+            {
+              inherit
+                std
+                inputs
+                pkgs-unstable
+                system
+                name
+                ;
+            };
           modules = [
             ./home/${name}.nix
             custom_option
@@ -118,10 +116,15 @@
           "laptop"
           "desktop"
           "nas"
+          {
+            name = "rpi";
+            system = "aarch64-linux";
+          }
         ]
-        |> map (name: {
-          name = "${name}";
-          value = (nix_conf { "name" = name; } |> lib.nixosSystem);
+        |> map (settings: (if (builtins.isAttrs settings) then settings else { name = settings; }))
+        |> map (settings: {
+          name = settings.name;
+          value = (nix_conf settings |> lib.nixosSystem);
         })
         |> builtins.listToAttrs
       );
@@ -133,10 +136,15 @@
           "laptop"
           "desktop"
           "nas"
+          {
+            name = "rpi";
+            system = "aarch64-linux";
+          }
         ]
-        |> map (name: {
-          name = "${name}";
-          value = (home_conf { "name" = name; } |> home-manager.lib.homeManagerConfiguration);
+        |> map (settings: (if (builtins.isAttrs settings) then settings else { name = settings; }))
+        |> map (settings: {
+          name = settings.name;
+          value = (home_conf settings |> home-manager.lib.homeManagerConfiguration);
         })
         |> builtins.listToAttrs;
     };
