@@ -4,6 +4,7 @@
   inputs,
   pkgs-unstable,
   system,
+  lib,
   ...
 }:
 let
@@ -62,5 +63,5 @@ in
 
   # Don't change this without reading the wiki!
   # & yes to future me, i did write this. :p
-  home.stateVersion = "24.05";
+  home.stateVersion = lib.mkDefault "24.05";
 }
