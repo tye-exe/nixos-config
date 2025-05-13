@@ -3,6 +3,7 @@
   inputs,
   lib,
   system,
+  name,
   ...
 }:
 
@@ -12,8 +13,12 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = lib.mkDefault true;
-  boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
+  boot.loader = lib.mkIf (name != "rpi") (
+    lib.mkDefault {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    }
+  );
 
   nix.settings.experimental-features = [
     "nix-command"

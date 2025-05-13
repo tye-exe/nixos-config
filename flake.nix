@@ -59,7 +59,7 @@
         {
           inherit system;
           specialArgs = {
-            inherit inputs system;
+            inherit inputs system name;
           };
           modules = [
             ./system/${name}.nix
