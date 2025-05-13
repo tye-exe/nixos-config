@@ -16,36 +16,46 @@ in
     };
   };
 
-  config.systemd.user.services = {
-    syncthingtray-start = mkIf tye-services.enabled.syncthingtray {
-      Unit.Description = "Starts syncthingtray.";
-      Install.WantedBy = [ "default.target" ];
+  config.systemd.user =
+    lib.mergeAttr
+      {
+        services = {
+          syncthingtray-start = mkIf tye-services.enabled.syncthingtray {
+            Unit.Description = "Starts syncthingtray.";
+            Install.WantedBy = [ "default.target" ];
 
-      Service = {
-        ExecStart = "${pkgs.writeShellScript "syncthingtray-start" ''
-          #!${pkgs.bash}/bin/bash
-          ${pkgs.syncthingtray}/bin/syncthingtray --wait''}";
-        Restart = "on-failure";
+            Service = {
+              ExecStart = "${pkgs.writeShellScript "syncthingtray-start" ''
+                #!${pkgs.bash}/bin/bash
+                ${pkgs.syncthingtray}/bin/syncthingtray --wait''}";
+              Restart = "on-failure";
+            };
+          };
+
+          # Start noisetorch on DE startup with my main mic as the input.
+          noisetorch-init = mkIf tye-services.enabled.noisetorch {
+            Unit = {
+              Description = "Start/Loads noisetorch with the desired microphone.";
+              StartLimitBurst = 10;
+            };
+            Install.WantedBy = [ "default.target" ];
+
+            Service = {
+              ExecStart = "${pkgs.writeShellScript "noisetorch-init" ''
+                #!${pkgs.bash}/bin/bash
+                noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback"
+              ''}";
+              Restart = "on-failure";
+              RestartSec = "10s";
+            };
+          };
+        };
+      }
+      # Only enable these if any of the services are enabled.
+      mkIf
+      (with tye-services.enabled; (syncthingtray || noisetorch))
+      {
+        enable = true;
+        startServices = "sd-switch";
       };
-    };
-
-    # Start noisetorch on DE startup with my main mic as the input.
-    noisetorch-init = mkIf tye-services.enabled.noisetorch {
-      Unit = {
-        Description = "Start/Loads noisetorch with the desired microphone.";
-        StartLimitBurst = 10;
-      };
-      Install.WantedBy = [ "default.target" ];
-
-      Service = {
-        ExecStart = "${pkgs.writeShellScript "noisetorch-init" ''
-          #!${pkgs.bash}/bin/bash
-          noisetorch -i -s "alsa_input.usb-3142_Fifine_Microphone-00.mono-fallback"
-        ''}";
-        Restart = "on-failure";
-        RestartSec = "10s";
-      };
-    };
-  };
-
 }

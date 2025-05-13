@@ -23,12 +23,6 @@ in
     ./module/systemd.nix
   ];
 
-  # Needed for ./module/systemd.nix
-  systemd.user = {
-    enable = true;
-    startServices = "sd-switch";
-  };
-
   home = {
     packages =
       with pkgs;
