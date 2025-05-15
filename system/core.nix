@@ -95,14 +95,16 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     helix # Vim-like editor
-    gnumake # Make but with a different name bc who knows
     git
     home-manager # Manages user-configurations
     libxkbcommon # Keyboard library - required by some programs
-    lua # Main scripting language.
 
     inputs.system-manager.packages.${system}.system-manager
   ];
+
+  environment.variables = {
+    EDITOR = "hx";
+  };
 
   # Program configs.
   programs = {
