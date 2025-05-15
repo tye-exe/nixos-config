@@ -29,6 +29,12 @@
       url = "github:tye-exe/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Secret Management.
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

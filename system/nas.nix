@@ -5,8 +5,20 @@
   ...
 }:
 {
-  # Shared configs are in this file.
-  imports = [ ./core.nix ];
+  imports = [
+    # Shared configs are in this file.
+    ./core.nix
+    inputs.sops-nix.nixosModules.sops
+  ];
+
+  # Sops setup.
+  sops.defaultSopsFile = ./../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/${config.users.users.tye.name}/.config/sops/age/keys.txt";
+
+  sops.secrets.upsmon = { };
+
+  environment.systemPackages = with pkgs; [ sops ];
 
   networking = {
     hostName = "tye-nas";
