@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     git
     gh # Used for authentication
-    diff-so-fancy
     delta
   ];
 
