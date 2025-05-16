@@ -37,6 +37,7 @@ in
 
   programs = {
     rio.enable = true;
+    qutebrowser.enable = true;
   };
 
   rio = {
