@@ -16,7 +16,6 @@
   home.file.zfs.source = config.lib.file.mkOutOfStoreSymlink "/zfs/data";
 
   programs = {
-    plasma.enable = false;
     git.extraConfig = {
       credential = {
         # credentialStore = "gpg";
