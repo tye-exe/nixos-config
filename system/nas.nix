@@ -250,6 +250,7 @@
           user = "admin";
           powerValue = 1;
           passwordFile = config.sops.secrets."upsmon".path;
+          system = "myups";
         };
       };
     };
