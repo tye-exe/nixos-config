@@ -9,6 +9,7 @@ in
   imports = [
     ./../module/rio.nix
     ./../preset/plasma.nix
+    ./../preset/qutebrowser.nix
   ];
 
   home.packages = with pkgs; [
@@ -37,7 +38,6 @@ in
 
   programs = {
     rio.enable = true;
-    qutebrowser.enable = true;
   };
 
   rio = {
@@ -50,4 +50,5 @@ in
       blinking = true;
     };
   };
+
 }
