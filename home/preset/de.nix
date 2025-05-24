@@ -26,7 +26,7 @@ in
 
     rio # Terminal emulator
     syncthingtray # Gui for syncthing
-    xwaylandvideobridge # Allows screensharing
+    kdePackages.xwaylandvideobridge # Allows screensharing
     vlc # Plays videos :P
     kdePackages.merkuro # Calander.
     obsidian # Note taking using markdown.
