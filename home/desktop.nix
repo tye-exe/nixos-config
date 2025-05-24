@@ -12,22 +12,19 @@
     ./preset/de.nix
   ];
 
-  home.packages =
-    with pkgs;
-    [
-      # Minceraft
-      prismlauncher
-      # Java for Mc
-      # pkgs.jdk8
-      jdk17_headless
-      # pkgs.openjdk21_headless
+  home.packages = with pkgs; [
+    # Minceraft
+    prismlauncher
+    # Java for Mc
+    # pkgs.jdk8
+    jdk17_headless
+    # pkgs.openjdk21_headless
 
-      obs-studio
-      # Games
-      heroic
-      mangohud
-    ]
-    ++ (with pkgs-unstable; [ ytmdesktop ]);
+    obs-studio
+    # Games
+    heroic
+    mangohud
+  ];
 
   services.syncthing.enable = true;
 
