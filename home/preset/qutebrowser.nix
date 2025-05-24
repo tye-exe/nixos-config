@@ -3,10 +3,21 @@
   home.packages = with pkgs; [
     # Required for content.block.method = "both"
     python312Packages.adblock
+
+    # Bitwarden compatibility
+    bitwarden-cli
+    python312Packages.tldextract
+    keyutils
+    rofi
   ];
 
   programs.qutebrowser = {
     enable = true;
+    keyBindings = {
+      normal = {
+        "zb" = "spawn --userscript qute-bitwarden";
+      };
+    };
     extraConfig = ''
       # set the flavor you'd like to use
       # valid options are 'mocha', 'macchiato', 'frappe', and 'latte'
