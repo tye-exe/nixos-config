@@ -85,7 +85,7 @@
         '';
 
         # Modifies the fish prompt to show if inside a nix_shell
-        fish_prompt = builtins.readFile ./fish/fish_prompt.fish;
+        fish_prompt = builtins.readFile ./fish_prompt.fish;
       };
 
       # Only starts zellij if it's not already open.
