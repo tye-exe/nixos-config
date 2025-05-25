@@ -15,6 +15,7 @@
         ll = "eza -lh";
         lla = "eza -lha";
         cat = "bat";
+        man = "batman";
         ts = "gtrash put";
         "7z" = "7zz"; # Seven zip uses "7zz", not "7z"
         shell = {

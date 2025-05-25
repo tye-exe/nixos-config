@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     zellij # Funky terminal multiplexer
-    bat # cat replacement
     eza # ls replacement
     # Fonts needed for eza
     nerd-fonts.fira-code
@@ -12,6 +11,9 @@
     trashy # Allows easy trashing & restoration of files
     btop # Like "top", but better :p
     gtrash # Allows easier trashing & restoration of files
+
+    bat # cat replacement
+    bat-extras.batman # man upgrade
   ];
 
   programs = {
