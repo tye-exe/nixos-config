@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  imports = [ ./fish/fish.nix ];
+
   home.packages = with pkgs; [
     zellij # Funky terminal multiplexer
     eza # ls replacement

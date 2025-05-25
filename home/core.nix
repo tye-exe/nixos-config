@@ -16,7 +16,6 @@ in
   imports = [
     ./preset/helix.nix
     ./preset/git.nix
-    ./preset/fish.nix
     ./preset/cli.nix
     ./preset/rust.nix
 
