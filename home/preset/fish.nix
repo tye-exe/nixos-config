@@ -19,11 +19,11 @@
         ts = "gtrash put";
         "7z" = "7zz"; # Seven zip uses "7zz", not "7z"
         shell = {
-          expansion = "nix shell nixpkgs#% --command sh -c \"fish\"";
+          expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
           setCursor = true;
         };
         shell-unstable = {
-          expansion = "nix shell nixpkgs/nixos-unstable#% --command sh -c \"fish\"";
+          expansion = "nix shell nixpkgs/nixos-unstable#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
           setCursor = true;
         };
         du = "ncdu"; # I always keep forgetting this
@@ -83,6 +83,9 @@
           [ ! -e .envrc ] && echo "use flake" >> .envrc
           direnv allow
         '';
+
+        # Modifies the fish prompt to show if inside a nix_shell
+        fish_prompt = builtins.readFile ./fish/fish_prompt.fish;
       };
 
       # Only starts zellij if it's not already open.
