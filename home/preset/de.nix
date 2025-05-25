@@ -31,7 +31,6 @@ in
     kdePackages.merkuro # Calander.
     obsidian # Note taking using markdown.
     pdfmixtool # Used to edit PDF's
-    et # Simple terminal timer
     rnote # Note taking application
     qimgv # Image viewer
   ];
