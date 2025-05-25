@@ -104,6 +104,11 @@
       url = {
         default_page = "about:blank";
         start_pages = "about:blank";
+        searchengines = {
+          hm = "https://home-manager-options.extranix.com/?query={}";
+          nix = "https://search.nixos.org/packages?query={}";
+          google = "https://www.google.com/search?udm=14&q={}";
+        };
       };
     };
   };
