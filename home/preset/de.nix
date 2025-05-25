@@ -33,6 +33,7 @@ in
     pdfmixtool # Used to edit PDF's
     rnote # Note taking application
     qimgv # Image viewer
+    wl-clipboard # Access clipboard from terminal
   ];
 
   programs = {
