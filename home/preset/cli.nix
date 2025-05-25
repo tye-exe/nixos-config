@@ -43,15 +43,6 @@
               SwitchToMode = "Normal";
             };
           };
-          # Same behaviour as qute browser.
-          "shared_except \"locked\"" = {
-            "bind \"Alt k\" \"Alt K\"" = {
-              MoveFocusOrTab = "Left";
-            };
-            "bind \"Alt j\" \"Alt J\"" = {
-              MoveFocusOrTab = "Right";
-            };
-          };
         };
       };
     };
