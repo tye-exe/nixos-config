@@ -29,6 +29,11 @@
         };
         init.defaultBranch = "main";
 
+        signing = {
+          key = "null";
+          signedByDefault = true;
+        };
+
         core = {
           editor = "${pkgs.helix}/bin/hx";
           compression = 9;
