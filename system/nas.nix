@@ -123,5 +123,23 @@
     };
   };
 
+  # Docker #
+
+  # Updates certs for mail server.
+  systemd.services."Update_Certs" = {
+    # Some months are longer than 30 days.
+    # Certs will be updated if they have less than 30 days to live.
+    startAt = "*-*-01,20 00:00:00";
+    script =
+      let
+        dir = "/zfs/data/docker/mail_server";
+      in
+      ''
+        ${pkgs.docker}/bin/docker run --rm -t \
+        -v "${dir}/docker-data/certbot/certs/:/etc/letsencrypt/" \
+        -v "${dir}/docker-data/certbot/logs/:/var/log/letsencrypt/" \
+        --net="proxy-network" --name="certbot" \
+        certbot/certbot renew
+      '';
   };
 }
