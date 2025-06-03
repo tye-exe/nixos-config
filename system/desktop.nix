@@ -41,4 +41,6 @@
 
   # It's undergoing mitosis!
   # virtualisation.vmware.host.enable = true;
+
+  services.flatpak.enable = true;
 }

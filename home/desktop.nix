@@ -10,6 +10,7 @@
   imports = [
     ./core.nix
     ./preset/de.nix
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
   home.packages = with pkgs; [
@@ -42,4 +43,8 @@
     };
   };
 
+  # Ru begged me to, urgh
+  services.flatpak.packages = [
+    "org.vinegarhq.Sober"
+  ];
 }
