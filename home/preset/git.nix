@@ -11,6 +11,7 @@
       enable = true;
       userName = "tye-exe";
       userEmail = "tye@mailbox.org";
+      lfs.enable = true;
 
       extraConfig = {
         # Removes annoying message about git ignore files.
