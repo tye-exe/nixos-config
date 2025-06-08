@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  name,
+  ...
+}:
 {
   home.packages = with pkgs; [
     fish # Bash 2.0
@@ -75,6 +80,8 @@
           expansion = "&>> /dev/null";
           position = "anywhere";
         };
+
+        roblox = lib.mkIf (name == "desktop") "org.vinegarhq.Sober >> /dev/null";
       };
 
       functions = {
