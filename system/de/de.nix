@@ -12,6 +12,9 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # This is enabled when flatpaks are.
+  environment.plasma6.excludePackages = [ pkgs.kdePackages.discover ];
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   services.pipewire = {
