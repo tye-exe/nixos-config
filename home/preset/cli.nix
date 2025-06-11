@@ -13,6 +13,7 @@
     trashy # Allows easy trashing & restoration of files
     btop # Like "top", but better :p
     gtrash # Allows easier trashing & restoration of files
+    yazi # Terminal file manager
 
     bat # cat replacement
     bat-extras.batman # man upgrade
