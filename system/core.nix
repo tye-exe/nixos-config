@@ -98,6 +98,7 @@
     git
     home-manager # Manages user-configurations
     libxkbcommon # Keyboard library - required by some programs
+    wget
 
     inputs.system-manager.packages.${system}.system-manager
   ];
