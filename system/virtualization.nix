@@ -32,6 +32,9 @@
     libvirtd = {
       enable = true;
       qemu.ovmf.enable = true;
+      # Required for shared file system.
+      # Set up on windows side: https://virtio-fs.gitlab.io/howto-windows.html
+      qemu.vhostUserPackages = [ pkgs.virtiofsd ];
     };
   };
 }
