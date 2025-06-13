@@ -98,7 +98,10 @@
                 "org.kde.plasma.volume"
                 "org.kde.plasma.bluetooth"
               ];
-              hidden = [ "org.kde.plasma.networkmanagement" ];
+              hidden = [
+                "org.kde.plasma.networkmanagement"
+                "org.kde.merkuro.contact.applet"
+              ];
             };
           }
           {
