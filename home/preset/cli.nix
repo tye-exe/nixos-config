@@ -14,6 +14,7 @@
     btop # Like "top", but better :p
     gtrash # Allows easier trashing & restoration of files
     yazi # Terminal file manager
+    fd # "find" alternative
 
     bat # cat replacement
     bat-extras.batman # man upgrade
