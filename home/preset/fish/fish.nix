@@ -22,7 +22,6 @@
         cat = "bat";
         man = "batman";
         ts = "gtrash put";
-        "7z" = "7zz"; # Seven zip uses "7zz", not "7z"
         shell = {
           expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
           setCursor = true;
