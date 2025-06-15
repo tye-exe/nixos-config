@@ -13,6 +13,7 @@
     ./nas/zfs.nix
     ./nas/email.nix
     ./nas/ups.nix
+    ./nas/atuin.nix
   ];
 
   # Sops setup.
