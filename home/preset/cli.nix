@@ -55,5 +55,20 @@
       enable = true;
       options = [ "--cmd cd" ];
     };
+
+    atuin = {
+      enable = true;
+      daemon.enable = true;
+      enableFishIntegration = true;
+
+      settings = {
+        dialect = "uk";
+        update_check = false;
+        style = "auto";
+        enter_accept = true;
+        keymap_mode = "vim-normal";
+        sync_address = "https://atuin.tye-home.xyz";
+      };
+    };
   };
 }
