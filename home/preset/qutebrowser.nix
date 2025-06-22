@@ -12,7 +12,7 @@
   ];
 
   programs.qutebrowser = {
-    enable = true;
+    enable = false;
     keyBindings = {
       normal = {
         "zb" = "spawn --userscript qute-bitwarden";
