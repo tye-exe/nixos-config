@@ -17,7 +17,6 @@ in
 
       nixd # Nix
       nixfmt-rfc-style # Nix fmt
-      # rust-analyzer # Rust
       rustfmt # Rust fmt
       taplo # Toml
       lua-language-server # Lua
@@ -29,12 +28,7 @@ in
       yapf # Fmt
       python312Packages.pyflakes
 
-      # markdown
-      # html
-      # json
-      # eslint
-      # css
-      # vscode-langservers-extracted
+      superhtml # Additional html lsp
 
       # javascript
       # typescript
@@ -116,6 +110,11 @@ in
           home_manager.expr = ''(builtins.getFlake "github:tye-exe/nixos-config").homeConfigurations.${name}.options'';
         };
       };
+
+      superhtml-lsp = {
+        command = "superhtml";
+        args = [ "lsp" ];
+      };
     };
 
     # language configs
@@ -170,6 +169,23 @@ in
         auto-format = true;
         language-servers = [
           "markdown-oxide"
+          spell
+        ];
+      }
+      {
+        name = "html";
+        auto-format = true;
+        formatter = {
+          command = "${pkgs.superhtml}/bin/superhtml";
+          args = [
+            "fmt"
+            "--stdin"
+          ];
+        };
+        file-types = [ "html" ];
+        language-servers = [
+          "superhtml-lsp"
+          "vscode-html-language-server"
           spell
         ];
       }
