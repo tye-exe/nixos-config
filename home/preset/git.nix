@@ -13,6 +13,12 @@
       userEmail = "tye@mailbox.org";
       lfs.enable = true;
 
+      # direnv files
+      ignores = [
+        ".envrc"
+        ".direnv"
+      ];
+
       extraConfig = {
         # Removes annoying message about git ignore files.
         advice.addIgnoredFile = false;
