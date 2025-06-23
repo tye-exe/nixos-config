@@ -15,7 +15,7 @@ in
       typos-lsp
       typos
 
-      nixd # Nix
+      nixd # Nix LSP
       nixfmt-rfc-style # Nix fmt
       rustfmt # Rust fmt
       taplo # Toml
@@ -45,6 +45,9 @@ in
       # css
       # moved to unstable due to https://github.com/NixOS/nixpkgs/issues/348596 patch.
       vscode-langservers-extracted
+
+      # Unstable as current stable version is outdated.
+      nil # Nix LSP - better code actions
     ]);
 
   programs.helix = {
@@ -126,6 +129,7 @@ in
         formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt"; # Path to installed nix formatter
         language-servers = [
           "nixd"
+          "nil"
           spell
         ];
       }
