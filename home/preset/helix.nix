@@ -178,6 +178,7 @@ in
       }
       {
         name = "html";
+        soft-wrap.enable = true;
         auto-format = true;
         formatter = {
           command = "${pkgs.superhtml}/bin/superhtml";
