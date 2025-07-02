@@ -16,7 +16,7 @@ in
     # Libre office
     libreoffice-qt6-still # Office but without the Microsoft
     hunspell # Spellchecker for libre office
-    hunspellDicts.en_GB-ise # Use the GB lib for the spell checker
+    hunspellDicts.en_GB-large # GB dictionary
 
     # Communication
     whatsapp-for-linux
