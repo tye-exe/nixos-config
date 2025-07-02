@@ -19,9 +19,8 @@ in
     hunspellDicts.en_GB-large # GB dictionary
 
     # Communication
-    whatsapp-for-linux
+    beeper # General communication
     vesktop # Alternate discord client.
-    telegram-desktop # Do i need to explain?
     thunderbird # Email
 
     rio # Terminal emulator
