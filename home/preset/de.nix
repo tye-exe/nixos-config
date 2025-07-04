@@ -7,7 +7,6 @@ in
 {
 
   imports = [
-    ./../module/rio.nix
     ./../preset/plasma.nix
     ./../preset/qutebrowser.nix
   ];
@@ -23,7 +22,6 @@ in
     vesktop # Alternate discord client.
     thunderbird # Email
 
-    rio # Terminal emulator
     syncthingtray # Gui for syncthing
     kdePackages.xwaylandvideobridge # Allows screensharing
     vlc # Plays videos :P
@@ -37,17 +35,12 @@ in
 
   programs = {
     rio.enable = true;
-  };
+    rio.settings = {
+      confirm-before-quit = false;
+      hide-mouse-cursor-when-typing = true;
 
-  rio = {
-    enable = true;
-    inherit configDir;
-    editor.program = "hx";
-    hide-cursor-when-typing = true;
-
-    cursor = {
-      blinking = true;
+      editor.program = "hx";
+      cursor.shape = "block";
     };
   };
-
 }

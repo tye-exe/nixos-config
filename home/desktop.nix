@@ -34,7 +34,7 @@
     noisetorch = true;
   };
 
-  rio.fonts.size = 14;
+  programs.rio.settings.fonts.size = 14;
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
