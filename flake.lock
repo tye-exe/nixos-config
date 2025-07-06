@@ -297,6 +297,7 @@
       },
       "original": {
         "owner": "tye-exe",
+        "ref": "v1.4.1",
         "repo": "system-manager",
         "type": "github"
       }
