@@ -17,9 +17,10 @@
     # Minceraft
     prismlauncher
     # Java for Mc
-    # pkgs.jdk8
     jdk17_headless
-    # pkgs.openjdk21_headless
+
+    # Minecraft bedrock!
+    mcpelauncher-ui-qt
 
     obs-studio
     # Games

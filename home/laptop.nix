@@ -19,6 +19,8 @@
     # Synths
     vital
     helm
+
+    mcpelauncher-ui-qt
   ];
 
   services.syncthing.enable = true;
