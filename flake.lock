@@ -55,11 +55,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751468302,
-        "narHash": "sha256-tWosziZTT039x6PgEZUhzGlV8oLvdDmIgKTE8ESMaEA=",
+        "lastModified": 1752175309,
+        "narHash": "sha256-g/f7sW8EH5qRRJF95+hwWj+AzOMlw4zs04Ei5DWSRlU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "501cfec8277f931a9c9af9f23d3105c537faeafe",
+        "rev": "524da5f6c0bf11bb0d5590046276423a28b9453e",
         "type": "github"
       },
       "original": {
@@ -158,11 +158,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1751637120,
-        "narHash": "sha256-xVNy/XopSfIG9c46nRmPaKfH1Gn/56vQ8++xWA8itO4=",
+        "lastModified": 1751984180,
+        "narHash": "sha256-LwWRsENAZJKUdD3SpLluwDmdXY9F45ZEgCb0X+xgOL0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5c724ed1388e53cc231ed98330a60eb2f7be4be3",
+        "rev": "9807714d6944a957c2e036f84b0ff8caf9930bc0",
         "type": "github"
       },
       "original": {
@@ -174,11 +174,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1751582995,
-        "narHash": "sha256-u7ubvtxdTnFPpV27AHpgoKn7qHuE7sgWgza/1oj5nzA=",
+        "lastModified": 1751943650,
+        "narHash": "sha256-7orTnNqkGGru8Je6Un6mq1T8YVVU/O5kyW4+f9C1mZQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7a732ed41ca0dd64b4b71b563ab9805a80a7d693",
+        "rev": "88983d4b665fb491861005137ce2b11a9f89f203",
         "type": "github"
       },
       "original": {
@@ -288,16 +288,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1751816006,
-        "narHash": "sha256-g9KaE0YcbhT9hRz0BJAyH6s8Yy7ptVyGhZEpD/U7Ktc=",
+        "lastModified": 1752092250,
+        "narHash": "sha256-SV4Rx/Rh3of9d5wEuiZjqIE0rMvUcedLIjwlqxuXP18=",
         "owner": "tye-exe",
         "repo": "system-manager",
-        "rev": "d4ee90d49340361dcc1d2d4b768ba397f729da11",
+        "rev": "1c6d48816f5ee1cfea771334c9dfd2033c587a18",
         "type": "github"
       },
       "original": {
         "owner": "tye-exe",
-        "ref": "v1.5.0",
+        "ref": "v1.5.1",
         "repo": "system-manager",
         "type": "github"
       }
