@@ -28,11 +28,23 @@
     mangohud
   ];
 
-  services.syncthing.enable = true;
+  services = {
+    syncthing.enable = true;
+
+    easyeffects = {
+      enable = true;
+      extraPresets = builtins.readFile ./preset/easyeffects.json |> builtins.fromJSON;
+      preset = "default";
+    };
+
+    # Ru begged me to, urgh
+    flatpak.packages = [
+      "org.vinegarhq.Sober"
+    ];
+  };
 
   tye-services.enabled = {
     syncthingtray = true;
-    noisetorch = true;
   };
 
   programs.rio.settings.fonts.size = 14;
@@ -43,9 +55,4 @@
       uris = [ "qemu:///system" ];
     };
   };
-
-  # Ru begged me to, urgh
-  services.flatpak.packages = [
-    "org.vinegarhq.Sober"
-  ];
 }

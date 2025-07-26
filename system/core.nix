@@ -111,6 +111,7 @@
   programs = {
     firefox.enable = lib.mkDefault true;
     fish.enable = true; # Here due to login shell shenanigans
+    dconf.enable = true; # Used for Easyeffects
 
     # Bash will still be the default shell, but will hand over to fish.
     # This is because some login methods expect a bash shell.

@@ -1,0 +1,45 @@
+{
+  "default": {
+    "input": {
+      "blocklist": [],
+      "loudness#0": {
+        "bypass": false,
+        "clipping": true,
+        "clipping-range": 6.0,
+        "fft": "4096",
+        "input-gain": 14.7,
+        "output-gain": 4.1,
+        "std": "ISO226-2003",
+        "volume": 0.0
+      },
+      "pitch#0": {
+        "anti-alias": false,
+        "bypass": false,
+        "input-gain": 0.0,
+        "output-gain": 0.0,
+        "overlap-length": 8,
+        "quick-seek": false,
+        "rate-difference": 0.0,
+        "seek-window": 15,
+        "semitones": 0.75,
+        "sequence-length": 40,
+        "tempo-difference": 0.0
+      },
+      "plugins_order": [
+        "rnnoise#0",
+        "loudness#0",
+        "pitch#0"
+      ],
+      "rnnoise#0": {
+        "bypass": false,
+        "enable-vad": true,
+        "input-gain": 0.0,
+        "model-name": "",
+        "output-gain": 0.0,
+        "release": 20.0,
+        "vad-thres": 60.0,
+        "wet": 0.0
+      }
+    }
+  }
+}
