@@ -26,6 +26,8 @@
     # Games
     heroic
     mangohud
+
+    ferdium
   ];
 
   services = {
