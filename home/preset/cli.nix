@@ -68,6 +68,7 @@
         enter_accept = true;
         keymap_mode = "vim-normal";
         sync_address = "https://atuin.tye-home.xyz";
+        inline_height = 20;
       };
     };
   };
