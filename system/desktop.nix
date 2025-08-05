@@ -26,9 +26,6 @@
       # Open ports in the firewall for Steam Local Network Game Transfers
       localNetworkGameTransfers.openFirewall = true;
     };
-
-    # Noise suppression
-    noisetorch.enable = true;
   };
 
   # Fixes F (function) keys not working for my keyboard.
