@@ -42,5 +42,13 @@ in
       editor.program = "hx";
       cursor.shape = "block";
     };
+
+    chromium = {
+      enable = lib.mkDefault true;
+      extensions = [
+        { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
+        { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # Ublock origin (lite)
+      ];
+    };
   };
 }
