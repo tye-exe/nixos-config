@@ -47,7 +47,7 @@
     settings = {
       PermitRootLogin = "no";
       KbdInteractiveAuthentication = false;
-      # PasswordAuthentication = false;
+      PasswordAuthentication = false;
       AllowUsers = [ config.users.users.tye.name ];
     };
   };
