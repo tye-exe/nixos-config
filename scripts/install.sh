@@ -3,6 +3,7 @@
 # Terminate script if any command fails.
 set -eo pipefail
 
+echo "Sudo required to change system configuration"
 # Only continues execution if sudo permission is granted.
 sudo echo "Sudo permission granted."
 
@@ -34,9 +35,9 @@ nixos-generate-config --show-hardware-config > ./hardware-confs/undefined.nix
 git add ./hardware-confs/undefined.nix
 
 echo "Switching system configuration."
-system-manager switch system --no_update
+system-manager switch system
 
 echo "Switching home-manager configuration."
-system-manager switch home --no_update
+system-manager switch home
 
 echo "Finished configuring system & dot files; Reboot to allow for the configuration to take full effect."
