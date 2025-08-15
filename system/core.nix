@@ -11,7 +11,15 @@
 {
   imports = [
     ./utils.nix
+    inputs.sops-nix.nixosModules.sops
   ];
+
+  # Sops setup.
+  sops.defaultSopsFile = ./../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/${config.users.users.tye.name}/.config/sops/age/keys.txt";
+
+  sops.secrets.upsmon = { };
 
   # Bootloader.
   boot.loader = lib.mkIf (name != "rpi") (
@@ -87,6 +95,10 @@
       "networkmanager"
       "wheel"
     ];
+    openssh.authorizedKeys.keys = [
+      # Desktop
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu/8cJc3bf0RQhigvzxQPYPrGBR4WiFP6x3nB8JtsMj tye"
+    ];
   };
 
   # Allow use of docker without sudo
@@ -103,6 +115,7 @@
     home-manager # Manages user-configurations
     libxkbcommon # Keyboard library - required by some programs
     wget
+    sops # Secrets management
 
     inputs.system-manager.packages.${system}.system-manager
   ];

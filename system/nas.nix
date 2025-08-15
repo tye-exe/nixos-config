@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   config,
   ...
 }:
@@ -8,22 +7,11 @@
   imports = [
     # Shared configs are in this file.
     ./core.nix
-    inputs.sops-nix.nixosModules.sops
-
     ./nas/zfs.nix
     ./nas/email.nix
     ./nas/ups.nix
     ./nas/atuin.nix
   ];
-
-  # Sops setup.
-  sops.defaultSopsFile = ./../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/home/${config.users.users.tye.name}/.config/sops/age/keys.txt";
-
-  sops.secrets.upsmon = { };
-
-  environment.systemPackages = with pkgs; [ sops ];
 
   networking = {
     hostName = "tye-nas";
@@ -54,8 +42,15 @@
     };
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      KbdInteractiveAuthentication = false;
+      # PasswordAuthentication = false;
+      AllowUsers = [ config.users.users.tye.name ];
+    };
+  };
 
   # Docker
   virtualisation.docker.enable = true;
