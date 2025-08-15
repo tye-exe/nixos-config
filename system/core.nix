@@ -4,6 +4,7 @@
   lib,
   system,
   name,
+  config,
   ...
 }:
 
@@ -87,6 +88,9 @@
       "wheel"
     ];
   };
+
+  # Allow use of docker without sudo
+  users.groups.docker.members = [ config.users.users.tye.name ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

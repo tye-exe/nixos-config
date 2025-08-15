@@ -59,10 +59,9 @@
 
   # Docker
   virtualisation.docker.enable = true;
-  users.users."tye".extraGroups = [ "docker" ];
 
   # Enable systemd user units at boot
-  users.users."tye".linger = true;
+  users.users.tye.linger = true;
 
   # No gui
   programs = {
