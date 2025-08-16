@@ -26,7 +26,6 @@ in
     packages =
       with pkgs;
       [
-        # dotool # Can simulate various user inputs.
         ncdu # Disk usage analyzer
         viu # Terminal image viewer
         ripgrep # Faster alternative to grep
@@ -46,6 +45,7 @@ in
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+      config.warn_timeout = "1m";
     };
 
     nix-index.enable = true;
