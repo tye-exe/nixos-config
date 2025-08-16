@@ -23,8 +23,6 @@
       # Note to self: "docker.internal.host" is blocked by firewall
       enable = true;
       allowedTCPPorts = [
-        # SSH
-        22
         # Tunnel
         2332
         # Syncthing
@@ -44,6 +42,8 @@
 
   services.openssh = {
     enable = true;
+    ports = [ 16777 ];
+    openFirewall = true;
     settings = {
       PermitRootLogin = "no";
       KbdInteractiveAuthentication = false;
@@ -61,6 +61,12 @@
   # No gui
   programs = {
     firefox.enable = false;
+  };
+
+  services.endlessh-go = {
+    enable = true;
+    openFirewall = true;
+    prometheus.enable = true;
   };
 
   # Network routing for containers.

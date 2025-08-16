@@ -56,11 +56,10 @@ in
         # Check to see if local address is accessible
         Match host nas exec "nc -w 1 -z 192.168.0.33 %p"
           HostName 192.168.0.33
-          Port 22
         Match host nas
           HostName tye-home.xyz
-          Port 16777
         Host nas
+          Port 16777
           User tye
       '';
     };
