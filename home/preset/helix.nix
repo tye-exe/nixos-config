@@ -118,6 +118,12 @@ in
         command = "superhtml";
         args = [ "lsp" ];
       };
+
+      # PHP
+      phpactor = {
+        command = "phpactor";
+        args = [ "language-server" ];
+      };
     };
 
     # language configs
