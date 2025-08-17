@@ -54,13 +54,23 @@ in
       enable = true;
       extraConfig = ''
         # Check to see if local address is accessible
-        Match host nas exec "nc -w 1 -z 192.168.0.33 %p"
+        Match host nas exec "nc -w 1 -z 192.168.0.33 16777"
           HostName 192.168.0.33
         Match host nas
           HostName tye-home.xyz
         Host nas
           Port 16777
           User tye
+
+        Host tyevps
+          HostName tyevps.vps.webdock.cloud
+          Port 16788
+          User tael
+
+        Host fyvps
+          HostName kass.vps.webdock.cloud
+          Port 16799
+          User tsey
       '';
     };
   };
