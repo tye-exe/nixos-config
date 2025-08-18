@@ -24,6 +24,10 @@
         cat = "bat";
         man = "batman";
         ts = "gtrash put";
+        du = "ncdu"; # I always keep forgetting this
+        image = "qimgv";
+        sm = "system-manager";
+
         shell = {
           expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
           setCursor = true;
@@ -32,9 +36,14 @@
           expansion = "nix shell nixpkgs/nixos-unstable#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
           setCursor = true;
         };
-        du = "ncdu"; # I always keep forgetting this
-        image = "qimgv";
-        sm = "system-manager";
+        unfree-shell = {
+          expansion = "NIXPKGS_ALLOW_UNFREE=1 nix shell nixpkgs#% --impure --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
+          setCursor = true;
+        };
+        unfree-shell-unstable = {
+          expansion = "NIXPKGS_ALLOW_UNFREE=1 nix shell nixpkgs/nixos-unstable#% --impure --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
+          setCursor = true;
+        };
 
         # Pipes rg into delta (pager).
         rgi = {
