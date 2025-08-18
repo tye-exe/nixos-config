@@ -6,7 +6,7 @@
     ./preset/de.nix
   ];
 
-  programs.rio.settings.fonts.size = 12;
+  programs.rio.settings.fonts.size = 14;
 
   home.packages = with pkgs; [
     # Video editing

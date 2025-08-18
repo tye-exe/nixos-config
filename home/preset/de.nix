@@ -1,11 +1,5 @@
 { pkgs, lib, ... }:
-let
-  username = "tye";
-  homeDirectory = "/home/${username}";
-  configDir = "${homeDirectory}/.config";
-in
 {
-
   imports = [
     ./../preset/plasma.nix
     ./../preset/qutebrowser.nix
@@ -41,6 +35,7 @@ in
 
       editor.program = "hx";
       cursor.shape = "block";
+      fonts.family = "${pkgs.unifont.pname}";
     };
 
     chromium = {

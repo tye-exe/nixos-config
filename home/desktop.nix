@@ -49,7 +49,7 @@
     syncthingtray = true;
   };
 
-  programs.rio.settings.fonts.size = 14;
+  programs.rio.settings.fonts.size = 16;
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {

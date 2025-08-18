@@ -27,6 +27,11 @@
 
     session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
 
+    fonts.general = {
+      family = "${pkgs.unifont.pname}";
+      pointSize = 12;
+    };
+
     workspace = {
       # I like my eyes, thank you very much
       lookAndFeel = "org.kde.breezedark.desktop";
@@ -66,8 +71,6 @@
 
     startup.startupScript = {
       syncthingtray.text = "syncthingtray &>> /dev/null &";
-      # syncthing.text = "syncthing &>> /dev/null &";
-      # script.text = "syncthing &>> /dev/null &; syncthingtray &>> /dev/null &;";
     };
 
     panels = [
