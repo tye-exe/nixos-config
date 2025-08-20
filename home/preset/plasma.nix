@@ -12,9 +12,11 @@
   home.packages = with pkgs; [
     # I love my dot
     mint-cursor-themes
-    # Default editor for kde
-    kdePackages.kate
   ];
+
+  programs.kate.enable = false;
+  programs.ghostwriter.enable = true;
+  programs.konsole.enable = false;
 
   programs.plasma = {
     enable = lib.mkDefault true;
@@ -23,6 +25,11 @@
       edgeBarrier = 0;
       # BE GONE FOUL BEAST
       effects.shakeCursor.enable = false;
+
+      effects.fallApart.enable = true;
+      effects.minimization.animation = "magiclamp";
+      # I don't know whatr this does
+      effects.windowOpenClose.animation = "glide";
     };
 
     session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
