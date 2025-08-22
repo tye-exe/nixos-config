@@ -15,7 +15,7 @@
   ];
 
   programs.kate.enable = false;
-  programs.ghostwriter.enable = true;
+  programs.ghostwriter.enable = false;
   programs.konsole.enable = false;
 
   programs.plasma = {

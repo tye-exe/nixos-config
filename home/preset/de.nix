@@ -25,6 +25,7 @@
     rnote # Note taking application
     qimgv # Image viewer
     wl-clipboard # Access clipboard from terminal
+    xfce.mousepad # Simple text editor
   ];
 
   programs = {
