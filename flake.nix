@@ -26,7 +26,7 @@
 
     # My system manager.
     system-manager = {
-      url = "github:tye-exe/system-manager/v1.5.1";
+      url = "github:tye-exe/system-manager/v1.6.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

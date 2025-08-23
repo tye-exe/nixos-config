@@ -288,16 +288,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1752092250,
-        "narHash": "sha256-SV4Rx/Rh3of9d5wEuiZjqIE0rMvUcedLIjwlqxuXP18=",
+        "lastModified": 1755968451,
+        "narHash": "sha256-R0Q/NSSPI/NJgiK1wdwoZZuZ1AsdvLURcR3bAZW7LYU=",
         "owner": "tye-exe",
         "repo": "system-manager",
-        "rev": "1c6d48816f5ee1cfea771334c9dfd2033c587a18",
+        "rev": "88bc281fee708a09f1e4729b8255dd6c6a2f10cd",
         "type": "github"
       },
       "original": {
         "owner": "tye-exe",
-        "ref": "v1.5.1",
+        "ref": "v1.6.0",
         "repo": "system-manager",
         "type": "github"
       }
