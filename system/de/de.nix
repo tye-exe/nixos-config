@@ -31,9 +31,25 @@
   };
 
   # Scanner
+  users.users.tye.extraGroups = [
+    "scanner"
+    "lp"
+  ];
+  services.ipp-usb.enable = true;
   hardware.sane = {
     enable = true;
-    extraBackends = [ pkgs.utsushi ];
+    extraBackends = with pkgs; [
+      hplipWithPlugin
+      sane-airscan
+      utsushi
+    ];
   };
+
   services.udev.packages = [ pkgs.utsushi ];
+  services.printing = {
+
+    # Enable CUPS to print documents.
+    enable = true;
+    drivers = with pkgs; [ hplipWithPlugin ];
+  };
 }
