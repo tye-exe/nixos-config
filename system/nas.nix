@@ -8,7 +8,7 @@
   tye.remote-build.enable = true;
   tye.remote-build.builder = {
     enable = true;
-    host = "tye-home.xyz";
+    host = "tye-home.xyz:16777";
     publicKey = my_opts.keys.system.nas;
   };
 
