@@ -42,7 +42,4 @@
   services.flatpak.enable = true;
 
   tye.remote-build.enable = true;
-  tye.remote-build.builder = {
-    enable = true;
-  };
 }
