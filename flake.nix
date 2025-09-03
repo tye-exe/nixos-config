@@ -59,9 +59,10 @@
       std = nix-std.lib;
 
       # Allows me to pass custom options into every module.
-      custom_option = (
+      my_opts = (
         { lib, ... }:
         {
+          options.keys = import ./lib/keys.nix;
         }
       );
 
@@ -79,11 +80,10 @@
           modules = [
             ./system/${name}.nix
             ./hardware-confs/${name}.nix
-            custom_option
+            my_opts
             # Allows for making system images with less compressed iso.
             self.nixosModules.myFormats
           ];
-
         };
 
       # Generates the home-manager configuration for each system
@@ -121,7 +121,7 @@
             };
           modules = [
             ./home/${name}.nix
-            custom_option
+            my_opts
           ];
         };
     in

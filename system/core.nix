@@ -5,13 +5,14 @@
   system,
   name,
   config,
+  my_opts,
   ...
 }:
-
 {
   imports = [
     ./utils.nix
     inputs.sops-nix.nixosModules.sops
+    ./module/remote-build.nix
   ];
 
   # Sops setup.
@@ -98,11 +99,8 @@
       "networkmanager"
       "wheel"
     ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu/8cJc3bf0RQhigvzxQPYPrGBR4WiFP6x3nB8JtsMj tye" # Desktop
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBevXkSxiJ6RqYr8tih3Ha8G6nKF/FIA2kqIAxr+RkG tye" # Laptop
-    ];
     hashedPasswordFile = config.sops.secrets.initialHashedPassword.path;
+    openssh.authorizedKeys.keys = my_opts.keys.all;
   };
 
   # Allow use of docker without sudo
