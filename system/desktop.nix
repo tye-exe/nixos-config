@@ -40,4 +40,6 @@
   # virtualisation.vmware.host.enable = true;
 
   services.flatpak.enable = true;
+
+  tye.remote-build.enable = true;
 }
