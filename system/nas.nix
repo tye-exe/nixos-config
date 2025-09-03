@@ -1,9 +1,17 @@
 {
   pkgs,
   config,
+  my_opts,
   ...
 }:
 {
+  tye.remote-build.enable = true;
+  tye.remote-build.builder = {
+    enable = true;
+    # host = "tye-home.xyz";
+    # publicKey = my_opts.keys.system.nas;
+  };
+
   imports = [
     # Shared configs are in this file.
     ./core.nix
