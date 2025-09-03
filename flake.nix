@@ -38,10 +38,16 @@
 
     # Flatpaks
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
@@ -74,6 +80,8 @@
             ./system/${name}.nix
             ./hardware-confs/${name}.nix
             custom_option
+            # Allows for making system images with less compressed iso.
+            self.nixosModules.myFormats
           ];
 
         };
@@ -156,5 +164,44 @@
           value = (home_conf settings |> home-manager.lib.homeManagerConfiguration);
         })
         |> builtins.listToAttrs;
+
+      # Defines custom formats for https://github.com/nix-community/nixos-generators
+      # To build use "nix build .#nixosConfigurations.<identity>.config.formats.iso"
+      nixosModules.myFormats =
+        { config, ... }:
+        {
+          nixpkgs.hostPlatform = "x86_64-linux";
+          # Imports all formats so iso can be overridden (i think).
+          imports = [
+            inputs.nixos-generators.nixosModules.all-formats
+          ];
+
+          formatConfigs.iso =
+            { config, modulesPath, ... }:
+            {
+              imports =
+                let
+                  # Shows the path to configurable options
+                  # module = builtins.trace "${toString modulesPath}/installer/cd-dvd/iso-image.nix";
+                in
+                [
+                  "${toString modulesPath}/installer/cd-dvd/iso-image.nix"
+                ];
+
+              # EFI booting
+              isoImage.makeEfiBootable = true;
+
+              # USB booting
+              isoImage.makeUsbBootable = true;
+
+              formatAttr = "isoImage";
+              fileExtension = ".iso";
+
+              # Minor compression helps alot and takes little time.
+              # The difference between the default 19 and 3 is about 1GB and 10 minuets of compression time
+              # for the former
+              isoImage.squashfsCompression = "zstd -Xcompression-level 3";
+            };
+        };
     };
 }
