@@ -66,6 +66,13 @@ in
             If this is left blank, then only the host system will be used. 
           '';
         };
+
+      # Easy hack to transfer which system builder is
+      system = mkOption {
+        type = types.str;
+        default = system;
+        description = ''Do not change this.'';
+      };
     };
   };
 
@@ -94,7 +101,7 @@ in
             ''
               Host nix-remote-builder-${builder.host}
               Hostname ${builder.host}
-              Port ${builder.port}
+              Port ${builtins.toString builder.port}
             ''
           ) builderSystems
         );
@@ -109,7 +116,7 @@ in
               hostName = "nix-remote-builder-${builder.host}";
               sshUser = "remotebuild";
               sshKey = "/etc/ssh/ssh_host_ed25519_key";
-              systems = builder.systems ++ [ system ];
+              systems = builder.systems ++ [ builder.system ];
               protocol = "ssh-ng";
               maxJobs = 3;
               publicHostKey =
