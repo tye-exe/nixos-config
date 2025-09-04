@@ -29,6 +29,7 @@ in
         ncdu # Disk usage analyzer
         viu # Terminal image viewer
         ripgrep # Faster alternative to grep
+        caligula # Every time i need this i have to spend 5 minuets searching for it
       ]
       ++ (with inputs.nix-alien.packages.${system}; [
         nix-alien
