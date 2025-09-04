@@ -41,6 +41,9 @@
           signedByDefault = true;
         };
 
+        # Makes a useful stash show output
+        stash.showPatch = true;
+
         core = {
           editor = "${pkgs.helix}/bin/hx";
           compression = 9;
