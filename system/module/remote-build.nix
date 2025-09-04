@@ -4,6 +4,7 @@
   lib,
   pkgs,
   my_opts,
+  system,
   ...
 }:
 let
@@ -43,6 +44,19 @@ in
           The public key used to verify the identity of the remote builder.
         '';
       };
+
+      systems = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        example = [
+          "x86_64-linux"
+          "aarch64-linux"
+        ];
+        description = ''
+          The systems that the builder can build/emulate.
+          If this is left blank, then only the host system will be used. 
+        '';
+      };
     };
   };
 
@@ -57,20 +71,28 @@ in
         |> lib.attrsets.filterAttrs (_: system: system.networking.hostName != config.networking.hostName)
         |> lib.attrsets.filterAttrs (_: system: system.tye.remote-build.builder.enable)
         |> builtins.attrValues
-        |> (builtins.map (system: {
-          hostName = system.tye.remote-build.builder.host;
-          sshUser = "remotebuild";
-          sshKey = "/etc/ssh/ssh_host_ed25519_key";
-          system = system.nixpkgs.hostPlatform.system;
-          protocol = "ssh-ng";
-          maxJobs = 3;
-          publicHostKey =
-            # For some reason this needs to be base64 encoded and nix does not do this for us.
-            builtins.readFile
-              (pkgs.runCommandLocal "hostpubkey" { } ''
-                echo "${system.tye.remote-build.builder.publicKey}" | base64 -w0 - > $out
-              '').outPath;
-        }));
+        |> (builtins.map (
+          system:
+          let
+            builder = system.tye.remote-build.builder;
+          in
+          {
+            hostName = builder.host;
+            sshUser = "remotebuild";
+            sshKey = "/etc/ssh/ssh_host_ed25519_key";
+            # System takes precedent over systems
+            system = lib.mkIf (builtins.length builder.systems == 0) system.nixpkgs.hostPlatform.system;
+            systems = builder.systems;
+            protocol = "ssh-ng";
+            maxJobs = 3;
+            publicHostKey =
+              # For some reason this needs to be base64 encoded and nix does not do this for us.
+              builtins.readFile
+                (pkgs.runCommandLocal "hostpubkey" { } ''
+                  echo "${builder.publicKey}" | base64 -w0 - > $out
+                '').outPath;
+          }
+        ));
 
     })
 
@@ -104,6 +126,8 @@ in
         MemoryMax = "60%";
         OOMScoreAdjust = 500;
       };
+
+      boot.binfmt.emulatedSystems = builtins.filter (x: x != system) cfg.builder.systems;
     })
   ];
 }

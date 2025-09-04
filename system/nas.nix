@@ -2,6 +2,7 @@
   pkgs,
   config,
   my_opts,
+  system,
   ...
 }:
 {
@@ -10,6 +11,10 @@
     enable = true;
     host = "tye-home.xyz:16777";
     publicKey = my_opts.keys.system.nas;
+    systems = [
+      system
+      "aarch64-linux"
+    ];
   };
 
   imports = [
