@@ -102,6 +102,7 @@ in
               Host nix-remote-builder-${builder.host}
               Hostname ${builder.host}
               Port ${builtins.toString builder.port}
+              User remotebuild
             ''
           ) builderSystems
         );
@@ -114,10 +115,10 @@ in
             in
             {
               hostName = "nix-remote-builder-${builder.host}";
-              sshUser = "remotebuild";
+              # sshUser = "remotebuild";
               sshKey = "/etc/ssh/ssh_host_ed25519_key";
               systems = builder.systems ++ [ builder.system ];
-              protocol = "ssh-ng";
+              protocol = "ssh";
               maxJobs = 3;
               publicHostKey =
                 # For some reason this needs to be base64 encoded and nix does not do this for us.
