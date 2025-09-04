@@ -45,6 +45,12 @@
           setCursor = true;
         };
 
+        # "which" often resolves to a symlink
+        where = {
+          expansion = "which % | eza -l --stdin";
+          setCursor = true;
+        };
+
         # Pipes rg into delta (pager).
         rgi = {
           expansion = "rg --json -C 3 % | delta";
