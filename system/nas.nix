@@ -2,17 +2,16 @@
   pkgs,
   config,
   my_opts,
-  system,
   ...
 }:
 {
   tye.remote-build.enable = true;
   tye.remote-build.builder = {
     enable = true;
-    host = "tye-home.xyz:16777";
+    host = "tye-home.xyz";
+    port = 16777;
     publicKey = my_opts.keys.system.nas;
     systems = [
-      system
       "aarch64-linux"
     ];
   };

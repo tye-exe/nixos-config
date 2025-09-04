@@ -37,6 +37,14 @@ in
         '';
       };
 
+      port = mkOption {
+        type = types.int;
+        default = 22;
+        description = ''
+          Target SSH port for remote builder
+        '';
+      };
+
       publicKey = mkOption {
         type = types.nullOr types.str;
         default = null;
@@ -45,56 +53,77 @@ in
         '';
       };
 
-      systems = mkOption {
-        type = types.listOf types.str;
-        default = [ ];
-        example = [
-          "x86_64-linux"
-          "aarch64-linux"
-        ];
-        description = ''
-          The systems that the builder can build/emulate.
-          If this is left blank, then only the host system will be used. 
-        '';
-      };
+      systems = # Switch to lib.uniqueStrings when available
+        mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          example = [
+            "x86_64-linux"
+            "aarch64-linux"
+          ];
+          description = ''
+            The systems that the builder can build/emulate, excluding the the builders system.
+            If this is left blank, then only the host system will be used. 
+          '';
+        };
     };
   };
 
   config = lib.mkMerge [
-    (lib.mkIf cfg.enable {
-      nix.distributedBuilds = true;
-      nix.settings.builders-use-substitutes = true;
+    (lib.mkIf cfg.enable (
+      let
+        # A list of systems that are builders
+        builderSystems =
+          inputs.self.nixosConfigurations
+          |> builtins.mapAttrs (_: system: system.config)
+          |> lib.attrsets.filterAttrs (_: system: system.networking.hostName != config.networking.hostName)
+          |> lib.attrsets.filterAttrs (_: system: system.tye.remote-build.builder.enable)
+          |> builtins.attrValues;
+      in
+      {
+        nix.distributedBuilds = true;
+        nix.settings.builders-use-substitutes = true;
 
-      nix.buildMachines =
-        inputs.self.nixosConfigurations
-        |> builtins.mapAttrs (_: system: system.config)
-        |> lib.attrsets.filterAttrs (_: system: system.networking.hostName != config.networking.hostName)
-        |> lib.attrsets.filterAttrs (_: system: system.tye.remote-build.builder.enable)
-        |> builtins.attrValues
-        |> (builtins.map (
-          system:
-          let
-            builder = system.tye.remote-build.builder;
-          in
-          {
-            hostName = builder.host;
-            sshUser = "remotebuild";
-            sshKey = "/etc/ssh/ssh_host_ed25519_key";
-            # System takes precedent over systems
-            system = lib.mkIf (builtins.length builder.systems == 0) system.nixpkgs.hostPlatform.system;
-            systems = builder.systems;
-            protocol = "ssh-ng";
-            maxJobs = 3;
-            publicHostKey =
-              # For some reason this needs to be base64 encoded and nix does not do this for us.
-              builtins.readFile
-                (pkgs.runCommandLocal "hostpubkey" { } ''
-                  echo "${builder.publicKey}" | base64 -w0 - > $out
-                '').outPath;
-          }
-        ));
+        # Add ssh config for nix.buildMachines.hostName to reference
+        programs.ssh.extraConfig = builtins.foldl' (acc: elm: "${elm}\n") "" (
+          builtins.map (
+            system:
+            let
+              builder = system.tye.remote-build.builder;
+            in
+            ''
+              Host nix-remote-builder-${builder.host}
+              Hostname ${builder.host}
+              Port ${builder.port}
+            ''
+          ) builderSystems
+        );
 
-    })
+        nix.buildMachines = (
+          builtins.map (
+            system:
+            let
+              builder = system.tye.remote-build.builder;
+            in
+            {
+              hostName = "nix-remote-builder-${builder.host}";
+              sshUser = "remotebuild";
+              sshKey = "/etc/ssh/ssh_host_ed25519_key";
+              systems = builder.systems ++ [ system ];
+              protocol = "ssh-ng";
+              maxJobs = 3;
+              publicHostKey =
+                # For some reason this needs to be base64 encoded and nix does not do this for us.
+                builtins.readFile
+                  (pkgs.runCommandLocal "hostpubkey" { } ''
+                    echo "${builder.publicKey}" | base64 -w0 - > $out
+                  '').outPath;
+            }
+          ) builderSystems
+        );
+
+      }
+    ))
 
     (lib.mkIf cfg.builder.enable {
       users.users.remotebuild = {
