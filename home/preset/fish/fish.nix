@@ -27,6 +27,7 @@
         du = "ncdu"; # I always keep forgetting this
         image = "qimgv";
         sm = "system-manager";
+        wine = "WINEPREFIX=./.wine; wine"; # Sets wine to use CWD as windows path
         "--help" = "--help | bat -plhelp";
 
         shell = {
