@@ -184,6 +184,7 @@ in
       }
       {
         name = "markdown";
+        soft-wrap.enable = true;
         auto-format = true;
         language-servers = [
           "markdown-oxide"
