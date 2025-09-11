@@ -27,6 +27,7 @@
         du = "ncdu"; # I always keep forgetting this
         image = "qimgv";
         sm = "system-manager";
+        "--help" = "--help | bat -plhelp";
 
         shell = {
           expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
