@@ -107,6 +107,11 @@
           direnv allow
         '';
 
+        # Creates a default flake file.
+        mkflake = ''
+          [ ! -e flake.nix ] && cp ${./flake_template.nix} flake.nix;
+        '';
+
         # Modifies the fish prompt to show if inside a nix_shell
         fish_prompt = builtins.readFile ./fish_prompt.fish;
       };
