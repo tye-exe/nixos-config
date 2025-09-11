@@ -110,7 +110,7 @@
 
         # Creates a default flake file.
         mkflake = ''
-          [ ! -e flake.nix ] && cp ${./flake_template.nix} flake.nix;
+          [ ! -e flake.nix ] && cp --no-preserve all ${./flake_template.nix} flake.nix;
         '';
 
         # Modifies the fish prompt to show if inside a nix_shell
