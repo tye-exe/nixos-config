@@ -7,7 +7,7 @@
 }:
 {
 
-  imports = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
+  imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
   home.packages = with pkgs; [
     # I love my dot
