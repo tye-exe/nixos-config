@@ -99,6 +99,14 @@ in
       typos = {
         command = "typos-lsp";
         config.diagnosticSeverity = "Warning";
+        # No nix to toml function exists
+        config.config = builtins.toFile "config_file.toml" ''
+          [default]
+          local = "en-gb"
+
+          [default.extend-words]
+          tye = "tye"
+        '';
       };
 
       rust-analyzer = {
