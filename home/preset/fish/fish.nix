@@ -103,7 +103,7 @@
 
       functions = {
         # Sets up template shell environment, alongside nix-direnv
-        mk-env = ''
+        mkenv = ''
           [ ! -e .envrc ] && echo "use flake" >> .envrc
           direnv allow
         '';
