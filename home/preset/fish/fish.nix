@@ -28,7 +28,10 @@
         image = "qimgv";
         sm = "system-manager";
         wine = "WINEPREFIX=./.wine; wine"; # Sets wine to use CWD as windows path
-        "--help" = "--help | bat -plhelp";
+        "--help" = {
+          expansion = "--help | bat -plhelp";
+          position = "anywhere";
+        };
 
         shell = {
           expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
