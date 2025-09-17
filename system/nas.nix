@@ -11,6 +11,7 @@
     ./nas/email.nix
     ./nas/ups.nix
     ./nas/atuin.nix
+    ./nas/unifi.nix
   ];
 
   networking = {
