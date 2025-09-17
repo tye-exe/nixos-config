@@ -2,20 +2,12 @@
   "default": {
     "input": {
       "blocklist": [],
-      "loudness#0": {
-        "bypass": false,
-        "clipping": true,
-        "clipping-range": 6.0,
-        "fft": "4096",
-        "input-gain": 14.7,
-        "output-gain": 4.1,
-        "std": "ISO226-2003",
-        "volume": 0.0
-      },
       "pitch#0": {
         "anti-alias": false,
         "bypass": false,
+        "cents": 0.0,
         "input-gain": 0.0,
+        "octaves": 0.0,
         "output-gain": 0.0,
         "overlap-length": 8,
         "quick-seek": false,
@@ -27,7 +19,7 @@
       },
       "plugins_order": [
         "rnnoise#0",
-        "loudness#0",
+        "speex#0",
         "pitch#0"
       ],
       "rnnoise#0": {
@@ -39,6 +31,20 @@
         "release": 20.0,
         "vad-thres": 60.0,
         "wet": 0.0
+      },
+      "speex#0": {
+        "bypass": false,
+        "enable-agc": true,
+        "enable-denoise": true,
+        "enable-dereverb": true,
+        "input-gain": 11.2,
+        "noise-suppression": -70,
+        "output-gain": 4.1,
+        "vad": {
+          "enable": true,
+          "probability-continue": 99,
+          "probability-start": 99
+        }
       }
     }
   }
