@@ -41,10 +41,7 @@
   # Use my flake for nix evaulations.
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  # Disables time-consuming generation of man cache.
-  # Fish defaults it to true.
-  # https://discourse.nixos.org/t/slow-build-at-building-man-cache/52365
-  documentation.man.generateCaches = false;
+  documentation.man.generateCaches = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
