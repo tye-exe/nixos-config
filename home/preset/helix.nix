@@ -6,6 +6,7 @@
 }:
 let
   spell = "typos";
+  fancy_spell = "codebook"; # One day i will make a typo and get annoyed
 in
 {
   home.packages =
@@ -48,7 +49,28 @@ in
 
       # Unstable as current stable version is outdated.
       nil # Nix LSP - better code actions
+
+      # Much more up-to-date
+      codebook # Spellchecker
     ]);
+
+  home.file."codebook.toml" = {
+    enable = true;
+    target = ".config/codebook/codebook.toml";
+    source = (pkgs.formats.toml { }).generate "codebook.toml" {
+      dictionaries = [
+        "en_gb"
+      ];
+      words = [
+        "alot"
+        "argh"
+      ];
+      flag_words = [ ];
+      ignore_paths = [ ];
+      ignore_patterns = [ ];
+      min_word_length = 3;
+    };
+  };
 
   programs.helix = {
     enable = true;
@@ -130,6 +152,11 @@ in
         command = "phpactor";
         args = [ "language-server" ];
       };
+
+      codebook = {
+        command = "codebook-lsp";
+        args = [ "serve" ];
+      };
     };
 
     # language configs
@@ -152,6 +179,7 @@ in
         language-servers = [
           "rust-analyzer"
           spell
+          fancy_spell
         ];
       }
       {
@@ -161,6 +189,7 @@ in
         language-servers = [
           "taplo"
           spell
+          fancy_spell
         ];
       }
       {
@@ -170,6 +199,7 @@ in
         language-servers = [
           "pylsp"
           spell
+          fancy_spell
         ];
       }
       {
@@ -178,6 +208,7 @@ in
         language-servers = [
           "lua-language-server"
           spell
+          fancy_spell
         ];
       }
       {
@@ -187,6 +218,7 @@ in
         language-servers = [
           "markdown-oxide"
           spell
+          fancy_spell
         ];
       }
       {
@@ -205,6 +237,23 @@ in
           "superhtml-lsp"
           "vscode-html-language-server"
           spell
+          fancy_spell
+        ];
+      }
+      {
+        name = "javascript";
+        auto-format = true;
+        language-servers = [
+          "typescript-language-server"
+          spell
+          fancy_spell
+        ];
+      }
+      {
+        name = "git-commit";
+        language-servers = [
+          spell
+          fancy_spell
         ];
       }
     ];
