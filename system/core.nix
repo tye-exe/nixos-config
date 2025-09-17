@@ -127,9 +127,21 @@
 
   # Program configs.
   programs = {
-    firefox.enable = lib.mkDefault true;
     fish.enable = true; # Here due to login shell shenanigans
     dconf.enable = true; # Used for Easyeffects
+
+    firefox = {
+      enable = lib.mkDefault true;
+      # Resting fingerprinting sadly messes with too many things
+      # This is to disable it
+      preferences = {
+        "privacy.resistFingerprinting" = false;
+        "privacy.resistFingerprinting.pbmode" = false;
+        "privacy.fingerprintingProtection" = true;
+        "privacy.fingerprintingProtection.pbmode" = true;
+        "privacy.fingerprintingProtection.overrides" = "+AllTargets,-CSSPrefersColorScheme";
+      };
+    };
 
     # Bash will still be the default shell, but will hand over to fish.
     # This is because some login methods expect a bash shell.
