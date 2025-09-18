@@ -131,6 +131,7 @@
         [
           "undefined"
           "laptop"
+          "framework"
           "desktop"
           "nas"
           {
@@ -151,6 +152,7 @@
         [
           "undefined"
           "laptop"
+          "framework"
           "desktop"
           "nas"
           {
