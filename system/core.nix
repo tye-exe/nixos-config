@@ -70,16 +70,11 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Configure keymap in X11
-  #services.xserver = {
-  #  layout = "gb";
-  #  xkbVariant = "";
-  #};
-
   security.rtkit.enable = true;
 
-  # Configure console keymap
+  # Keyboard configuration
   console.keyMap = "uk";
+  services.xserver.xkb.layout = "gb";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
