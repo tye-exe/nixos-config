@@ -5,6 +5,7 @@
   system,
   name,
   config,
+  opts,
   ...
 }:
 
@@ -90,10 +91,7 @@
       "networkmanager"
       "wheel"
     ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGu/8cJc3bf0RQhigvzxQPYPrGBR4WiFP6x3nB8JtsMj tye" # Desktop
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBevXkSxiJ6RqYr8tih3Ha8G6nKF/FIA2kqIAxr+RkG tye" # Laptop
-    ];
+    openssh.authorizedKeys.keys = opts.keys.users;
     hashedPasswordFile = config.sops.secrets.initialHashedPassword.path;
   };
 

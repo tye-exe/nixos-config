@@ -59,11 +59,9 @@
       std = nix-std.lib;
 
       # Allows me to pass custom options into every module.
-      custom_option = (
-        { lib, ... }:
-        {
-        }
-      );
+      opts = {
+        keys = import ./lib/keys.nix;
+      };
 
       # Generates the nixos system configuration for each system
       nix_conf =
@@ -74,12 +72,16 @@
         {
           inherit system;
           specialArgs = {
-            inherit inputs system name;
+            inherit
+              inputs
+              system
+              name
+              opts
+              ;
           };
           modules = [
             ./system/${name}.nix
             ./hardware-confs/${name}.nix
-            custom_option
             # Allows for making system images with less compressed iso.
             self.nixosModules.myFormats
           ];
@@ -117,11 +119,11 @@
                 pkgs-unstable
                 system
                 name
+                opts
                 ;
             };
           modules = [
             ./home/${name}.nix
-            custom_option
           ];
         };
     in
