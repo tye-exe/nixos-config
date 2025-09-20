@@ -50,6 +50,12 @@
           setCursor = true;
         };
 
+        # Store path of the nix package (may not be installed).
+        store-path = {
+          expansion = "nix eval nixpkgs#%.outPath";
+          setCursor = true;
+        };
+
         # "which" often resolves to a symlink
         where = {
           expansion = "which % | eza -l --stdin";
