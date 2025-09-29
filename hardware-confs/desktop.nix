@@ -39,8 +39,8 @@
     ];
   };
 
-  fileSystems."/virt/windows_10" = {
-    device = "/dev/disk/by-uuid/d3db04da-867c-4445-9a51-96e09701cc42";
+  fileSystems."/mnt/spinner" = {
+    device = "/dev/disk/by-uuid/85b228a9-a19c-41a5-8d57-b3d9baeb40d3";
     fsType = "ext4";
   };
 
@@ -52,8 +52,7 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
-  # networking.interfaces.vmnet1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.vmnet8.useDHCP = lib.mkDefault true;
+  # networking.interfaces.virbr0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
