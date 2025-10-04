@@ -7,12 +7,12 @@
   ];
 
   networking.hostName = "framework"; # Define your hostname.
-
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 3333 ];
-  networking.firewall.allowedUDPPorts = [ 1900 ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   hardware.bluetooth.enable = true;
+
+  # On screen keyboards work alot better in X
+  services.xserver.enable = true;
+  environment.systemPackages = with pkgs; [
+    onboard
+  ];
+
 }

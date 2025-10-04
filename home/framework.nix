@@ -25,4 +25,5 @@
 
   services.syncthing.enable = true;
   tye-services.enabled.syncthingtray = true;
+  tye-services.enabled.keyboard = true;
 }

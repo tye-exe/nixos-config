@@ -12,13 +12,15 @@ in
   options.tye-services = {
     enabled = {
       syncthingtray = mkEnableOption "Syncthing tray on login.";
+      keyboard = mkEnableOption "Enable onscreen keyboard.";
     };
   };
 
   config.systemd.user =
     let
       syncthing = tye-services.enabled.syncthingtray;
-      any = syncthing;
+      keyboard = tye-services.enabled.keyboard;
+      any = syncthing || keyboard;
     in
     {
       services = {
@@ -30,6 +32,16 @@ in
             ExecStart = "${pkgs.writeShellScript "syncthingtray-start" ''
               #!${pkgs.bash}/bin/bash
               ${pkgs.syncthingtray}/bin/syncthingtray --wait''}";
+            Restart = "on-failure";
+          };
+        };
+        keyboard-start = mkIf keyboard {
+          Unit.Description = "Starts the onscreen keyboard.";
+          Install.WantedBy = [ "default.target" ];
+
+          Service = {
+            Type = "Simple";
+            ExecStart = "${pkgs.onboard}/bin/onboard";
             Restart = "on-failure";
           };
         };
