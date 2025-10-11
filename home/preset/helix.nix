@@ -34,6 +34,9 @@ in
       # javascript
       # typescript
       nodePackages.typescript-language-server
+
+      docker-compose-language-service
+      yaml-language-server
     ]
     ++ (with pkgs-unstable; [
       # Rust.
@@ -254,6 +257,14 @@ in
         language-servers = [
           spell
           fancy_spell
+        ];
+      }
+      {
+        name = "docker-compose";
+        auto-format = true;
+        language-servers = [
+          "docker-compose-langserver"
+          "yaml-language-server"
         ];
       }
     ];
