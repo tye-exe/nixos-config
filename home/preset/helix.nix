@@ -39,6 +39,9 @@ in
       docker-compose-language-service
       yaml-language-server
 
+      bash-language-server
+      shfmt
+
       amber-lang
       amber-lsp
     ]
@@ -186,7 +189,7 @@ in
         language-servers = [
           "rust-analyzer"
           spell
-          fancy_spell
+          # fancy_spell
         ];
       }
       {
@@ -269,6 +272,15 @@ in
         language-servers = [
           "docker-compose-langserver"
           "yaml-language-server"
+        ];
+      }
+      {
+        name = "bash";
+        auto-format = true;
+        formatter.command = "shfmt";
+        language-servers = [
+          "bash-language-server"
+          spell
         ];
       }
       {
