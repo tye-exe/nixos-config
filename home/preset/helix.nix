@@ -7,6 +7,7 @@
 let
   spell = "typos";
   fancy_spell = "codebook"; # One day i will make a typo and get annoyed
+  amber-lsp = pkgs.callPackage ./amber/amber.nix { };
 in
 {
   home.packages =
@@ -37,6 +38,9 @@ in
 
       docker-compose-language-service
       yaml-language-server
+
+      amber-lang
+      amber-lsp
     ]
     ++ (with pkgs-unstable; [
       # Rust.
@@ -265,6 +269,14 @@ in
         language-servers = [
           "docker-compose-langserver"
           "yaml-language-server"
+        ];
+      }
+      {
+        name = "amber";
+        auto-format = true;
+        language-servers = [
+          "amber-lsp"
+          spell
         ];
       }
     ];
