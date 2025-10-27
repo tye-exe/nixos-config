@@ -87,6 +87,9 @@
         gs = "git status --short --b";
         gss = "git status --show-stash -b";
 
+        gr = "git restore";
+        grs = "git restore --staged";
+
         gp = "git push";
         gu = "git pull";
         gl = ''git log --all --graph --pretty=format:"%C(magenta)%h:%n%C(brightcyan)%an  %ar%C(blue)  %D%n%C(cyan)%s%n"'';
