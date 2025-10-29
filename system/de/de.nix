@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [ ./avatar.nix ];
 
@@ -33,7 +38,12 @@
   # Scanner
   hardware.sane = {
     enable = true;
-    extraBackends = [ pkgs.utsushi ];
+    extraBackends = [
+      pkgs.utsushi
+      pkgs.hplipWithPlugin
+    ];
   };
   services.udev.packages = [ pkgs.utsushi ];
+  environment.defaultPackages = [ pkgs.simple-scan ];
+  users.groups.lp.members = [ config.users.users.tye.name ];
 }
