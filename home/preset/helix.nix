@@ -74,6 +74,11 @@ in
       words = [
         "alot"
         "argh"
+        "eframe"
+        "egui"
+        "Wayland"
+        "winit"
+        "destructor"
       ];
       flag_words = [ ];
       ignore_paths = [ ];
@@ -290,6 +295,16 @@ in
           "amber-lsp"
           spell
         ];
+      }
+      {
+        name = "c-sharp";
+        auto-format = true;
+        language-servers = [
+          "csharp-ls"
+          fancy_spell
+        ];
+        formatter.command = "csharpier";
+        formatter.args = [ "format" ];
       }
     ];
   };
