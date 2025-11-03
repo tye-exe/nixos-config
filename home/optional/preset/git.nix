@@ -9,8 +9,8 @@
   programs = {
     git = {
       enable = true;
-      userName = "tye-exe";
-      userEmail = "tye@mailbox.org";
+      userName = lib.mkDefault "tye-exe";
+      userEmail =  lib.mkDefault "tye@mailbox.org";
       lfs.enable = true;
 
       # direnv files

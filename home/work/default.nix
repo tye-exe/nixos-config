@@ -40,5 +40,10 @@
     };
 
     nix-index.enable = true;
+
+    git = {
+      userName = "tye-travcomuk";
+      userEmail = "tye@travcomuk.com";
+    };
   };
 }
