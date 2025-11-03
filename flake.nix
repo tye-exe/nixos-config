@@ -58,6 +58,36 @@
       lib = nixpkgs.lib;
       std = nix-std.lib;
 
+      users = [
+        "tye"
+        "work"
+      ];
+
+      devices =
+        [
+          "undefined"
+          "laptop"
+          "framework"
+          "desktop"
+          "nas"
+          {
+            device = "rpi";
+            system = "aarch64-linux";
+          }
+        ]
+        |> map (
+          settings:
+          (
+            if (builtins.isAttrs settings) then
+              settings
+            else
+              {
+                device = settings;
+                system = "x86_64-linux";
+              }
+          )
+        );
+
       # Allows me to pass custom options into every module.
       opts = {
         keys = import ./lib/keys.nix;
@@ -66,8 +96,8 @@
       # Generates the nixos system configuration for each system
       nix_conf =
         {
-          name ? "undefined",
-          system ? "x86_64-linux",
+          name,
+          system,
         }:
         {
           inherit system;
@@ -91,9 +121,10 @@
       # Generates the home-manager configuration for each system
       home_conf =
         {
-          name ? "undefined",
-          system ? "x86_64-linux",
-
+          device,
+          system,
+          user,
+          name,
         }:
         {
           pkgs = import nixpkgs {
@@ -117,31 +148,26 @@
                 std
                 inputs
                 pkgs-unstable
-                system
-                name
                 opts
+                device
+                system
+                user
+                name
                 ;
             };
           modules = [
-            ./home/${name}.nix
+            ./home/common/${device}.nix
           ];
         };
     in
     {
       # System confs
       nixosConfigurations = (
-        [
-          "undefined"
-          "laptop"
-          "framework"
-          "desktop"
-          "nas"
-          {
-            name = "rpi";
-            system = "aarch64-linux";
-          }
-        ]
-        |> map (settings: (if (builtins.isAttrs settings) then settings else { name = settings; }))
+        devices
+        |> map (settings: {
+          name = settings.device;
+          system = settings.system;
+        })
         |> map (settings: {
           name = settings.name;
           value = (nix_conf settings |> lib.nixosSystem);
@@ -151,18 +177,24 @@
 
       # Home manager confs
       homeConfigurations =
-        [
-          "undefined"
-          "laptop"
-          "framework"
-          "desktop"
-          "nas"
-          {
-            name = "rpi";
-            system = "aarch64-linux";
+        lib.forEach users (
+          user:
+          (
+            devices
+            |> map (
+              settings: with settings; {
+                inherit device system user;
+              }
+            )
+          )
+        )
+        |> lib.flatten
+        |> map (
+          settings: with settings; {
+            name = "${user}-${device}";
+            inherit device system user;
           }
-        ]
-        |> map (settings: (if (builtins.isAttrs settings) then settings else { name = settings; }))
+        )
         |> map (settings: {
           name = settings.name;
           value = (home_conf settings |> home-manager.lib.homeManagerConfiguration);

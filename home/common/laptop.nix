@@ -3,7 +3,7 @@
 
   imports = [
     ./core.nix
-    ./preset/de.nix
+    ../optional/preset/de.nix
   ];
 
   programs.rio.settings.fonts.size = 14;

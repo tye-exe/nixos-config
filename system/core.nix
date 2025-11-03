@@ -105,7 +105,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     helix # Vim-like editor
-    git
     home-manager # Manages user-configurations
     libxkbcommon # Keyboard library - required by some programs
     wget
@@ -120,6 +119,26 @@
 
   # Program configs.
   programs = {
+    git = {
+      enable = true;
+      config = {
+        # Allow home-manager building from other users
+        safe.directory = [ "/etc/nixos" ];
+
+        # Default to personal details
+        user = {
+          name = "tye-exe";
+          email = "tye@mailbox.org";
+        };
+
+        core = {
+          editor = "${pkgs.helix}/bin/hx";
+          compression = 9;
+          preloadIndex = true;
+        };
+      };
+    };
+
     fish.enable = true; # Here due to login shell shenanigans
     dconf.enable = true; # Used for Easyeffects
 

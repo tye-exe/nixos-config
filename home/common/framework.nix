@@ -3,7 +3,7 @@
 
   imports = [
     ./core.nix
-    ./preset/de.nix
+    ../optional/preset/de.nix
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 

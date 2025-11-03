@@ -1,10 +1,16 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 
 {
   imports = [
     ./core.nix
     ./de/de.nix
     ./virtualization.nix
+    inputs.sops-nix.nixosModules.sops
   ];
 
   networking.hostName = "framework"; # Define your hostname.
@@ -32,5 +38,15 @@
       # Open ports in the firewall for Steam Local Network Game Transfers
       localNetworkGameTransfers.openFirewall = true;
     };
+  };
+
+  users.users.work = {
+    isNormalUser = true;
+    description = "work";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    hashedPasswordFile = config.sops.secrets.initialHashedPassword.path;
   };
 }

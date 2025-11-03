@@ -1,25 +1,17 @@
 {
   pkgs,
-  config,
   inputs,
-  pkgs-unstable,
   system,
-  lib,
   ...
 }:
-let
-  username = "tye";
-  homeDirectory = "/home/${username}";
-in
 {
-
   imports = [
-    ./preset/helix.nix
-    ./preset/git.nix
-    ./preset/cli.nix
-    ./preset/rust.nix
+    ../optional/preset/helix.nix
+    ../optional/preset/git.nix
+    ../optional/preset/cli.nix
+    ../optional/preset/rust.nix
 
-    ./module/systemd.nix
+    ../optional/module/systemd.nix
   ];
 
   home = {
@@ -34,8 +26,6 @@ in
       ++ (with inputs.nix-alien.packages.${system}; [
         nix-alien
       ]);
-
-    inherit username homeDirectory;
   };
 
   fonts = {
@@ -75,8 +65,4 @@ in
       '';
     };
   };
-
-  # Don't change this without reading the wiki!
-  # & yes to future me, i did write this. :p
-  home.stateVersion = lib.mkDefault "24.05";
 }
