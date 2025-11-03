@@ -4,6 +4,7 @@
   imports = [
     ./core.nix
     ./preset/de.nix
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
   programs.rio.settings.fonts.size = 14;
@@ -26,4 +27,18 @@
   services.syncthing.enable = true;
   tye-services.enabled.syncthingtray = true;
   tye-services.enabled.keyboard = true;
+
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "com.github.joseexposito.touche"
+    ];
+  };
+
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
+  };
 }
