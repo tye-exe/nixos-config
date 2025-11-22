@@ -35,7 +35,7 @@
 
     easyeffects = {
       enable = true;
-      extraPresets = builtins.readFile ./preset/easyeffects.json |> builtins.fromJSON;
+      extraPresets = builtins.readFile ./../optional/preset/easyeffects.json |> builtins.fromJSON;
       preset = "default";
     };
 
