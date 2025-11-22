@@ -108,6 +108,12 @@
               name
               opts
               ;
+            pkgs-unstable = import nixpkgs-unstable {
+              inherit system;
+              config = {
+                allowUnfree = true;
+              };
+            };
           };
           modules = [
             ./system/${name}.nix

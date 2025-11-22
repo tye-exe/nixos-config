@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  pkgs-unstable,
   ...
 }:
 {
@@ -119,6 +120,27 @@
       set -eu
       cd /home/tye/zfs/docker/syncthing/data/Me
       ${pkgs.bash}/bin/bash rambles.sh
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
+
+  # Music
+  systemd.user.timers."Music_Timer" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "2:10:00";
+      Unit = "Music_Update.service";
+      RandomizedDelaySec = "1h";
+    };
+  };
+
+  systemd.user.services."Music_Update" = {
+    script = ''
+      set -eu
+      cd /home/tye/zfs/docker/syncthing/data/Music/Youtube
+      ${pkgs-unstable.yt-dlp}/bin/yt-dlp -x https://www.youtube.com/playlist?list=PL93pgajWiXsKlovYZaduv7kkFI79r-X1j
     '';
     serviceConfig = {
       Type = "oneshot";
