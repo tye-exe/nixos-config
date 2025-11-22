@@ -15,11 +15,9 @@
       enable = true;
       shellAbbrs = {
         # Util abbrs.
-        l = "eza -la";
         ls = "eza";
-        la = "eza -a";
-        ll = "eza -lh";
-        lla = "eza -lha";
+        l = "eza -l";
+        la = "eza -la";
 
         cat = "bat";
         man = "batman";
