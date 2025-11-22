@@ -147,6 +147,26 @@
     };
   };
 
+  # Currency
+  systemd.user.timers."actual_flow" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "2,17:10:00";
+      Unit = "actual_flow.service";
+    };
+  };
+
+  systemd.user.services."actual_flow" = {
+    script = ''
+      set -eu
+      cd /home/tye/zfs/docker/actual-flow
+      ${pkgs.docker}/bin/docker compose run --rm app
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
+
   # Docker #
 
   # Updates certs for mail server.
