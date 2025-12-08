@@ -52,6 +52,11 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.nameservers = [
+    "9.9.9.9"
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/London";
