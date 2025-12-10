@@ -43,6 +43,21 @@
 
     ssh = {
       enable = true;
+      enableDefaultConfig = false;
+      # Previous default home-manager config
+      matchBlocks."*" = {
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
+      };
+
       extraConfig = ''
         # Check to see if local address is accessible
         Match host nas exec "nc -w 1 -z 192.168.0.33 16777"

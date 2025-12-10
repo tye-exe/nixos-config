@@ -2,12 +2,13 @@
   description = "My NixOS configuration :P";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-25_05.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     # ~/ files config
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -27,7 +28,7 @@
     # My system manager.
     system-manager = {
       url = "github:tye-exe/system-manager/v1.6.0";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Secret Management.
@@ -148,12 +149,20 @@
                   allowUnfree = true;
                 };
               };
+              # Unstable pkgs
+              pkgs-25_05 = import inputs.nixpkgs-25_05 {
+                inherit system;
+                config = {
+                  allowUnfree = true;
+                };
+              };
             in
             {
               inherit
                 std
                 inputs
                 pkgs-unstable
+                pkgs-25_05
                 opts
                 device
                 system

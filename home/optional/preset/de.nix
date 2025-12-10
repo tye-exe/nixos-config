@@ -1,32 +1,42 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  pkgs-25_05,
+  ...
+}:
 {
   imports = [
     ./../preset/plasma.nix
     ./../preset/qutebrowser.nix
   ];
 
-  home.packages = with pkgs; [
-    # Libre office
-    libreoffice-qt6-still # Office but without the Microsoft
-    hunspell # Spellchecker for libre office
-    hunspellDicts.en_GB-large # GB dictionary
+  home.packages =
+    with pkgs;
+    [
+      # Libre office
+      libreoffice-qt6-still # Office but without the Microsoft
+      hunspell # Spellchecker for libre office
+      hunspellDicts.en_GB-large # GB dictionary
 
-    # Communication
-    beeper # General communication
-    vesktop # Alternate discord client.
-    thunderbird # Email
+      # Communication
+      beeper # General communication
+      vesktop # Alternate discord client.
+      thunderbird # Email
 
-    syncthingtray # Gui for syncthing
-    kdePackages.xwaylandvideobridge # Allows screensharing
-    vlc # Plays videos :P
-    kdePackages.merkuro # Calander.
-    obsidian # Note taking using markdown.
-    pdfmixtool # Used to edit PDF's
-    rnote # Note taking application
-    qimgv # Image viewer
-    wl-clipboard # Access clipboard from terminal
-    xfce.mousepad # Simple text editor
-  ];
+      syncthingtray # Gui for syncthing
+
+      vlc # Plays videos :P
+      kdePackages.merkuro # Calander.
+      obsidian # Note taking using markdown.
+      pdfmixtool # Used to edit PDF's
+      rnote # Note taking application
+      qimgv # Image viewer
+      wl-clipboard # Access clipboard from terminal
+      xfce.mousepad # Simple text editor
+    ]
+    ++ [
+      pkgs-25_05.kdePackages.xwaylandvideobridge # Allows screensharing
+    ];
 
   programs = {
     rio.enable = true;

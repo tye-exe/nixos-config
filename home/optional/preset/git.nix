@@ -9,8 +9,6 @@
   programs = {
     git = {
       enable = true;
-      userName = lib.mkDefault "tye-exe";
-      userEmail =  lib.mkDefault "tye@mailbox.org";
       lfs.enable = true;
 
       # direnv files
@@ -19,7 +17,10 @@
         ".direnv"
       ];
 
-      extraConfig = {
+      settings = {
+        user.name = lib.mkDefault "tye-exe";
+        user.email = lib.mkDefault "tye@mailbox.org";
+
         # Removes annoying message about git ignore files.
         advice.addIgnoredFile = false;
 
