@@ -41,9 +41,9 @@
 
     nix-index.enable = true;
 
-    git = {
-      userName = "tye-travcomuk";
-      userEmail = "tye@travcomuk.com";
+    git.settings.user = {
+      name = "tye-travcomuk";
+      email = "tye@travcomuk.com";
     };
   };
 }
