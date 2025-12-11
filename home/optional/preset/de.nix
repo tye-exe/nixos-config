@@ -33,6 +33,8 @@
       qimgv # Image viewer
       wl-clipboard # Access clipboard from terminal
       xfce.mousepad # Simple text editor
+
+      unifont
     ]
     ++ [
       pkgs-25_05.kdePackages.xwaylandvideobridge # Allows screensharing
@@ -46,7 +48,6 @@
 
       editor.program = "hx";
       cursor.shape = "block";
-      fonts.family = "${pkgs.unifont.pname}";
     };
 
     chromium = {
