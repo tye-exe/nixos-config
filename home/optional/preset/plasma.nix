@@ -70,10 +70,10 @@
       };
     };
 
-    hotkeys.commands."launch-rio" = {
-      name = "Launch Rio";
+    hotkeys.commands."launch-kitty" = {
+      name = "Launch Kitty";
       key = "Ctrl+Alt+T";
-      command = "rio";
+      command = "kitty";
     };
 
     startup.startupScript = {
@@ -94,7 +94,7 @@
               launchers = [
                 "applications:org.kde.dolphin.desktop"
                 "applications:firefox.desktop"
-                "applications:rio.desktop"
+                "applications:kitty.desktop"
               ];
             };
           }

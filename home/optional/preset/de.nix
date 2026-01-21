@@ -41,13 +41,29 @@
     ];
 
   programs = {
-    rio.enable = true;
-    rio.settings = {
-      confirm-before-quit = false;
-      hide-mouse-cursor-when-typing = true;
+    kitty = {
+      enable = true;
+      shellIntegration.enableFishIntegration = true;
+      shellIntegration.enableBashIntegration = true;
+      enableGitIntegration = true;
+      settings = {
+        font_family = "${pkgs.unifont.pname}";
+        font_size = 11;
+        # I'm not too sure why kitty doubles the font width.
+        modify_font = "cell_width 50%";
 
-      editor.program = "hx";
-      cursor.shape = "block";
+        enable_audio_bell = false;
+      };
+      # Zellij is just a bit better than kitty.
+      # extraConfig = "
+      #     map alt+h neighboring_window left
+      #     map alt+j neighboring_window down
+      #     map alt+k neighboring_window up
+      #     map alt+l neighboring_window right
+
+      #     map alt+ctrl+h previous_tab
+      #     map alt+ctrl+l next_tab
+      #   ";
     };
 
     chromium = {

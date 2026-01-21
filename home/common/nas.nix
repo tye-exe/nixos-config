@@ -9,7 +9,7 @@
   imports = [ ./core.nix ];
 
   home.packages = with pkgs; [
-    rio # Used for term compatibility
+    kitty # Used for term compatibility
   ];
 
   # Link to zfs dataset

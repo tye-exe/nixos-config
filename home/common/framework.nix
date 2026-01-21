@@ -7,8 +7,6 @@
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
-  programs.rio.settings.fonts.size = 14;
-
   home.packages = with pkgs; [
     # Video editing
     shotcut

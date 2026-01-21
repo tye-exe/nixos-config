@@ -6,8 +6,6 @@
     ../optional/preset/de.nix
   ];
 
-  programs.rio.settings.fonts.size = 14;
-
   home.packages = with pkgs; [
     # Video editing
     shotcut
