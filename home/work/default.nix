@@ -25,6 +25,10 @@
       ]
       ++ (with inputs.nix-alien.packages.${system}; [
         nix-alien
+      ])
+      ++ (with inputs.winapps.packages.${system}; [
+        winapps
+        winapps-launcher
       ]);
   };
 
