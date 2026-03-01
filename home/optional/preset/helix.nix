@@ -19,7 +19,6 @@ in
 
       nixd # Nix LSP
       nixfmt-rfc-style # Nix fmt
-      rustfmt # Rust fmt
       taplo # Toml
       lua-language-server # Lua
       markdown-oxide # Markdown
@@ -49,6 +48,8 @@ in
       # Rust.
       # moved to unstable due to bugs within the stable version.
       rust-analyzer
+      # Hopefully it'll work better in unstable
+      rustfmt
       # markdown
       # html
       # json
@@ -190,7 +191,7 @@ in
       {
         name = "rust";
         auto-format = true;
-        formatter.command = "${pkgs.rustfmt}/bin/rustfmt --edition 2021"; # Path to installed rust formatter
+        formatter.command = "rustfmt --edition 2024"; # Path to installed rust formatter
         language-servers = [
           "rust-analyzer"
           spell
