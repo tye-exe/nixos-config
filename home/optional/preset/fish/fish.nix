@@ -4,6 +4,114 @@
   name,
   ...
 }:
+let
+  shellAbbrs =
+    prefix:
+    {
+      # Util abbrs.
+      ls = "eza";
+      l = "eza -l";
+      la = "eza -la";
+
+      cat = "bat";
+      man = "batman";
+      ts = "gtrash put";
+      du = "ncdu"; # I always keep forgetting this
+      image = "qimgv";
+      sm = "system-manager";
+      wine = "WINEPREFIX=./.wine; wine"; # Sets wine to use CWD as windows path
+      "--help" = {
+        expansion = "--help | bat -plhelp";
+        position = "anywhere";
+      };
+
+      shell = {
+        expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
+        setCursor = true;
+      };
+      shell-unstable = {
+        expansion = "nix shell nixpkgs/nixos-unstable#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
+        setCursor = true;
+      };
+      unfree-shell = {
+        expansion = "NIXPKGS_ALLOW_UNFREE=1 nix shell nixpkgs#% --impure --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
+        setCursor = true;
+      };
+      unfree-shell-unstable = {
+        expansion = "NIXPKGS_ALLOW_UNFREE=1 nix shell nixpkgs/nixos-unstable#% --impure --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
+        setCursor = true;
+      };
+
+      # Store path of the nix package (may not be installed).
+      store-path = {
+        expansion = "nix eval nixpkgs#%.outPath";
+        setCursor = true;
+      };
+
+      # "which" often resolves to a symlink
+      where = {
+        expansion = "which % | eza -l --stdin";
+        setCursor = true;
+      };
+
+      # Pipes rg into delta (pager).
+      rgi = {
+        expansion = "rg --json -C 3 % | delta";
+        setCursor = true;
+      };
+
+      # Git abbrs #
+      gd = "git diff";
+      gdc = "git diff --cached";
+
+      gc = "git commit";
+      gcm = {
+        expansion = ''git commit -m "%"'';
+        setCursor = true;
+      };
+      gca = "git commit --amend --no-edit";
+
+      ga = "git add";
+      gaa = "git add .";
+      gai = "git add -i";
+      gap = "git add --patch";
+
+      gs = "git status --short --b";
+      gss = "git status --show-stash -b";
+
+      gr = "git restore";
+      grs = "git restore --staged";
+
+      gp = "git push";
+      gu = "git pull";
+      gl = ''git log --all --graph --pretty=format:"%C(magenta)%h:%n%C(brightcyan)%an  %ar%C(blue)  %D%n%C(cyan)%s%n"'';
+      gll = ''git log --all --graph --pretty=format:"%C(magenta)%h:%n%C(brightcyan)%an  %ar%C(blue)  %D%n%C(cyan)%s%n%+b"'';
+
+      # Opens the given path/file with the default application.
+      open = {
+        expansion = "xdg-open % &>> /dev/null";
+        setCursor = true;
+      };
+
+      # Shortcuts to void command output
+      void = {
+        expansion = ">> /dev/null";
+        position = "anywhere";
+      };
+      evoid = {
+        expansion = "&>> /dev/null";
+        position = "anywhere";
+      };
+
+      roblox = lib.mkIf (name == "desktop") "org.vinegarhq.Sober >> /dev/null";
+    }
+    |> lib.mapAttrsToList (
+      name: value: {
+        name = prefix + name;
+        value = if (builtins.isAttrs value) then value else { expansion = prefix + " " + value; };
+      }
+    );
+in
 {
   home.packages = with pkgs; [
     fish # Bash 2.0
@@ -13,104 +121,19 @@
     # Shell config.
     fish = {
       enable = true;
-      shellAbbrs = {
-        # Util abbrs.
-        ls = "eza";
-        l = "eza -l";
-        la = "eza -la";
-
-        cat = "bat";
-        man = "batman";
-        ts = "gtrash put";
-        du = "ncdu"; # I always keep forgetting this
-        image = "qimgv";
-        sm = "system-manager";
-        wine = "WINEPREFIX=./.wine; wine"; # Sets wine to use CWD as windows path
-        "--help" = {
-          expansion = "--help | bat -plhelp";
-          position = "anywhere";
-        };
-
-        shell = {
-          expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
-          setCursor = true;
-        };
-        shell-unstable = {
-          expansion = "nix shell nixpkgs/nixos-unstable#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
-          setCursor = true;
-        };
-        unfree-shell = {
-          expansion = "NIXPKGS_ALLOW_UNFREE=1 nix shell nixpkgs#% --impure --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
-          setCursor = true;
-        };
-        unfree-shell-unstable = {
-          expansion = "NIXPKGS_ALLOW_UNFREE=1 nix shell nixpkgs/nixos-unstable#% --impure --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
-          setCursor = true;
-        };
-
-        # Store path of the nix package (may not be installed).
-        store-path = {
-          expansion = "nix eval nixpkgs#%.outPath";
-          setCursor = true;
-        };
-
-        # "which" often resolves to a symlink
-        where = {
-          expansion = "which % | eza -l --stdin";
-          setCursor = true;
-        };
-
-        # Pipes rg into delta (pager).
-        rgi = {
-          expansion = "rg --json -C 3 % | delta";
-          setCursor = true;
-        };
-
-        # Git abbrs #
-        gd = "git diff";
-        gdc = "git diff --cached";
-
-        gc = "git commit";
-        gcm = {
-          expansion = ''git commit -m "%"'';
-          setCursor = true;
-        };
-        gca = "git commit --amend --no-edit";
-
-        ga = "git add";
-        gaa = "git add .";
-        gai = "git add -i";
-        gap = "git add --patch";
-
-        gs = "git status --short --b";
-        gss = "git status --show-stash -b";
-
-        gr = "git restore";
-        grs = "git restore --staged";
-
-        gp = "git push";
-        gu = "git pull";
-        gl = ''git log --all --graph --pretty=format:"%C(magenta)%h:%n%C(brightcyan)%an  %ar%C(blue)  %D%n%C(cyan)%s%n"'';
-        gll = ''git log --all --graph --pretty=format:"%C(magenta)%h:%n%C(brightcyan)%an  %ar%C(blue)  %D%n%C(cyan)%s%n%+b"'';
-
-        # Opens the given path/file with the default application.
-        open = {
-          expansion = "xdg-open % &>> /dev/null";
-          setCursor = true;
-        };
-
-        # Shortcuts to void command output
-        void = {
-          expansion = ">> /dev/null";
-          position = "anywhere";
-        };
-        evoid = {
-          expansion = "&>> /dev/null";
-          position = "anywhere";
-        };
-
-        roblox = lib.mkIf (name == "desktop") "org.vinegarhq.Sober >> /dev/null";
-      };
+      shellAbbrs =
+        lib.concatLists [
+          (
+            # Generates user abbreviations
+            shellAbbrs ""
+          )
+          (
+            # Generates sudo abbreviations
+            shellAbbrs "sudo" |> lib.filter (attr: attr.position or null == null)
+          )
+        ]
+        |> lib.flatten
+        |> builtins.listToAttrs;
 
       functions = {
         # Sets up template shell environment, alongside nix-direnv
