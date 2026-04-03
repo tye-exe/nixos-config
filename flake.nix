@@ -74,6 +74,7 @@
           "undefined"
           "laptop"
           "framework"
+          "framework-13"
           "desktop"
           "nas"
           {
