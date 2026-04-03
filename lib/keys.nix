@@ -5,6 +5,7 @@ rec {
     laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBevXkSxiJ6RqYr8tih3Ha8G6nKF/FIA2kqIAxr+RkG tye";
     framework = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF4WVKh+6Tg76ClLo03PNYyr4Kwh4O+VgwdawkB4cEUH tye";
     nas = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFlxvMZ/Q8knBvPAdFgjHRjVqtxyC+xAgA4RhlVWB7m1 tye";
+    framework-13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFx/VLe1DXHkMlt+fU4eBk7Ajx6TLC1Yus8fHQM02a/a tye";
   };
 
   # System keys
