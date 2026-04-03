@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs-unstable; [
     # Faster rust linker
-    mold-wrapped
+    mold
   ];
 
   home.file.cargo = {
