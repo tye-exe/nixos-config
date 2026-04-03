@@ -149,14 +149,19 @@
 
     firefox = {
       enable = lib.mkDefault true;
-      # Resting fingerprinting sadly messes with too many things
-      # This is to disable it
+
+      languagePacks = [ "en-GB" ];
+      policies.DisableTelemetry = true;
       preferences = {
+        # Resting fingerprinting sadly messes with too many things
+        # This is to disable it
         "privacy.resistFingerprinting" = false;
         "privacy.resistFingerprinting.pbmode" = false;
         "privacy.fingerprintingProtection" = true;
         "privacy.fingerprintingProtection.pbmode" = true;
         "privacy.fingerprintingProtection.overrides" = "+AllTargets,-CSSPrefersColorScheme";
+
+        "browser.ctrlTab.sortByRecentlyUsed" = true;
       };
     };
 
