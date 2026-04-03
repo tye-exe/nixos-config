@@ -7,7 +7,6 @@
 let
   spell = "typos";
   fancy_spell = "codebook"; # One day i will make a typo and get annoyed
-  amber-lsp = pkgs.callPackage ./amber/amber.nix { };
 in
 {
   home.packages =
@@ -42,7 +41,6 @@ in
       shfmt
 
       amber-lang
-      amber-lsp
     ]
     ++ (with pkgs-unstable; [
       # Rust.
