@@ -16,7 +16,7 @@
   home.file.zfs.source = config.lib.file.mkOutOfStoreSymlink "/zfs/data";
 
   programs = {
-    git.extraConfig = {
+    git.settings = {
       credential = {
         # credentialStore = "gpg";
         helper = "${pkgs.gh}/bin/gh auth git-credential";
