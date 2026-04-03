@@ -10,8 +10,8 @@ let
     {
       # Util abbrs.
       ls = "eza";
-      l = "eza -l";
-      la = "eza -la";
+      l = "eza -lg";
+      la = "eza -lag";
 
       cat = "bat";
       man = "batman";
