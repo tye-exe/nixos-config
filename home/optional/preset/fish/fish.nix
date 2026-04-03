@@ -108,7 +108,8 @@ let
     |> lib.mapAttrsToList (
       name: value: {
         name = prefix + name;
-        value = if (builtins.isAttrs value) then value else { expansion = prefix + " " + value; };
+        value =
+          if (builtins.isAttrs value) then value else { expansion = lib.trim (prefix + " " + value); };
       }
     );
 in
