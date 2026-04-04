@@ -23,7 +23,7 @@ in
     enable = true;
     enableIPv6 = true;
     externalInterface = "eno1";
-    internalInterfaces = interface;
+    internalInterfaces = [ interface ];
   };
 
   systemd.network = {
