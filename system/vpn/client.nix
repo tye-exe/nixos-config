@@ -17,8 +17,10 @@ in
   };
 
   networking.firewall.allowedUDPPorts = [ port ];
-
   networking.useNetworkd = true;
+
+  # NixOS firewall will block wg traffic because of rpfilter
+  networking.firewall.checkReversePath = "loose";
 
   systemd.network = {
     enable = true;

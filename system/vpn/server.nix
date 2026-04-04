@@ -7,6 +7,7 @@
 }:
 let
   port = 51820;
+  interface = "wg0";
 in
 {
   sops.secrets."${name}/wireguard" = {
@@ -17,14 +18,19 @@ in
   };
 
   networking.firewall.allowedUDPPorts = [ port ];
-
   networking.useNetworkd = true;
+  networking.nat = {
+    enable = true;
+    enableIPv6 = true;
+    externalInterface = "eno1";
+    internalInterfaces = interface;
+  };
 
   systemd.network = {
     enable = true;
 
-    networks."50-wg0" = {
-      matchConfig.Name = "wg0";
+    networks."50-${interface}" = {
+      matchConfig.Name = interface;
 
       address = [
         # /32 and /128 specifies a single address
@@ -32,12 +38,17 @@ in
         "fd31:bf08:57cb::1/128"
         "192.168.2.1/32"
       ];
+
+      networkConfig = {
+        IPv4Forwarding = true;
+        IPv6Forwarding = true;
+      };
     };
 
-    netdevs."50-wg0" = {
+    netdevs."50-${interface}" = {
       netdevConfig = {
         Kind = "wireguard";
-        Name = "wg0";
+        Name = interface;
       };
 
       wireguardConfig = {
