@@ -29,6 +29,9 @@ in
       matchConfig.Name = "wg0";
 
       address =
+        #   "::/0"
+        #   "0.0.0.0/0"
+        # ];
         opts.keys.wireguard.client
         |> builtins.attrNames
         |> lib.lists.imap1 (

@@ -73,8 +73,9 @@ in
             PublicKey = key;
             AllowedIPs = [
               # Index + 1 because server is at 1.
-              "fd31:bf08:57cb::${toString (index + 1)}/128"
-              "192.168.2.${toString (index + 1)}/32"
+              # "fd31:bf08:57cb::${toString (index + 1)}/128"
+              # "192.168.2.${toString (index + 1)}/32"
+              "192.168.2.0/0"
             ];
 
             # RouteTable can also be set in wireguardPeers
