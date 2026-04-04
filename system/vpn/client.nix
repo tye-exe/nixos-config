@@ -74,7 +74,8 @@ in
             "::/0"
             "0.0.0.0/0"
           ];
-          Endpoint = "tye-home.xyz:${toString port}";
+          # Endpoint = "tye-home.xyz:${toString port}";
+          Endpoint = "193.180.208.29:${toString port}";
 
           # RouteTable can also be set in wireguardPeers
           # RouteTable in wireguardConfig will then be ignored.
