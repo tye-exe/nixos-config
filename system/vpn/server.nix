@@ -32,14 +32,14 @@ in
     networks."50-${interface}" = {
       matchConfig.Name = interface;
 
-      address = [
-        # /32 and /128 specifies a single address
-        # for use on this wg peer machine
-        # "fd31:bf08:57cb::1/128"
-        # "192.168.2.1/32"
-        "::/0"
-        "0.0.0.0/0"
-      ];
+      # address = [
+      #   # /32 and /128 specifies a single address
+      #   # for use on this wg peer machine
+      #   # "fd31:bf08:57cb::1/128"
+      #   # "192.168.2.1/32"
+      #   "::/0"
+      #   "0.0.0.0/0"
+      # ];
 
       networkConfig = {
         IPv4Forwarding = true;
