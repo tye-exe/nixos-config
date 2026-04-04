@@ -11,6 +11,7 @@
     ./de/de.nix
     ./virtualization.nix
     inputs.sops-nix.nixosModules.sops
+    ./vpn/client.nix
   ];
 
   networking.hostName = "framework"; # Define your hostname.

@@ -22,4 +22,11 @@ rec {
     users
     systems
   ];
+
+  wireguard = {
+    client = {
+      framework-13 = "wIqYKLi0VFAaPYdGT5/9K4ydE4q5kfO+iyslHznc5l4=";
+    };
+    server = "QSMyZAS8WxfF78wtMkqPnlXQQvAjxPmpasFgoN7auxM=";
+  };
 }

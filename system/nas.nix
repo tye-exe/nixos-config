@@ -13,6 +13,7 @@
     ./nas/ups.nix
     ./nas/atuin.nix
     ./nas/unifi.nix
+    ./vpn/server.nix
   ];
 
   networking = {
