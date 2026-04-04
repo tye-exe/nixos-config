@@ -8,6 +8,7 @@
 let
   port = 51820;
   interface = "wg0";
+  externalInterface = "eno1";
 in
 {
   sops.secrets."${name}/wireguard" = {
@@ -22,7 +23,7 @@ in
   networking.nat = {
     enable = true;
     enableIPv6 = true;
-    externalInterface = "eno1";
+    externalInterface = externalInterface;
     internalInterfaces = [ interface ];
   };
 
@@ -75,8 +76,6 @@ in
               # Index + 1 because server is at 1.
               "fd31:bf08:57cb::${toString (index + 1)}/128"
               "192.168.2.${toString (index + 1)}/32"
-              # DO NOT USE THIS, BREAKS NETWORKING.
-              # "192.168.2.0/0"
             ];
 
             # RouteTable can also be set in wireguardPeers
