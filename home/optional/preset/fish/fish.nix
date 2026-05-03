@@ -25,6 +25,11 @@ let
         position = "anywhere";
       };
 
+      maths = {
+        expansion = "maths \"%\"";
+        setCursor = true;
+      };
+
       shell = {
         expansion = "nix shell nixpkgs#% --set-env-var nix_shell_status \"nix_shell\" --command sh -c \"fish\"";
         setCursor = true;
@@ -135,6 +140,11 @@ in
         ]
         |> lib.flatten
         |> builtins.listToAttrs;
+
+      shellAliases = {
+        # Fixing developer oversight (all in good fun).
+        maths = "math";
+      };
 
       functions = {
         # Sets up template shell environment, alongside nix-direnv
