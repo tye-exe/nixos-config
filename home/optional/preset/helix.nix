@@ -7,6 +7,8 @@
 let
   spell = "typos";
   fancy_spell = "codebook"; # One day i will make a typo and get annoyed
+
+  mdformatWithPlugins = pkgs.mdformat.withPlugins (ps: with ps; [ mdformat-gfm ]);
 in
 {
   home.packages =
@@ -21,6 +23,7 @@ in
       taplo # Toml
       lua-language-server # Lua
       markdown-oxide # Markdown
+      mdformatWithPlugins
 
       # Python decides to be complicated but oh well
       python312Packages.jedi # LSP dependency
@@ -234,6 +237,14 @@ in
           spell
           fancy_spell
         ];
+        formatter = {
+          command = "mdformat";
+          args = [
+            "--wrap"
+            "100"
+            "-"
+          ];
+        };
       }
       {
         name = "html";
