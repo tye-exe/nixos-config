@@ -126,6 +126,7 @@ in
         {
           normal = {
             inherit X;
+            "S-tab" = "jump_backward";
           };
           select = {
             inherit X;
