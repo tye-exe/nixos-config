@@ -42,7 +42,7 @@
   # Use my flake for nix evaulations.
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  documentation.man.generateCaches = true;
+  documentation.man.cache.enable = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

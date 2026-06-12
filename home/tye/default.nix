@@ -45,7 +45,7 @@
       enable = true;
       enableDefaultConfig = false;
       # Previous default home-manager config
-      matchBlocks."*" = {
+      settings."*" = {
         forwardAgent = false;
         addKeysToAgent = "no";
         compression = false;

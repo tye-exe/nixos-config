@@ -19,7 +19,7 @@ in
       typos
 
       nixd # Nix LSP
-      nixfmt-rfc-style # Nix fmt
+      nixfmt # Nix fmt
       taplo # Toml
       lua-language-server # Lua
       markdown-oxide # Markdown
@@ -35,7 +35,7 @@ in
 
       # javascript
       # typescript
-      nodePackages.typescript-language-server
+      typescript-language-server
 
       docker-compose-language-service
       yaml-language-server
@@ -183,7 +183,7 @@ in
         # Gives me the power to have pretty nix files. ^-^
         name = "nix";
         auto-format = true;
-        formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt"; # Path to installed nix formatter
+        formatter.command = "nixfmt"; # Path to installed nix formatter
         language-servers = [
           "nixd"
           "nil"
