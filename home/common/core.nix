@@ -22,6 +22,14 @@
     fontconfig.enable = true;
   };
 
+  # gtk = {
+  #   enable = true;
+  #   font = {
+  #     name = "Noto Sans";
+  #     size = 12;
+  #   };
+  # };
+
   programs = {
     direnv = {
       enable = true;

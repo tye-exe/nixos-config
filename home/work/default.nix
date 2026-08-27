@@ -24,16 +24,17 @@
         ripgrep # Faster alternative to grep
         caligula # Every time i need this i have to spend 5 minuets searching for it
         remmina
+        crun # Used for podman
 
-        # C# development
-        jetbrains.rider
-        (
-          with dotnetCorePackages;
-          combinePackages [
-            sdk_8_0
-            sdk_10_0
-          ]
-        )
+        # # C# development
+        # jetbrains.rider
+        # (
+        #   with dotnetCorePackages;
+        #   combinePackages [
+        #     sdk_8_0
+        #     sdk_10_0
+        #   ]
+        # )
 
         libreoffice
       ]

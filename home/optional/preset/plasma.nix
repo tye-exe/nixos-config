@@ -34,10 +34,10 @@
 
     session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
 
-    fonts.general = {
-      family = "${pkgs.unifont.pname}";
-      pointSize = 12;
-    };
+    # fonts.general = {
+    #   family = "${pkgs.unifont.pname}";
+    #   pointSize = 12;
+    # };
 
     workspace = {
       # I like my eyes, thank you very much

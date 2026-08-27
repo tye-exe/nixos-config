@@ -13,6 +13,8 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
+  fonts.enableDefaultPackages = true;
+
   networking.firewall = {
     enable = true;
     # Required for windows connecting form inside container.
@@ -72,7 +74,6 @@
     };
     podman = {
       enable = true;
-      dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
     };
   };

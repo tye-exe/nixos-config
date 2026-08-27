@@ -19,7 +19,6 @@
       hunspellDicts.en_GB-large # GB dictionary
 
       # Communication
-      beeper # General communication
       vesktop # Alternate discord client.
       thunderbird # Email
 

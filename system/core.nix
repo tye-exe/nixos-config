@@ -44,6 +44,13 @@
 
   documentation.man.cache.enable = true;
 
+  fonts = {
+    fontDir.enable = true;
+    enableDefaultPackages = true;
+    fontconfig.enable = true;
+    packages = [ pkgs.unifont ];
+  };
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

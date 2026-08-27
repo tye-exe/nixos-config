@@ -40,7 +40,7 @@
     enable = true;
     extraBackends = [
       pkgs.utsushi
-      pkgs.hplipWithPlugin
+      # pkgs.hplipWithPlugin
     ];
   };
   services.udev.packages = [ pkgs.utsushi ];
