@@ -8,7 +8,13 @@ let
   spell = "typos";
   fancy_spell = "codebook"; # One day i will make a typo and get annoyed
 
-  mdformatWithPlugins = pkgs.mdformat.withPlugins (ps: with ps; [ mdformat-gfm ]);
+  mdformatWithPlugins = pkgs.mdformat.withPlugins (
+    ps: with ps; [
+      mdformat-front-matters
+      mdformat-gfm
+      mdformat-footnote
+    ]
+  );
 in
 {
   home.packages =
